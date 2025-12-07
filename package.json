@@ -1,0 +1,41 @@
+{
+  "name": "librelink-mcp-server-fixed",
+  "version": "1.1.0",
+  "description": "MCP server for FreeStyle LibreLink CGM data - Fixed for API v4.16.0 (October 2025)",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch",
+    "configure": "node dist/configure.js",
+    "test": "node test-mcp.js",
+    "test:mcp": "node test-mcp.js",
+    "test:analytics": "node test-analytics.js",
+    "test:connection": "node test-real-connection.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "mcp",
+    "librelink",
+    "freestyle-libre",
+    "cgm",
+    "glucose",
+    "diabetes",
+    "claude",
+    "anthropic"
+  ],
+  "author": "Fork with v4.16.0 fix",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.24.3",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

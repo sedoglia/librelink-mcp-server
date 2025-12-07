@@ -1,0 +1,6 @@
+{
+  "region": "EU",
+  "targetLow": 70,
+  "targetHigh": 180,
+  "clientVersion": "4.16.0"
+}
