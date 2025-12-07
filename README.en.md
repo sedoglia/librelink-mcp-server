@@ -13,6 +13,10 @@
 ## 🚀 Quick Start
 
 ```bash
+# Clone the repository
+git clone https://github.com/sedoglia/librelink-mcp-server-fixed.git
+cd librelink-mcp-server-fixed
+
 # Install dependencies
 npm install
 
