@@ -1,54 +1,70 @@
 /**
  * Configuration Manager for LibreLink MCP Server
- * 
- * Handles loading, saving, and managing configuration
+ *
+ * Handles loading, saving, and managing configuration.
+ * Credentials are now stored securely using SecureStorage with
+ * AES-256-GCM encryption and OS keychain for key storage.
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 import { LibreLinkConfig } from './types.js';
+import { SecureStorage, SecureCredentials, StoredTokenData } from './secure-storage.js';
+
+// Configuration stored on disk (non-sensitive data only)
+interface StoredConfig {
+  region: 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU';
+  targetLow: number;
+  targetHigh: number;
+  clientVersion: string;
+}
 
 // Default configuration values
-const DEFAULT_CONFIG: LibreLinkConfig = {
-  email: '',
-  password: '',
+const DEFAULT_CONFIG: StoredConfig = {
   region: 'EU',
   targetLow: 70,
   targetHigh: 180,
-  clientVersion: '4.16.0'  // CRITICAL: Must be 4.16.0+ as of October 2025
+  clientVersion: '4.16.0' // CRITICAL: Must be 4.16.0+ as of October 2025
 };
 
 export class ConfigManager {
   private configDir: string;
   private configPath: string;
-  private config: LibreLinkConfig;
+  private config: StoredConfig;
+  private secureStorage: SecureStorage;
+  private cachedCredentials: SecureCredentials | null = null;
 
   constructor() {
     // Store config in user's home directory
     this.configDir = join(homedir(), '.librelink-mcp');
     this.configPath = join(this.configDir, 'config.json');
+    this.secureStorage = new SecureStorage();
     this.config = this.loadConfig();
   }
 
   /**
-   * Load configuration from file
+   * Load configuration from file (non-sensitive data only)
    */
-  private loadConfig(): LibreLinkConfig {
+  private loadConfig(): StoredConfig {
     try {
       if (existsSync(this.configPath)) {
         const data = readFileSync(this.configPath, 'utf-8');
         const loaded = JSON.parse(data);
-        
+
         // Merge with defaults to ensure all fields exist
         // IMPORTANT: Always use at least version 4.16.0
         const merged = { ...DEFAULT_CONFIG, ...loaded };
-        
+
+        // Remove any sensitive data that might be in old config
+        delete (merged as Record<string, unknown>).email;
+        delete (merged as Record<string, unknown>).password;
+
         // Ensure clientVersion is at least 4.16.0
         if (!merged.clientVersion || this.compareVersions(merged.clientVersion, '4.16.0') < 0) {
           merged.clientVersion = '4.16.0';
         }
-        
+
         return merged;
       }
     } catch (error) {
@@ -64,7 +80,7 @@ export class ConfigManager {
   private compareVersions(v1: string, v2: string): number {
     const parts1 = v1.split('.').map(Number);
     const parts2 = v2.split('.').map(Number);
-    
+
     for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
       const p1 = parts1[i] || 0;
       const p2 = parts2[i] || 0;
@@ -75,7 +91,7 @@ export class ConfigManager {
   }
 
   /**
-   * Save configuration to file
+   * Save configuration to file (non-sensitive data only)
    */
   private saveConfig(): void {
     try {
@@ -84,7 +100,7 @@ export class ConfigManager {
         mkdirSync(this.configDir, { recursive: true });
       }
 
-      // Write config file
+      // Write config file without sensitive data
       writeFileSync(this.configPath, JSON.stringify(this.config, null, 2));
 
       // Set file permissions to user-only (600)
@@ -100,26 +116,69 @@ export class ConfigManager {
   }
 
   /**
-   * Get current configuration
+   * Get current configuration (including credentials from secure storage)
    */
-  getConfig(): LibreLinkConfig {
-    return { ...this.config };
+  async getConfig(): Promise<LibreLinkConfig> {
+    const credentials = await this.getCredentials();
+    return {
+      email: credentials?.email || '',
+      password: credentials?.password || '',
+      ...this.config
+    };
+  }
+
+  /**
+   * Get non-sensitive configuration synchronously
+   */
+  getConfigSync(): StoredConfig & { email: string; password: string } {
+    return {
+      email: this.cachedCredentials?.email || '',
+      password: this.cachedCredentials?.password || '',
+      ...this.config
+    };
+  }
+
+  /**
+   * Load credentials from secure storage and cache them
+   */
+  async loadCredentials(): Promise<void> {
+    this.cachedCredentials = await this.secureStorage.getCredentials();
+  }
+
+  /**
+   * Get credentials from secure storage
+   */
+  async getCredentials(): Promise<SecureCredentials | null> {
+    if (this.cachedCredentials) {
+      return this.cachedCredentials;
+    }
+    this.cachedCredentials = await this.secureStorage.getCredentials();
+    return this.cachedCredentials;
   }
 
   /**
    * Check if credentials are configured
    */
-  isConfigured(): boolean {
-    return !!(this.config.email && this.config.password);
+  async isConfigured(): Promise<boolean> {
+    const credentials = await this.getCredentials();
+    return !!(credentials?.email && credentials?.password);
   }
 
   /**
-   * Update credentials
+   * Check if credentials are configured (sync, uses cache)
    */
-  updateCredentials(email: string, password: string): void {
-    this.config.email = email;
-    this.config.password = password;
-    this.saveConfig();
+  isConfiguredSync(): boolean {
+    return !!(this.cachedCredentials?.email && this.cachedCredentials?.password);
+  }
+
+  /**
+   * Update credentials (stored securely)
+   */
+  async updateCredentials(email: string, password: string): Promise<void> {
+    await this.secureStorage.saveCredentials({ email, password });
+    this.cachedCredentials = { email, password };
+    // Clear any cached tokens when credentials change
+    await this.secureStorage.clearToken();
   }
 
   /**
@@ -170,10 +229,71 @@ export class ConfigManager {
   }
 
   /**
-   * Clear all configuration
+   * Get secure storage paths for diagnostics
    */
-  clearConfig(): void {
+  getSecureStoragePaths(): { configDir: string; credentialsPath: string; tokenPath: string } {
+    return this.secureStorage.getStoragePaths();
+  }
+
+  /**
+   * Get the secure storage instance for token management
+   */
+  getSecureStorage(): SecureStorage {
+    return this.secureStorage;
+  }
+
+  /**
+   * Save authentication token
+   */
+  async saveToken(tokenData: StoredTokenData): Promise<void> {
+    await this.secureStorage.saveToken(tokenData);
+  }
+
+  /**
+   * Get stored authentication token
+   */
+  async getToken(): Promise<StoredTokenData | null> {
+    return this.secureStorage.getToken();
+  }
+
+  /**
+   * Clear authentication token
+   */
+  async clearToken(): Promise<void> {
+    await this.secureStorage.clearToken();
+  }
+
+  /**
+   * Clear all configuration and credentials
+   */
+  async clearConfig(): Promise<void> {
     this.config = { ...DEFAULT_CONFIG };
     this.saveConfig();
+    await this.secureStorage.clearAll();
+    this.cachedCredentials = null;
+  }
+
+  /**
+   * Migrate from legacy unencrypted config
+   */
+  async migrateFromLegacy(): Promise<boolean> {
+    return this.secureStorage.migrateFromLegacy();
+  }
+
+  /**
+   * Get region
+   */
+  getRegion(): 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU' {
+    return this.config.region;
+  }
+
+  /**
+   * Get target ranges
+   */
+  getTargetRanges(): { targetLow: number; targetHigh: number } {
+    return {
+      targetLow: this.config.targetLow,
+      targetHigh: this.config.targetHigh
+    };
   }
 }

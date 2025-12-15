@@ -1,7 +1,7 @@
 {
   "name": "librelink-mcp-server-fixed",
-  "version": "1.1.0",
-  "description": "MCP server for FreeStyle LibreLink CGM data - Fixed for API v4.16.0 (October 2025)",
+  "version": "1.2.0",
+  "description": "MCP server for FreeStyle LibreLink CGM data - Fixed for API v4.16.0 with secure credential storage",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -29,9 +29,11 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.24.3",
-    "axios": "^1.6.0"
+    "axios": "^1.6.0",
+    "keytar": "^7.9.0"
   },
   "devDependencies": {
+    "@types/keytar": "^4.4.0",
     "@types/node": "^20.10.0",
     "typescript": "^5.3.0"
   },

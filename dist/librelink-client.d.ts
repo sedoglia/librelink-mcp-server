@@ -4,17 +4,20 @@
  * This client implements the required changes:
  * 1. API version header set to 4.16.0
  * 2. Account-Id header (SHA256 hash of userId) required for all authenticated requests
+ * 3. Secure token persistence with automatic refresh
  */
 import { LibreLinkConfig, GlucoseReading, SensorInfo, Connection } from './types.js';
+import { ConfigManager } from './config.js';
 export declare class LibreLinkClient {
     private config;
+    private configManager;
     private baseUrl;
     private jwtToken;
     private userId;
     private accountId;
     private patientId;
     private tokenExpires;
-    constructor(config: LibreLinkConfig);
+    constructor(config: LibreLinkConfig, configManager?: ConfigManager);
     /**
      * Create axios instance with default headers
      */
@@ -28,6 +31,14 @@ export declare class LibreLinkClient {
      * Check if current token is valid
      */
     private isTokenValid;
+    /**
+     * Try to restore session from stored token
+     */
+    tryRestoreSession(): Promise<boolean>;
+    /**
+     * Save current session token to secure storage
+     */
+    private saveSession;
     /**
      * Login to LibreLinkUp and get JWT token
      */
@@ -68,4 +79,16 @@ export declare class LibreLinkClient {
      * Update configuration
      */
     updateConfig(newConfig: Partial<LibreLinkConfig>): void;
+    /**
+     * Clear stored session
+     */
+    clearSession(): Promise<void>;
+    /**
+     * Get session status
+     */
+    getSessionStatus(): {
+        authenticated: boolean;
+        tokenValid: boolean;
+        expiresAt: Date | null;
+    };
 }

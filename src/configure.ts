@@ -2,8 +2,12 @@
 
 /**
  * CLI Configuration Tool for LibreLink MCP Server
- * 
+ *
  * Usage: npm run configure
+ *
+ * Credentials are stored securely using:
+ * - AES-256-GCM encryption for data at rest
+ * - Encryption keys stored in OS keychain via Keytar
  */
 
 import * as readline from 'readline';
@@ -26,19 +30,19 @@ function question(prompt: string): Promise<string> {
 function questionHidden(prompt: string): Promise<string> {
   return new Promise((resolve) => {
     process.stdout.write(prompt);
-    
+
     const stdin = process.stdin;
     const wasRaw = stdin.isRaw;
-    
+
     if (stdin.isTTY) {
       stdin.setRawMode(true);
     }
-    
+
     let password = '';
-    
+
     const onData = (char: Buffer) => {
       const c = char.toString('utf8');
-      
+
       switch (c) {
         case '\n':
         case '\r':
@@ -63,7 +67,7 @@ function questionHidden(prompt: string): Promise<string> {
           break;
       }
     };
-    
+
     stdin.on('data', onData);
     stdin.resume();
   });
@@ -71,41 +75,63 @@ function questionHidden(prompt: string): Promise<string> {
 
 async function main() {
   console.log('');
-  console.log('🩸 LibreLink MCP Server Configuration');
-  console.log('=====================================');
+  console.log('LibreLink MCP Server Configuration');
+  console.log('===================================');
   console.log('');
   console.log('This tool will configure your LibreLink credentials.');
-  console.log('Your credentials are stored locally at ~/.librelink-mcp/config.json');
   console.log('');
-  console.log('⚠️  IMPORTANT: Use your LibreLinkUp credentials (not LibreLink)');
-  console.log('   - LibreLinkUp is the follower/sharing app');
-  console.log('   - Make sure data sharing is enabled in the LibreLink app');
+  console.log('SECURITY: Your credentials are stored securely using:');
+  console.log('  - AES-256-GCM encryption for data at rest');
+  console.log('  - Encryption keys stored in your OS keychain');
+  console.log('');
+  console.log('IMPORTANT: Use your LibreLinkUp credentials (not LibreLink)');
+  console.log('  - LibreLinkUp is the follower/sharing app');
+  console.log('  - Make sure data sharing is enabled in the LibreLink app');
   console.log('');
 
   const configManager = new ConfigManager();
-  const currentConfig = configManager.getConfig();
+
+  // Try to migrate legacy config
+  const migrated = await configManager.migrateFromLegacy();
+  if (migrated) {
+    console.log('Migrated existing credentials to secure storage.');
+    console.log('');
+  }
+
+  // Load existing credentials
+  await configManager.loadCredentials();
+  const existingCredentials = await configManager.getCredentials();
+  const ranges = configManager.getTargetRanges();
+  const region = configManager.getRegion();
 
   // Get email
-  const emailPrompt = currentConfig.email 
-    ? `Email [${currentConfig.email}]: ` 
+  const emailPrompt = existingCredentials?.email
+    ? `Email [${existingCredentials.email}]: `
     : 'Email: ';
   let email = await question(emailPrompt);
-  if (!email && currentConfig.email) {
-    email = currentConfig.email;
+  if (!email && existingCredentials?.email) {
+    email = existingCredentials.email;
   }
 
   if (!email) {
-    console.log('❌ Email is required');
+    console.log('Email is required');
     rl.close();
     process.exit(1);
   }
 
   // Get password
   console.log('');
-  const password = await questionHidden('Password: ');
+  const passwordPrompt = existingCredentials?.password
+    ? 'Password (press Enter to keep existing): '
+    : 'Password: ';
+  let password = await questionHidden(passwordPrompt);
+  if (!password && existingCredentials?.password) {
+    password = existingCredentials.password;
+    console.log('(keeping existing password)');
+  }
 
   if (!password) {
-    console.log('❌ Password is required');
+    console.log('Password is required');
     rl.close();
     process.exit(1);
   }
@@ -120,16 +146,16 @@ async function main() {
   console.log('  AP - Asia Pacific');
   console.log('  AU - Australia');
   console.log('');
-  
-  const regionPrompt = `Region [${currentConfig.region}]: `;
-  let region = (await question(regionPrompt)).toUpperCase() as 'EU' | 'US' | 'DE' | 'FR' | 'AP' | 'AU';
-  if (!region) {
-    region = currentConfig.region;
+
+  const regionPrompt = `Region [${region}]: `;
+  let newRegion = (await question(regionPrompt)).toUpperCase() as 'EU' | 'US' | 'DE' | 'FR' | 'AP' | 'AU';
+  if (!newRegion) {
+    newRegion = region;
   }
 
   const validRegions = ['EU', 'US', 'DE', 'FR', 'AP', 'AU'];
-  if (!validRegions.includes(region)) {
-    console.log(`❌ Invalid region. Must be one of: ${validRegions.join(', ')}`);
+  if (!validRegions.includes(newRegion)) {
+    console.log(`Invalid region. Must be one of: ${validRegions.join(', ')}`);
     rl.close();
     process.exit(1);
   }
@@ -137,17 +163,17 @@ async function main() {
   // Get target ranges
   console.log('');
   console.log('Target glucose ranges (mg/dL):');
-  
-  const lowPrompt = `Target Low [${currentConfig.targetLow}]: `;
-  const lowInput = await question(lowPrompt);
-  const targetLow = lowInput ? parseInt(lowInput, 10) : currentConfig.targetLow;
 
-  const highPrompt = `Target High [${currentConfig.targetHigh}]: `;
+  const lowPrompt = `Target Low [${ranges.targetLow}]: `;
+  const lowInput = await question(lowPrompt);
+  const targetLow = lowInput ? parseInt(lowInput, 10) : ranges.targetLow;
+
+  const highPrompt = `Target High [${ranges.targetHigh}]: `;
   const highInput = await question(highPrompt);
-  const targetHigh = highInput ? parseInt(highInput, 10) : currentConfig.targetHigh;
+  const targetHigh = highInput ? parseInt(highInput, 10) : ranges.targetHigh;
 
   if (targetLow >= targetHigh) {
-    console.log('❌ Target low must be less than target high');
+    console.log('Target low must be less than target high');
     rl.close();
     process.exit(1);
   }
@@ -155,14 +181,24 @@ async function main() {
   // Save configuration
   console.log('');
   console.log('Saving configuration...');
-  
+
   try {
-    configManager.updateCredentials(email, password);
-    configManager.updateRegion(region);
+    // Save credentials securely
+    await configManager.updateCredentials(email, password);
+
+    // Save other settings
+    configManager.updateRegion(newRegion);
     configManager.updateRanges(targetLow, targetHigh);
-    console.log(`✅ Configuration saved to ${configManager.getConfigPath()}`);
+
+    const paths = configManager.getSecureStoragePaths();
+    console.log('Configuration saved!');
+    console.log('');
+    console.log('Storage locations:');
+    console.log(`  Encrypted credentials: ${paths.credentialsPath}`);
+    console.log(`  Encryption key: Stored in OS keychain`);
+    console.log(`  Settings: ${configManager.getConfigPath()}`);
   } catch (error) {
-    console.log(`❌ Failed to save configuration: ${error}`);
+    console.log(`Failed to save configuration: ${error}`);
     rl.close();
     process.exit(1);
   }
@@ -170,22 +206,28 @@ async function main() {
   // Test connection
   console.log('');
   console.log('Testing connection to LibreLinkUp...');
-  
+
   try {
-    const client = new LibreLinkClient(configManager.getConfig());
+    const config = await configManager.getConfig();
+    const client = new LibreLinkClient(config, configManager);
     await client.validateConnection();
-    
-    console.log('✅ Connection successful!');
-    
+
+    console.log('Connection successful!');
+
     const glucose = await client.getCurrentGlucose();
+    const sessionStatus = client.getSessionStatus();
+
     console.log('');
     console.log('Current glucose reading:');
     console.log(`  Value: ${glucose.value} mg/dL`);
     console.log(`  Trend: ${glucose.trend}`);
     console.log(`  Status: ${glucose.color === 'green' ? 'In Range' : glucose.color === 'red' ? 'Critical' : 'Out of Range'}`);
-    
+    console.log('');
+    console.log('Session info:');
+    console.log(`  Token valid until: ${sessionStatus.expiresAt?.toLocaleString() || 'N/A'}`);
+
   } catch (error) {
-    console.log(`❌ Connection failed: ${error}`);
+    console.log(`Connection failed: ${error}`);
     console.log('');
     console.log('Troubleshooting:');
     console.log('  1. Verify your email and password are correct');
@@ -198,13 +240,13 @@ async function main() {
   }
 
   console.log('');
-  console.log('🎉 Configuration complete!');
+  console.log('Configuration complete!');
   console.log('');
   console.log('Next steps:');
   console.log('  1. Add the server to Claude Desktop configuration');
   console.log('  2. Restart Claude Desktop');
   console.log('  3. Ask Claude about your glucose levels!');
-  
+
   rl.close();
 }
 

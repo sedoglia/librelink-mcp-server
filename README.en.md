@@ -9,6 +9,9 @@
 - ✅ Required `Account-Id` header (SHA256 hash of userId)
 - ✅ Automatic regional redirect handling
 - ✅ Automatic token refresh
+- ✅ **NEW v1.2.0**: Secure credential storage with AES-256-GCM encryption
+- ✅ **NEW v1.2.0**: Encryption keys stored in OS keychain (Keytar)
+- ✅ **NEW v1.2.0**: Secure JWT token persistence
 
 ## 🚀 Quick Start
 
@@ -51,6 +54,11 @@ You will be asked for:
 - **Region**: EU, US, DE, FR, AP, AU
 - **Target range**: Target glucose values (default: 70-180 mg/dL)
 
+Credentials are stored securely:
+- **Encryption**: AES-256-GCM with random salt and IV
+- **Encryption key**: Stored in the OS keychain
+- **JWT token**: Persisted securely to avoid repeated logins
+
 ### 2. Test the connection
 
 ```bash
@@ -91,6 +99,8 @@ Restart Claude Desktop to load the MCP server.
 | `configure_credentials` | Configure LibreLinkUp credentials |
 | `configure_ranges` | Set custom target ranges |
 | `validate_connection` | Test the connection |
+| `get_session_status` | **NEW**: Authentication session status |
+| `clear_session` | **NEW**: Clear session and force re-authentication |
 
 ## 💬 Usage Examples
 
@@ -137,10 +147,48 @@ Once integrated with Claude Desktop, you can ask:
 
 ## 🔒 Security & Privacy
 
-- **Local processing** - No data sent to external servers
-- **Local credentials** - Stored in `~/.librelink-mcp/config.json`
-- **File permissions** - Automatically set to 600 (user only)
-- **No tracking** - Zero telemetry
+### Security Architecture (v1.2.0)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    OS Keychain (Keytar)                     │
+│  ┌─────────────────────────────────────────────────────────┐│
+│  │  AES-256 Key (32 random bytes)                          ││
+│  └─────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│               ~/.librelink-mcp/                             │
+│  ┌───────────────────┐  ┌────────────────────┐             │
+│  │ credentials.enc   │  │ token.enc          │             │
+│  │ (AES-256-GCM)     │  │ (AES-256-GCM)      │             │
+│  │ - email           │  │ - JWT token        │             │
+│  │ - password        │  │ - expiration       │             │
+│  └───────────────────┘  │ - userId           │             │
+│                         │ - accountId        │             │
+│  ┌───────────────────┐  └────────────────────┘             │
+│  │ config.json       │                                      │
+│  │ (non-sensitive)   │                                      │
+│  │ - region          │                                      │
+│  │ - targetLow/High  │                                      │
+│  └───────────────────┘                                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Security Features
+
+- **AES-256-GCM encryption**: Credentials are encrypted with AES-256 in GCM mode with authentication tag
+- **Random salt and IV**: Each encryption operation uses unique salt and IV
+- **Keys in Keychain**: The master key is stored in the OS keychain:
+  - Windows: Credential Manager
+  - macOS: Keychain
+  - Linux: Secret Service (libsecret)
+- **Persistent tokens**: JWT tokens are saved encrypted to avoid repeated logins
+- **Automatic migration**: Credentials from old version are automatically migrated and plaintext passwords removed
+- **File permissions**: Automatically set to 600 (user only)
+- **No tracking**: Zero telemetry
+- **Local processing**: No data sent to external servers
 
 ## ⚠️ API v4.16.0 Fix (October 2025)
 
@@ -193,6 +241,13 @@ headers['Account-Id'] = accountId;
 2. Try logging in from the official LibreLinkUp app
 3. Check the region (EU vs US)
 
+### Keytar/Keychain error
+
+If you encounter keychain errors:
+1. Make sure the system keychain service is active
+2. On Linux, install `libsecret-1-dev` and `gnome-keyring`
+3. If the problem persists, credentials will still be encrypted with a derived key
+
 ## 📁 Project Structure
 
 ```
@@ -203,11 +258,11 @@ librelink-mcp-server-fixed/
 │   ├── glucose-analytics.ts  # Analytics and statistics
 │   ├── config.ts             # Configuration management
 │   ├── configure.ts          # CLI configuration tool
+│   ├── secure-storage.ts     # NEW: Secure storage with Keytar
 │   └── types.ts              # TypeScript definitions
-├── config/
-│   └── default.json          # Default configuration
 ├── dist/                     # Compiled files
 ├── test-real-connection.js   # Connection test
+├── test-secure-storage.js    # NEW: Security module test
 ├── package.json
 └── README.md
 ```
@@ -221,6 +276,7 @@ MIT License
 - Original fork: [amansk/librelink-mcp-server](https://github.com/amansk/librelink-mcp-server)
 - API Documentation: [khskekec/libre-link-up-http-dump](https://gist.github.com/khskekec/6c13ba01b10d3018d816706a32ae8ab2)
 - MCP Protocol: [Anthropic](https://modelcontextprotocol.io)
+- Secure Storage: [Keytar](https://github.com/atom/node-keytar)
 
 ---
 

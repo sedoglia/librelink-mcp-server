@@ -1,9 +1,10 @@
 /**
  * LibreLink API Client - Fixed for v4.16.0 (October 2025)
- * 
+ *
  * This client implements the required changes:
  * 1. API version header set to 4.16.0
  * 2. Account-Id header (SHA256 hash of userId) required for all authenticated requests
+ * 3. Secure token persistence with automatic refresh
  */
 
 import axios, { AxiosInstance, AxiosError } from 'axios';
@@ -19,6 +20,8 @@ import {
   LIBRE_LINK_SERVERS,
   getGlucoseColor
 } from './types.js';
+import { ConfigManager } from './config.js';
+import { StoredTokenData } from './secure-storage.js';
 
 // Default client version - CRITICAL: Must be 4.16.0 or higher as of October 8, 2025
 const DEFAULT_CLIENT_VERSION = '4.16.0';
@@ -82,6 +85,7 @@ function mapGlucoseItem(item: RawGlucoseItem, targetLow: number, targetHigh: num
 
 export class LibreLinkClient {
   private config: LibreLinkConfig;
+  private configManager: ConfigManager | null = null;
   private baseUrl: string;
   private jwtToken: string | null = null;
   private userId: string | null = null;
@@ -89,11 +93,12 @@ export class LibreLinkClient {
   private patientId: string | null = null;
   private tokenExpires: number = 0;
 
-  constructor(config: LibreLinkConfig) {
+  constructor(config: LibreLinkConfig, configManager?: ConfigManager) {
     this.config = {
       ...config,
       clientVersion: config.clientVersion || DEFAULT_CLIENT_VERSION
     };
+    this.configManager = configManager || null;
     this.baseUrl = LIBRE_LINK_SERVERS[config.region] || LIBRE_LINK_SERVERS['GLOBAL'];
   }
 
@@ -136,7 +141,7 @@ export class LibreLinkClient {
       'product': 'llu.android',
       'version': this.config.clientVersion,
       'Authorization': `Bearer ${this.jwtToken}`,
-      'Account-Id': this.accountId  // CRITICAL: Required for v4.16.0+
+      'Account-Id': this.accountId // CRITICAL: Required for v4.16.0+
     };
 
     return axios.create({
@@ -156,6 +161,68 @@ export class LibreLinkClient {
   }
 
   /**
+   * Try to restore session from stored token
+   */
+  async tryRestoreSession(): Promise<boolean> {
+    if (!this.configManager) {
+      return false;
+    }
+
+    try {
+      const storedToken = await this.configManager.getToken();
+
+      if (!storedToken) {
+        return false;
+      }
+
+      // Check if stored token matches current region
+      if (storedToken.region !== this.config.region) {
+        await this.configManager.clearToken();
+        return false;
+      }
+
+      // Restore session from stored token
+      this.jwtToken = storedToken.token;
+      this.tokenExpires = storedToken.expires;
+      this.userId = storedToken.userId;
+      this.accountId = storedToken.accountId;
+
+      // Update base URL for the region
+      this.baseUrl = LIBRE_LINK_SERVERS[storedToken.region] || LIBRE_LINK_SERVERS['GLOBAL'];
+
+      console.error('LibreLink: Restored session from secure storage');
+      return true;
+    } catch (error) {
+      console.error('Error restoring session:', error);
+      return false;
+    }
+  }
+
+  /**
+   * Save current session token to secure storage
+   */
+  private async saveSession(): Promise<void> {
+    if (!this.configManager || !this.jwtToken || !this.userId || !this.accountId) {
+      return;
+    }
+
+    try {
+      const tokenData: StoredTokenData = {
+        token: this.jwtToken,
+        expires: this.tokenExpires,
+        userId: this.userId,
+        accountId: this.accountId,
+        region: this.config.region
+      };
+
+      await this.configManager.saveToken(tokenData);
+      console.error('LibreLink: Session saved to secure storage');
+    } catch (error) {
+      console.error('Error saving session:', error);
+    }
+  }
+
+  /**
    * Login to LibreLinkUp and get JWT token
    */
   async login(): Promise<void> {
@@ -172,13 +239,16 @@ export class LibreLinkClient {
       // Check for region redirect
       if (data.data.redirect && data.data.region) {
         const newRegion = data.data.region.toUpperCase();
-        
+
         // Update base URL for the correct region
         if (LIBRE_LINK_SERVERS[newRegion]) {
           this.baseUrl = LIBRE_LINK_SERVERS[newRegion];
         } else {
           this.baseUrl = `https://api-${data.data.region}.libreview.io`;
         }
+
+        // Update config region
+        this.config.region = newRegion as LibreLinkConfig['region'];
 
         // Retry login with correct region
         return this.login();
@@ -193,19 +263,22 @@ export class LibreLinkClient {
       this.jwtToken = data.data.authTicket.token;
       this.tokenExpires = data.data.authTicket.expires * 1000; // Convert to milliseconds
       this.userId = data.data.user.id;
-      
+
       // CRITICAL: Generate Account-Id from user ID (required for v4.16.0+)
       this.accountId = generateAccountId(this.userId);
 
       console.error(`LibreLink: Logged in as ${data.data.user.firstName} ${data.data.user.lastName}`);
 
+      // Save session to secure storage
+      await this.saveSession();
+
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError<{ message?: string; status?: number; data?: { minimumVersion?: string } }>;
-        
+
         if (axiosError.response?.status === 403) {
           const responseData = axiosError.response.data;
-          
+
           if (responseData?.data?.minimumVersion) {
             throw new Error(
               `API requires minimum version ${responseData.data.minimumVersion}. ` +
@@ -213,7 +286,7 @@ export class LibreLinkClient {
               `Please update to the latest version of librelink-mcp-server-fixed.`
             );
           }
-          
+
           if (responseData?.message === 'RequiredHeaderMissing') {
             throw new Error(
               'Required header missing. This usually means the Account-Id header is not being sent. ' +
@@ -221,7 +294,7 @@ export class LibreLinkClient {
             );
           }
         }
-        
+
         if (axiosError.response?.status === 401) {
           throw new Error('Authentication failed. Please check your email and password.');
         }
@@ -236,6 +309,15 @@ export class LibreLinkClient {
    * Ensure we have a valid authenticated session
    */
   private async ensureAuthenticated(): Promise<void> {
+    // First try to restore from stored token
+    if (!this.isTokenValid()) {
+      const restored = await this.tryRestoreSession();
+      if (restored && this.isTokenValid()) {
+        return;
+      }
+    }
+
+    // If still not valid, login
     if (!this.isTokenValid()) {
       await this.login();
     }
@@ -253,7 +335,10 @@ export class LibreLinkClient {
       return response.data.data || [];
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
-        // Token expired, re-login and retry
+        // Token expired, clear stored token and re-login
+        if (this.configManager) {
+          await this.configManager.clearToken();
+        }
         this.jwtToken = null;
         await this.ensureAuthenticated();
         return this.getConnections();
@@ -300,6 +385,9 @@ export class LibreLinkClient {
       return response.data.data;
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
+        if (this.configManager) {
+          await this.configManager.clearToken();
+        }
         this.jwtToken = null;
         await this.ensureAuthenticated();
         return this.getGraphData();
@@ -314,7 +402,7 @@ export class LibreLinkClient {
   async getCurrentGlucose(): Promise<GlucoseReading> {
     const data = await this.getGraphData();
     const current = data.connection.glucoseMeasurement;
-    
+
     return mapGlucoseItem(current, this.config.targetLow, this.config.targetHigh);
   }
 
@@ -339,7 +427,7 @@ export class LibreLinkClient {
    */
   async getSensorInfo(): Promise<SensorInfo[]> {
     const data = await this.getGraphData();
-    
+
     return data.activeSensors.map(s => ({
       sn: s.sensor.sn,
       activatedOn: s.sensor.a,
@@ -365,16 +453,42 @@ export class LibreLinkClient {
    */
   updateConfig(newConfig: Partial<LibreLinkConfig>): void {
     this.config = { ...this.config, ...newConfig };
-    
+
     // Reset authentication if credentials changed
     if (newConfig.email || newConfig.password || newConfig.region) {
       this.jwtToken = null;
       this.accountId = null;
       this.patientId = null;
-      
+
       if (newConfig.region) {
         this.baseUrl = LIBRE_LINK_SERVERS[newConfig.region] || LIBRE_LINK_SERVERS['GLOBAL'];
       }
     }
+  }
+
+  /**
+   * Clear stored session
+   */
+  async clearSession(): Promise<void> {
+    this.jwtToken = null;
+    this.accountId = null;
+    this.userId = null;
+    this.patientId = null;
+    this.tokenExpires = 0;
+
+    if (this.configManager) {
+      await this.configManager.clearToken();
+    }
+  }
+
+  /**
+   * Get session status
+   */
+  getSessionStatus(): { authenticated: boolean; tokenValid: boolean; expiresAt: Date | null } {
+    return {
+      authenticated: !!this.jwtToken,
+      tokenValid: this.isTokenValid(),
+      expiresAt: this.tokenExpires > 0 ? new Date(this.tokenExpires) : null
+    };
   }
 }

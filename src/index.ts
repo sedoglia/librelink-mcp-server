@@ -2,30 +2,34 @@
 
 /**
  * LibreLink MCP Server - Fixed for API v4.16.0 (October 2025)
- * 
+ *
  * This MCP server provides Claude Desktop with access to FreeStyle LibreLink
  * continuous glucose monitoring (CGM) data.
- * 
- * Key fixes in this version:
+ *
+ * Key features in this version:
  * - API version 4.16.0 support
  * - Account-Id header (SHA256 of userId) for authenticated requests
+ * - Secure credential storage with AES-256-GCM encryption
+ * - Encryption keys stored in OS keychain via Keytar
+ * - Automatic token persistence and refresh
  */
 
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { 
-  CallToolRequestSchema, 
-  ListToolsRequestSchema 
+import {
+  CallToolRequestSchema,
+  ListToolsRequestSchema
 } from '@modelcontextprotocol/sdk/types.js';
 import { LibreLinkClient } from './librelink-client.js';
 import { GlucoseAnalytics } from './glucose-analytics.js';
 import { ConfigManager } from './config.js';
+import { LibreLinkConfig } from './types.js';
 
 // Create MCP server
 const server = new Server(
   {
     name: 'librelink-mcp-server-fixed',
-    version: '1.1.0'
+    version: '1.2.0'
   },
   {
     capabilities: {
@@ -42,11 +46,16 @@ let analytics: GlucoseAnalytics | null = null;
 /**
  * Initialize LibreLink client if configured
  */
-function initializeClient(): void {
-  const config = configManager.getConfig();
-  
-  if (configManager.isConfigured()) {
-    client = new LibreLinkClient(config);
+async function initializeClient(): Promise<void> {
+  // Migrate from legacy config if needed
+  await configManager.migrateFromLegacy();
+
+  // Load credentials from secure storage
+  await configManager.loadCredentials();
+
+  if (await configManager.isConfigured()) {
+    const config = await configManager.getConfig();
+    client = new LibreLinkClient(config, configManager);
     analytics = new GlucoseAnalytics(config);
   }
 }
@@ -56,9 +65,9 @@ function initializeClient(): void {
  */
 function handleError(error: unknown): { content: Array<{ type: string; text: string }> } {
   console.error('LibreLink MCP Error:', error);
-  
+
   const message = error instanceof Error ? error.message : 'Unknown error occurred';
-  
+
   return {
     content: [{
       type: 'text',
@@ -132,7 +141,7 @@ const tools = [
   },
   {
     name: 'configure_credentials',
-    description: 'Set up or update your LibreLinkUp account credentials for data access. Required before using any glucose reading tools. Credentials are stored securely on your local machine only.',
+    description: 'Set up or update your LibreLinkUp account credentials for data access. Required before using any glucose reading tools. Credentials are stored securely using AES-256-GCM encryption with keys in your OS keychain.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -179,6 +188,24 @@ const tools = [
       properties: {},
       required: []
     }
+  },
+  {
+    name: 'get_session_status',
+    description: 'Get the current authentication session status including whether authenticated, token validity, and expiration time.',
+    inputSchema: {
+      type: 'object',
+      properties: {},
+      required: []
+    }
+  },
+  {
+    name: 'clear_session',
+    description: 'Clear the current authentication session and stored tokens. Use this if you need to force a re-authentication.',
+    inputSchema: {
+      type: 'object',
+      properties: {},
+      required: []
+    }
   }
 ];
 
@@ -197,9 +224,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!client) {
           throw new Error('LibreLinkUp not configured. Use configure_credentials first.');
         }
-        
+
         const reading = await client.getCurrentGlucose();
-        
+
         return {
           content: [{
             type: 'text',
@@ -218,10 +245,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!client) {
           throw new Error('LibreLinkUp not configured. Use configure_credentials first.');
         }
-        
+
         const hours = (args?.hours as number) || 24;
         const history = await client.getGlucoseHistory(hours);
-        
+
         return {
           content: [{
             type: 'text',
@@ -238,11 +265,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!client || !analytics) {
           throw new Error('LibreLinkUp not configured. Use configure_credentials first.');
         }
-        
+
         const days = (args?.days as number) || 7;
         const readings = await client.getGlucoseHistory(days * 24);
         const stats = analytics.calculateGlucoseStats(readings);
-        
+
         return {
           content: [{
             type: 'text',
@@ -269,12 +296,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!client || !analytics) {
           throw new Error('LibreLinkUp not configured. Use configure_credentials first.');
         }
-        
+
         const period = (args?.period as 'daily' | 'weekly' | 'monthly') || 'weekly';
         const daysToAnalyze = period === 'daily' ? 1 : period === 'weekly' ? 7 : 30;
         const readings = await client.getGlucoseHistory(daysToAnalyze * 24);
         const trends = analytics.analyzeTrends(readings, period);
-        
+
         return {
           content: [{
             type: 'text',
@@ -293,9 +320,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!client) {
           throw new Error('LibreLinkUp not configured. Use configure_credentials first.');
         }
-        
+
         const sensors = await client.getSensorInfo();
-        
+
         return {
           content: [{
             type: 'text',
@@ -308,39 +335,41 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       case 'configure_credentials': {
-        const { email, password, region } = args as { 
-          email: string; 
-          password: string; 
-          region?: 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU' 
+        const { email, password, region } = args as {
+          email: string;
+          password: string;
+          region?: 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU'
         };
-        
-        configManager.updateCredentials(email, password);
-        
+
+        await configManager.updateCredentials(email, password);
+
         if (region) {
           configManager.updateRegion(region);
         }
-        
+
         // Reinitialize client with new credentials
-        initializeClient();
-        
+        await initializeClient();
+
+        const paths = configManager.getSecureStoragePaths();
+
         return {
           content: [{
             type: 'text',
-            text: 'LibreLinkUp credentials configured successfully. Use validate_connection to test.'
+            text: `LibreLinkUp credentials configured successfully.\n\nCredentials are stored securely:\n- Encrypted file: ${paths.credentialsPath}\n- Encryption key: Stored in OS keychain\n\nUse validate_connection to test.`
           }]
         };
       }
 
       case 'configure_ranges': {
         const { target_low, target_high } = args as { target_low: number; target_high: number };
-        
+
         configManager.updateRanges(target_low, target_high);
-        
+
         // Reinitialize analytics with new ranges
         if (analytics) {
-          analytics.updateConfig(configManager.getConfig());
+          analytics.updateConfig(await configManager.getConfig());
         }
-        
+
         return {
           content: [{
             type: 'text',
@@ -353,15 +382,17 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!client) {
           throw new Error('LibreLinkUp not configured. Use configure_credentials first.');
         }
-        
+
         const isValid = await client.validateConnection();
-        
+
         if (isValid) {
           const glucose = await client.getCurrentGlucose();
+          const sessionStatus = client.getSessionStatus();
+
           return {
             content: [{
               type: 'text',
-              text: `LibreLinkUp connection validated successfully!\n\nCurrent glucose: ${glucose.value} mg/dL (${glucose.trend})`
+              text: `LibreLinkUp connection validated successfully!\n\nCurrent glucose: ${glucose.value} mg/dL (${glucose.trend})\n\nSession status:\n- Authenticated: ${sessionStatus.authenticated}\n- Token valid: ${sessionStatus.tokenValid}\n- Expires: ${sessionStatus.expiresAt?.toISOString() || 'N/A'}`
             }]
           };
         } else {
@@ -372,6 +403,48 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             }]
           };
         }
+      }
+
+      case 'get_session_status': {
+        if (!client) {
+          return {
+            content: [{
+              type: 'text',
+              text: JSON.stringify({
+                configured: false,
+                message: 'LibreLinkUp not configured. Use configure_credentials first.'
+              }, null, 2)
+            }]
+          };
+        }
+
+        const status = client.getSessionStatus();
+
+        return {
+          content: [{
+            type: 'text',
+            text: JSON.stringify({
+              configured: true,
+              authenticated: status.authenticated,
+              token_valid: status.tokenValid,
+              expires_at: status.expiresAt?.toISOString() || null
+            }, null, 2)
+          }]
+        };
+      }
+
+      case 'clear_session': {
+        if (client) {
+          await client.clearSession();
+        }
+        await configManager.clearToken();
+
+        return {
+          content: [{
+            type: 'text',
+            text: 'Session cleared. You will need to re-authenticate on the next request.'
+          }]
+        };
       }
 
       default:
@@ -387,15 +460,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
  */
 export async function main(): Promise<void> {
   // Initialize client if already configured
-  initializeClient();
-  
+  await initializeClient();
+
   // Create stdio transport
   const transport = new StdioServerTransport();
-  
+
   // Connect server to transport
   await server.connect(transport);
-  
-  console.error('LibreLink MCP Server running on stdio (v1.1.0 - Fixed for API v4.16.0)');
+
+  console.error('LibreLink MCP Server running on stdio (v1.2.0 - Secure credential storage)');
 }
 
 // Run if executed directly

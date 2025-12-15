@@ -1,2 +1,4 @@
-node_modules/ 
-.librelink-mcp/ 
+node_modules/
+.librelink-mcp/
+.claude/
+*.log

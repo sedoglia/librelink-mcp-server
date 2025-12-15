@@ -5,9 +5,12 @@
  * This MCP server provides Claude Desktop with access to FreeStyle LibreLink
  * continuous glucose monitoring (CGM) data.
  *
- * Key fixes in this version:
+ * Key features in this version:
  * - API version 4.16.0 support
  * - Account-Id header (SHA256 of userId) for authenticated requests
+ * - Secure credential storage with AES-256-GCM encryption
+ * - Encryption keys stored in OS keychain via Keytar
+ * - Automatic token persistence and refresh
  */
 /**
  * Main entry point

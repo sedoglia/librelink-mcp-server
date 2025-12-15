@@ -9,6 +9,9 @@
 - ✅ Header `Account-Id` obbligatorio (SHA256 hash dell'userId)
 - ✅ Gestione automatica del redirect regionale
 - ✅ Refresh automatico del token
+- ✅ **NEW v1.2.0**: Storage sicuro delle credenziali con crittografia AES-256-GCM
+- ✅ **NEW v1.2.0**: Chiavi di crittografia salvate nel keychain del sistema operativo (Keytar)
+- ✅ **NEW v1.2.0**: Persistenza sicura dei token JWT
 
 ## 🚀 Installazione Rapida
 
@@ -51,6 +54,11 @@ Ti verrà chiesto:
 - **Regione**: EU, US, DE, FR, AP, AU
 - **Range target**: Valori glicemici target (default: 70-180 mg/dL)
 
+Le credenziali vengono salvate in modo sicuro:
+- **Crittografia**: AES-256-GCM con salt e IV casuali
+- **Chiave di crittografia**: Salvata nel keychain del sistema operativo
+- **Token JWT**: Persistito in modo sicuro per evitare login ripetuti
+
 ### 2. Testa la connessione
 
 ```bash
@@ -91,6 +99,8 @@ Riavvia Claude Desktop per caricare il server MCP.
 | `configure_credentials` | Configura credenziali LibreLinkUp |
 | `configure_ranges` | Imposta range target personalizzati |
 | `validate_connection` | Testa la connessione |
+| `get_session_status` | **NEW**: Stato della sessione di autenticazione |
+| `clear_session` | **NEW**: Pulisce la sessione e forza re-autenticazione |
 
 ## 💬 Esempi di Utilizzo
 
@@ -137,10 +147,48 @@ Una volta integrato con Claude Desktop, puoi chiedere:
 
 ## 🔒 Sicurezza e Privacy
 
-- **Elaborazione locale** - Nessun dato inviato a server esterni
-- **Credenziali locali** - Salvate in `~/.librelink-mcp/config.json`
-- **Permessi file** - Automaticamente impostati a 600 (solo utente)
-- **Nessun tracking** - Zero telemetria
+### Architettura di Sicurezza (v1.2.0)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    OS Keychain (Keytar)                     │
+│  ┌─────────────────────────────────────────────────────────┐│
+│  │  Chiave AES-256 (32 byte random)                        ││
+│  └─────────────────────────────────────────────────────────┘│
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│               ~/.librelink-mcp/                             │
+│  ┌───────────────────┐  ┌────────────────────┐             │
+│  │ credentials.enc   │  │ token.enc          │             │
+│  │ (AES-256-GCM)     │  │ (AES-256-GCM)      │             │
+│  │ - email           │  │ - JWT token        │             │
+│  │ - password        │  │ - expiration       │             │
+│  └───────────────────┘  │ - userId           │             │
+│                         │ - accountId        │             │
+│  ┌───────────────────┐  └────────────────────┘             │
+│  │ config.json       │                                      │
+│  │ (non sensibile)   │                                      │
+│  │ - region          │                                      │
+│  │ - targetLow/High  │                                      │
+│  └───────────────────┘                                      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Caratteristiche di Sicurezza
+
+- **Crittografia AES-256-GCM**: Le credenziali sono crittografate con algoritmo AES-256 in modalità GCM con authentication tag
+- **Salt e IV casuali**: Ogni operazione di crittografia usa salt e IV unici
+- **Chiavi nel Keychain**: La chiave master è salvata nel keychain del sistema operativo:
+  - Windows: Credential Manager
+  - macOS: Keychain
+  - Linux: Secret Service (libsecret)
+- **Token persistenti**: I JWT token sono salvati crittografati per evitare login ripetuti
+- **Migrazione automatica**: Le credenziali dalla vecchia versione vengono migrate automaticamente e le password in chiaro eliminate
+- **Permessi file**: Automaticamente impostati a 600 (solo utente)
+- **Nessun tracking**: Zero telemetria
+- **Elaborazione locale**: Nessun dato inviato a server esterni
 
 ## ⚠️ Fix API v4.16.0 (Ottobre 2025)
 
@@ -193,6 +241,13 @@ headers['Account-Id'] = accountId;
 2. Prova ad accedere dall'app ufficiale LibreLinkUp
 3. Controlla la regione (EU vs US)
 
+### Errore Keytar/Keychain
+
+Se riscontri errori con il keychain:
+1. Assicurati che il servizio keychain del sistema sia attivo
+2. Su Linux, installa `libsecret-1-dev` e `gnome-keyring`
+3. Se il problema persiste, le credenziali saranno comunque crittografate con una chiave derivata
+
 ## 📁 Struttura Progetto
 
 ```
@@ -203,11 +258,11 @@ librelink-mcp-server-fixed/
 │   ├── glucose-analytics.ts  # Analisi e statistiche
 │   ├── config.ts             # Gestione configurazione
 │   ├── configure.ts          # Tool CLI configurazione
+│   ├── secure-storage.ts     # NEW: Storage sicuro con Keytar
 │   └── types.ts              # Definizioni TypeScript
-├── config/
-│   └── default.json          # Configurazione default
 ├── dist/                     # File compilati
 ├── test-real-connection.js   # Test connessione
+├── test-secure-storage.js    # NEW: Test modulo sicurezza
 ├── package.json
 └── README.md
 ```
@@ -221,6 +276,7 @@ MIT License
 - Fork originale: [amansk/librelink-mcp-server](https://github.com/amansk/librelink-mcp-server)
 - Documentazione API: [khskekec/libre-link-up-http-dump](https://gist.github.com/khskekec/6c13ba01b10d3018d816706a32ae8ab2)
 - MCP Protocol: [Anthropic](https://modelcontextprotocol.io)
+- Secure Storage: [Keytar](https://github.com/atom/node-keytar)
 
 ---
 

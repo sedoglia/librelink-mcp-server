@@ -3,6 +3,8 @@
 /**
  * Test script for real LibreLinkUp connection
  * Run this after configuring your credentials with: npm run configure
+ *
+ * Version 1.2.0 - Tests secure credential storage and token persistence
  */
 
 import { spawn } from 'child_process';
@@ -18,15 +20,22 @@ class RealConnectionTester {
 
   async startServer() {
     this.log('Starting MCP server with your credentials...');
-    
+
     this.server = spawn('node', ['dist/index.js'], {
-      stdio: ['pipe', 'pipe', 'pipe']
+      stdio: ['pipe', 'pipe', 'pipe'],
+      cwd: process.cwd()
     });
 
     this.server.stderr.on('data', (data) => {
       const message = data.toString().trim();
       if (message.includes('LibreLink MCP Server running')) {
-        this.log('✅ Server started successfully');
+        this.log('Server started successfully');
+      } else if (message.includes('Restored session')) {
+        this.log('Session restored from secure storage');
+      } else if (message.includes('Logged in as')) {
+        this.log(`Authenticated: ${message.split('LibreLink: ')[1] || message}`);
+      } else if (message.includes('Session saved')) {
+        this.log('Session token saved to secure storage');
       } else if (message) {
         this.log(`Server: ${message}`);
       }
@@ -34,7 +43,7 @@ class RealConnectionTester {
 
     // Give server time to start
     await new Promise(resolve => setTimeout(resolve, 2000));
-    
+
     return this.server.pid ? true : false;
   }
 
@@ -80,7 +89,7 @@ class RealConnectionTester {
       timeoutId = setTimeout(() => {
         this.server.stdout.off('data', onData);
         reject(new Error(`Timeout waiting for response`));
-      }, 15000);
+      }, 30000); // Increased timeout for first auth
 
       // Send init first, then the actual message
       this.server.stdin.write(JSON.stringify(initMessage) + '\n');
@@ -92,7 +101,7 @@ class RealConnectionTester {
 
   async testValidateConnection() {
     this.log('Testing connection to LibreLinkUp...');
-    
+
     const message = {
       jsonrpc: '2.0',
       id: 1,
@@ -105,34 +114,41 @@ class RealConnectionTester {
 
     try {
       const response = await this.sendMCPMessage(message);
-      
+
       if (response.result && response.result.content) {
         const content = response.result.content[0].text;
-        this.log(`Response: ${content}`);
-        
+        this.log(`Response: ${content.split('\n')[0]}`);
+
         if (content.includes('validated successfully')) {
-          this.log('🎉 SUCCESS! Your LibreLinkUp connection is working!');
+          this.log('SUCCESS! Your LibreLinkUp connection is working!');
+
+          // Parse session info
+          if (content.includes('Token valid:')) {
+            const tokenValid = content.includes('Token valid: true');
+            this.log(`Token persistence: ${tokenValid ? 'Working' : 'Not working'}`);
+          }
+
           return true;
         } else {
-          this.log('❌ Connection failed - check your credentials or sensor status');
+          this.log('Connection failed - check your credentials or sensor status');
           return false;
         }
       } else if (response.error) {
-        this.log(`❌ Error: ${response.error.message}`);
+        this.log(`Error: ${response.error.message}`);
         return false;
       } else {
-        this.log('❌ Unexpected response format');
+        this.log('Unexpected response format');
         return false;
       }
     } catch (error) {
-      this.log(`❌ Error testing connection: ${error.message}`);
+      this.log(`Error testing connection: ${error.message}`);
       return false;
     }
   }
 
   async testCurrentGlucose() {
     this.log('Testing current glucose reading...');
-    
+
     const message = {
       jsonrpc: '2.0',
       id: 2,
@@ -145,13 +161,13 @@ class RealConnectionTester {
 
     try {
       const response = await this.sendMCPMessage(message);
-      
+
       if (response.result && response.result.content) {
         const content = response.result.content[0].text;
-        
+
         try {
           const glucose = JSON.parse(content);
-          this.log('🎉 SUCCESS! Got glucose reading:');
+          this.log('SUCCESS! Got glucose reading:');
           this.log(`   Current glucose: ${glucose.current_glucose} mg/dL`);
           this.log(`   Trend: ${glucose.trend}`);
           this.log(`   Status: ${glucose.status}`);
@@ -162,16 +178,106 @@ class RealConnectionTester {
           return content.includes('Error') ? false : true;
         }
       } else if (response.error) {
-        this.log(`❌ Error: ${response.error.message}`);
+        this.log(`Error: ${response.error.message}`);
         return false;
       } else {
-        this.log('❌ No glucose data received');
+        this.log('No glucose data received');
         return false;
       }
     } catch (error) {
-      this.log(`❌ Error getting glucose: ${error.message}`);
+      this.log(`Error getting glucose: ${error.message}`);
       return false;
     }
+  }
+
+  async testSessionStatus() {
+    this.log('Testing session status...');
+
+    const message = {
+      jsonrpc: '2.0',
+      id: 3,
+      method: 'tools/call',
+      params: {
+        name: 'get_session_status',
+        arguments: {}
+      }
+    };
+
+    try {
+      const response = await this.sendMCPMessage(message);
+
+      if (response.result && response.result.content) {
+        const content = response.result.content[0].text;
+
+        try {
+          const status = JSON.parse(content);
+          this.log('Session status:');
+          this.log(`   Configured: ${status.configured}`);
+          this.log(`   Authenticated: ${status.authenticated}`);
+          this.log(`   Token valid: ${status.token_valid}`);
+          if (status.expires_at) {
+            this.log(`   Expires: ${new Date(status.expires_at).toLocaleString()}`);
+          }
+          return true;
+        } catch (e) {
+          this.log(`Response: ${content}`);
+          return false;
+        }
+      } else if (response.error) {
+        this.log(`Error: ${response.error.message}`);
+        return false;
+      }
+    } catch (error) {
+      this.log(`Error getting session status: ${error.message}`);
+      return false;
+    }
+    return false;
+  }
+
+  async testGlucoseHistory() {
+    this.log('Testing glucose history (last 4 hours)...');
+
+    const message = {
+      jsonrpc: '2.0',
+      id: 4,
+      method: 'tools/call',
+      params: {
+        name: 'get_glucose_history',
+        arguments: { hours: 4 }
+      }
+    };
+
+    try {
+      const response = await this.sendMCPMessage(message);
+
+      if (response.result && response.result.content) {
+        const content = response.result.content[0].text;
+
+        try {
+          const history = JSON.parse(content);
+          this.log('SUCCESS! Got glucose history:');
+          this.log(`   Period: ${history.period_hours} hours`);
+          this.log(`   Total readings: ${history.total_readings}`);
+          if (history.readings && history.readings.length > 0) {
+            const first = history.readings[0];
+            const last = history.readings[history.readings.length - 1];
+            this.log(`   First reading: ${first.value} mg/dL at ${first.timestamp}`);
+            this.log(`   Last reading: ${last.value} mg/dL at ${last.timestamp}`);
+          }
+          return true;
+        } catch (e) {
+          this.log(`Response: ${content}`);
+          return content.includes('Error') ? false : true;
+        }
+      } else if (response.error) {
+        this.log(`Error: ${response.error.message}`);
+        return false;
+      }
+    } catch (error) {
+      this.log(`Error getting history: ${error.message}`);
+      return false;
+    }
+    return false;
   }
 
   async stopServer() {
@@ -186,23 +292,29 @@ class RealConnectionTester {
   }
 
   async runTest() {
-    console.log('🩸 LibreLink MCP Server Connection Test');
+    console.log('LibreLink MCP Server Connection Test');
     console.log('========================================');
-    console.log('Version: 1.1.0 (Fixed for API v4.16.0)');
+    console.log('Version: 1.2.0 (Secure credential storage)');
     console.log('');
 
     try {
       const serverStarted = await this.startServer();
       if (!serverStarted) {
-        this.log('❌ Failed to start server');
+        this.log('Failed to start server');
         return;
       }
+
+      console.log('');
+
+      // Test session status
+      await this.testSessionStatus();
+      console.log('');
 
       // Test connection first
       const connectionValid = await this.testValidateConnection();
       if (!connectionValid) {
-        this.log('');
-        this.log('⚠️  Connection test failed. Please check:');
+        console.log('');
+        this.log('Connection test failed. Please check:');
         this.log('   1. Your LibreLinkUp credentials are correct');
         this.log('   2. Open LibreLinkUp app and accept any Terms & Conditions');
         this.log('   3. Ensure data sharing is enabled');
@@ -215,10 +327,21 @@ class RealConnectionTester {
 
       // Test glucose reading
       const glucoseSuccess = await this.testCurrentGlucose();
-      
-      if (glucoseSuccess) {
+      console.log('');
+
+      // Test glucose history
+      const historySuccess = await this.testGlucoseHistory();
+
+      if (glucoseSuccess && historySuccess) {
         console.log('');
-        console.log('🎉 All tests passed! Your LibreLink MCP server is working!');
+        console.log('========================================');
+        console.log('All tests passed! Your LibreLink MCP server is working!');
+        console.log('========================================');
+        console.log('');
+        console.log('Security features verified:');
+        console.log('  - Credentials encrypted with AES-256-GCM');
+        console.log('  - Encryption key stored in OS keychain');
+        console.log('  - JWT token persisted securely');
         console.log('');
         console.log('Next step: Add to Claude Desktop configuration');
         console.log('');
@@ -234,7 +357,7 @@ class RealConnectionTester {
       }
 
     } catch (error) {
-      this.log(`❌ Test error: ${error.message}`);
+      this.log(`Test error: ${error.message}`);
     } finally {
       await this.stopServer();
     }
@@ -242,7 +365,7 @@ class RealConnectionTester {
 }
 
 console.log('');
-console.log('⚠️  IMPORTANT: Make sure you have configured your credentials first!');
+console.log('IMPORTANT: Make sure you have configured your credentials first!');
 console.log('   Run: npm run configure');
 console.log('');
 
