@@ -22,7 +22,6 @@ import { homedir, platform } from 'os';
 // Service name for keytar
 const SERVICE_NAME = 'librelink-mcp-server';
 const ENCRYPTION_KEY_ACCOUNT = 'encryption-key';
-const AUTH_TOKEN_ACCOUNT = 'auth-token';
 
 // Encryption constants
 const ALGORITHM = 'aes-256-gcm';
@@ -264,13 +263,6 @@ export class SecureStorage {
   async saveToken(tokenData: StoredTokenData): Promise<void> {
     const encrypted = await this.encrypt(JSON.stringify(tokenData));
     this.saveEncryptedFile(this.tokenPath, encrypted);
-
-    // Also store a quick-access token hash in keychain for validation
-    try {
-      await keytar.setPassword(SERVICE_NAME, AUTH_TOKEN_ACCOUNT, tokenData.accountId);
-    } catch {
-      // Non-critical, continue without keychain token storage
-    }
   }
 
   /**
@@ -315,12 +307,6 @@ export class SecureStorage {
     if (existsSync(this.tokenPath)) {
       unlinkSync(this.tokenPath);
     }
-
-    try {
-      await keytar.deletePassword(SERVICE_NAME, AUTH_TOKEN_ACCOUNT);
-    } catch {
-      // Ignore keychain errors
-    }
   }
 
   /**
@@ -333,10 +319,9 @@ export class SecureStorage {
     }
     await this.clearToken();
 
-    // Clear keychain entries
+    // Clear keychain entry
     try {
       await keytar.deletePassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT);
-      await keytar.deletePassword(SERVICE_NAME, AUTH_TOKEN_ACCOUNT);
     } catch {
       // Ignore keychain errors
     }
