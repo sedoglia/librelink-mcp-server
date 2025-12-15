@@ -214,14 +214,14 @@ I file di configurazione sono salvati in posizioni specifiche per ogni sistema o
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
 │         [Percorso specifico per OS]/librelink-mcp/          │
-│  ┌───────────────────┐  ┌────────────────────┐             │
-│  │ credentials.enc   │  │ token.enc          │             │
-│  │ (AES-256-GCM)     │  │ (AES-256-GCM)      │             │
-│  │ - email           │  │ - JWT token        │             │
-│  │ - password        │  │ - expiration       │             │
-│  └───────────────────┘  │ - userId           │             │
-│                         │ - accountId        │             │
-│  ┌───────────────────┐  └────────────────────┘             │
+│  ┌───────────────────┐  ┌────────────────────┐              │
+│  │ credentials.enc   │  │ token.enc          │              │
+│  │ (AES-256-GCM)     │  │ (AES-256-GCM)      │              │
+│  │ - email           │  │ - JWT token        │              │
+│  │ - password        │  │ - expiration       │              │
+│  └───────────────────┘  │ - userId           │              │
+│                         │ - accountId        │              │
+│  ┌───────────────────┐  └────────────────────┘              │
 │  │ config.json       │                                      │
 │  │ (non sensibile)   │                                      │
 │  │ - region          │                                      │
