@@ -14,24 +14,29 @@
 - ✅ Secure JWT token persistence
 - ✅ **v1.3.0**: Full support for all 13 LibreLinkUp regions
 
+## 📋 Prerequisites
+
+- **Node.js**: Version 18.0.0 or higher
+- **LibreLinkUp Account**: Active account with shared data
+- **Sensor**: Active FreeStyle Libre 2 or 3
+- **Claude Desktop**: For MCP integration
+
 ## 🚀 Quick Start
 
 ```bash
 # Clone the repository
 git clone https://github.com/sedoglia/librelink-mcp-server-fixed.git
 cd librelink-mcp-server-fixed
+```
 
+```bash
 # Install dependencies
 npm install
+```
 
-# Build TypeScript
-npm run build
-
-# Configure credentials
-npm run configure
-
-# Test the connection
-npm run test:connection
+```bash
+# Installa Keytar
+npm install keytar
 ```
 
 ### Keytar Requirements
@@ -52,12 +57,10 @@ sudo apt-get install libsecret-1-dev gnome-keyring
 sudo dnf install libsecret-devel gnome-keyring
 ```
 
-## 📋 Prerequisites
-
-- **Node.js**: Version 18.0.0 or higher
-- **LibreLinkUp Account**: Active account with shared data
-- **Sensor**: Active FreeStyle Libre 2 or 3
-- **Claude Desktop**: For MCP integration
+```bash
+# Build TypeScript
+npm run build
+```
 
 ## 🔧 Configuration
 
