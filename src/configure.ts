@@ -13,6 +13,7 @@
 import * as readline from 'readline';
 import { ConfigManager } from './config.js';
 import { LibreLinkClient } from './librelink-client.js';
+import { LibreLinkRegion, VALID_REGIONS } from './types.js';
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -139,23 +140,29 @@ async function main() {
   // Get region
   console.log('');
   console.log('Region options:');
-  console.log('  EU - Europe (default)');
-  console.log('  US - United States');
-  console.log('  DE - Germany');
-  console.log('  FR - France');
+  console.log('  AE - United Arab Emirates');
   console.log('  AP - Asia Pacific');
   console.log('  AU - Australia');
+  console.log('  CA - Canada');
+  console.log('  CN - China');
+  console.log('  DE - Germany');
+  console.log('  EU - Europe (default)');
+  console.log('  EU2 - Europe 2');
+  console.log('  FR - France');
+  console.log('  JP - Japan');
+  console.log('  LA - Latin America');
+  console.log('  RU - Russia');
+  console.log('  US - United States');
   console.log('');
 
   const regionPrompt = `Region [${region}]: `;
-  let newRegion = (await question(regionPrompt)).toUpperCase() as 'EU' | 'US' | 'DE' | 'FR' | 'AP' | 'AU';
+  let newRegion = (await question(regionPrompt)).toUpperCase() as LibreLinkRegion;
   if (!newRegion) {
     newRegion = region;
   }
 
-  const validRegions = ['EU', 'US', 'DE', 'FR', 'AP', 'AU'];
-  if (!validRegions.includes(newRegion)) {
-    console.log(`Invalid region. Must be one of: ${validRegions.join(', ')}`);
+  if (!VALID_REGIONS.includes(newRegion)) {
+    console.log(`Invalid region. Must be one of: ${VALID_REGIONS.join(', ')}`);
     rl.close();
     process.exit(1);
   }

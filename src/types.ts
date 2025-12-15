@@ -1,9 +1,12 @@
 // Types for LibreLink MCP Server
 
+// All supported LibreLinkUp regions
+export type LibreLinkRegion = 'AE' | 'AP' | 'AU' | 'CA' | 'DE' | 'EU' | 'EU2' | 'FR' | 'JP' | 'US' | 'LA' | 'RU' | 'CN';
+
 export interface LibreLinkConfig {
   email: string;
   password: string;
-  region: 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU';
+  region: LibreLinkRegion;
   targetLow: number;
   targetHigh: number;
   clientVersion: string;
@@ -118,13 +121,23 @@ export function getGlucoseColor(value: number, targetLow: number, targetHigh: nu
 }
 
 // Regional API endpoints
+// Supported regions: AE, AP, AU, CA, DE, EU, EU2, FR, JP, US, LA, RU, CN
 export const LIBRE_LINK_SERVERS: Record<string, string> = {
-  'EU': 'https://api-eu.libreview.io',
-  'EU2': 'https://api-eu2.libreview.io',
-  'US': 'https://api-us.libreview.io',
-  'DE': 'https://api-de.libreview.io',
-  'FR': 'https://api-fr.libreview.io',
+  'AE': 'https://api-ae.libreview.io',
   'AP': 'https://api-ap.libreview.io',
   'AU': 'https://api-au.libreview.io',
+  'CA': 'https://api-ca.libreview.io',
+  'DE': 'https://api-de.libreview.io',
+  'EU': 'https://api-eu.libreview.io',
+  'EU2': 'https://api-eu2.libreview.io',
+  'FR': 'https://api-fr.libreview.io',
+  'JP': 'https://api-jp.libreview.io',
+  'US': 'https://api-us.libreview.io',
+  'LA': 'https://api-la.libreview.io',
+  'RU': 'https://api-ru.libreview.io',
+  'CN': 'https://api-cn.libreview.io',
   'GLOBAL': 'https://api.libreview.io'
 };
+
+// List of valid regions for validation
+export const VALID_REGIONS: LibreLinkRegion[] = ['AE', 'AP', 'AU', 'CA', 'DE', 'EU', 'EU2', 'FR', 'JP', 'US', 'LA', 'RU', 'CN'];

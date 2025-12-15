@@ -9,9 +9,10 @@
 - ✅ Required `Account-Id` header (SHA256 hash of userId)
 - ✅ Automatic regional redirect handling
 - ✅ Automatic token refresh
-- ✅ **NEW v1.2.0**: Secure credential storage with AES-256-GCM encryption
-- ✅ **NEW v1.2.0**: Encryption keys stored in OS keychain (Keytar)
-- ✅ **NEW v1.2.0**: Secure JWT token persistence
+- ✅ Secure credential storage with AES-256-GCM encryption
+- ✅ Encryption keys stored in OS keychain (Keytar)
+- ✅ Secure JWT token persistence
+- ✅ **v1.3.0**: Full support for all 13 LibreLinkUp regions
 
 ## 🚀 Quick Start
 
@@ -30,7 +31,25 @@ npm run build
 npm run configure
 
 # Test the connection
-node test-real-connection.js
+npm run test:connection
+```
+
+### Keytar Requirements
+
+Keytar requires some system dependencies to work:
+
+**Windows**: No additional dependencies required (uses Windows Credential Manager)
+
+**macOS**: No additional dependencies required (uses Keychain)
+
+**Linux** (Debian/Ubuntu):
+```bash
+sudo apt-get install libsecret-1-dev gnome-keyring
+```
+
+**Linux** (Fedora/RHEL):
+```bash
+sudo dnf install libsecret-devel gnome-keyring
 ```
 
 ## 📋 Prerequisites
@@ -51,8 +70,26 @@ npm run configure
 You will be asked for:
 - **Email**: Your LibreLinkUp account email
 - **Password**: Your account password
-- **Region**: EU, US, DE, FR, AP, AU
+- **Region**: One of 13 supported regions (see below)
 - **Target range**: Target glucose values (default: 70-180 mg/dL)
+
+### Supported Regions
+
+| Code | Region |
+|------|--------|
+| AE | United Arab Emirates |
+| AP | Asia Pacific |
+| AU | Australia |
+| CA | Canada |
+| CN | China |
+| DE | Germany |
+| EU | Europe (default) |
+| EU2 | Europe 2 |
+| FR | France |
+| JP | Japan |
+| LA | Latin America |
+| RU | Russia |
+| US | United States |
 
 Credentials are stored securely:
 - **Encryption**: AES-256-GCM with random salt and IV
@@ -62,7 +99,7 @@ Credentials are stored securely:
 ### 2. Test the connection
 
 ```bash
-node test-real-connection.js
+npm run test:connection
 ```
 
 ### 3. Configure Claude Desktop
@@ -99,8 +136,8 @@ Restart Claude Desktop to load the MCP server.
 | `configure_credentials` | Configure LibreLinkUp credentials |
 | `configure_ranges` | Set custom target ranges |
 | `validate_connection` | Test the connection |
-| `get_session_status` | **NEW**: Authentication session status |
-| `clear_session` | **NEW**: Clear session and force re-authentication |
+| `get_session_status` | Authentication session status |
+| `clear_session` | Clear session and force re-authentication |
 
 ## 💬 Usage Examples
 
@@ -147,7 +184,17 @@ Once integrated with Claude Desktop, you can ask:
 
 ## 🔒 Security & Privacy
 
-### Security Architecture (v1.2.0)
+### Storage Locations
+
+Configuration files are stored in OS-specific locations:
+
+| System | Path |
+|--------|------|
+| Windows | `%LOCALAPPDATA%\librelink-mcp\` |
+| macOS | `~/Library/Application Support/librelink-mcp/` |
+| Linux | `~/.config/librelink-mcp/` |
+
+### Security Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -159,7 +206,7 @@ Once integrated with Claude Desktop, you can ask:
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│               ~/.librelink-mcp/                             │
+│           [OS-specific path]/librelink-mcp/                 │
 │  ┌───────────────────┐  ┌────────────────────┐             │
 │  │ credentials.enc   │  │ token.enc          │             │
 │  │ (AES-256-GCM)     │  │ (AES-256-GCM)      │             │
@@ -239,7 +286,7 @@ headers['Account-Id'] = accountId;
 **Solutions:**
 1. Verify email and password
 2. Try logging in from the official LibreLinkUp app
-3. Check the region (EU vs US)
+3. Check the region (EU vs US, etc.)
 
 ### Keytar/Keychain error
 
@@ -258,12 +305,12 @@ librelink-mcp-server-fixed/
 │   ├── glucose-analytics.ts  # Analytics and statistics
 │   ├── config.ts             # Configuration management
 │   ├── configure.ts          # CLI configuration tool
-│   ├── secure-storage.ts     # NEW: Secure storage with Keytar
+│   ├── secure-storage.ts     # Secure storage with Keytar
 │   └── types.ts              # TypeScript definitions
-├── dist/                     # Compiled files
 ├── test-real-connection.js   # Connection test
-├── test-secure-storage.js    # NEW: Security module test
+├── test-secure-storage.js    # Security module test
 ├── package.json
+├── tsconfig.json
 └── README.md
 ```
 

@@ -9,9 +9,10 @@
 - ✅ Header `Account-Id` obbligatorio (SHA256 hash dell'userId)
 - ✅ Gestione automatica del redirect regionale
 - ✅ Refresh automatico del token
-- ✅ **NEW v1.2.0**: Storage sicuro delle credenziali con crittografia AES-256-GCM
-- ✅ **NEW v1.2.0**: Chiavi di crittografia salvate nel keychain del sistema operativo (Keytar)
-- ✅ **NEW v1.2.0**: Persistenza sicura dei token JWT
+- ✅ Storage sicuro delle credenziali con crittografia AES-256-GCM
+- ✅ Chiavi di crittografia salvate nel keychain del sistema operativo (Keytar)
+- ✅ Persistenza sicura dei token JWT
+- ✅ **v1.3.0**: Supporto completo per tutte le 13 regioni LibreLinkUp
 
 ## 🚀 Installazione Rapida
 
@@ -30,7 +31,25 @@ npm run build
 npm run configure
 
 # Testa la connessione
-node test-real-connection.js
+npm run test:connection
+```
+
+### Requisiti per Keytar
+
+Keytar richiede alcune dipendenze di sistema per funzionare:
+
+**Windows**: Nessuna dipendenza aggiuntiva richiesta (usa Windows Credential Manager)
+
+**macOS**: Nessuna dipendenza aggiuntiva richiesta (usa Keychain)
+
+**Linux** (Debian/Ubuntu):
+```bash
+sudo apt-get install libsecret-1-dev gnome-keyring
+```
+
+**Linux** (Fedora/RHEL):
+```bash
+sudo dnf install libsecret-devel gnome-keyring
 ```
 
 ## 📋 Prerequisiti
@@ -51,8 +70,26 @@ npm run configure
 Ti verrà chiesto:
 - **Email**: Email del tuo account LibreLinkUp
 - **Password**: Password del tuo account
-- **Regione**: EU, US, DE, FR, AP, AU
+- **Regione**: Una delle 13 regioni supportate (vedi sotto)
 - **Range target**: Valori glicemici target (default: 70-180 mg/dL)
+
+### Regioni Supportate
+
+| Codice | Regione |
+|--------|---------|
+| AE | Emirati Arabi Uniti |
+| AP | Asia Pacifico |
+| AU | Australia |
+| CA | Canada |
+| CN | Cina |
+| DE | Germania |
+| EU | Europa (default) |
+| EU2 | Europa 2 |
+| FR | Francia |
+| JP | Giappone |
+| LA | America Latina |
+| RU | Russia |
+| US | Stati Uniti |
 
 Le credenziali vengono salvate in modo sicuro:
 - **Crittografia**: AES-256-GCM con salt e IV casuali
@@ -62,7 +99,7 @@ Le credenziali vengono salvate in modo sicuro:
 ### 2. Testa la connessione
 
 ```bash
-node test-real-connection.js
+npm run test:connection
 ```
 
 ### 3. Configura Claude Desktop
@@ -99,8 +136,8 @@ Riavvia Claude Desktop per caricare il server MCP.
 | `configure_credentials` | Configura credenziali LibreLinkUp |
 | `configure_ranges` | Imposta range target personalizzati |
 | `validate_connection` | Testa la connessione |
-| `get_session_status` | **NEW**: Stato della sessione di autenticazione |
-| `clear_session` | **NEW**: Pulisce la sessione e forza re-autenticazione |
+| `get_session_status` | Stato della sessione di autenticazione |
+| `clear_session` | Pulisce la sessione e forza re-autenticazione |
 
 ## 💬 Esempi di Utilizzo
 
@@ -147,7 +184,17 @@ Una volta integrato con Claude Desktop, puoi chiedere:
 
 ## 🔒 Sicurezza e Privacy
 
-### Architettura di Sicurezza (v1.2.0)
+### Posizioni di Storage
+
+I file di configurazione sono salvati in posizioni specifiche per ogni sistema operativo:
+
+| Sistema | Percorso |
+|---------|----------|
+| Windows | `%LOCALAPPDATA%\librelink-mcp\` |
+| macOS | `~/Library/Application Support/librelink-mcp/` |
+| Linux | `~/.config/librelink-mcp/` |
+
+### Architettura di Sicurezza
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -159,7 +206,7 @@ Una volta integrato con Claude Desktop, puoi chiedere:
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│               ~/.librelink-mcp/                             │
+│         [Percorso specifico per OS]/librelink-mcp/          │
 │  ┌───────────────────┐  ┌────────────────────┐             │
 │  │ credentials.enc   │  │ token.enc          │             │
 │  │ (AES-256-GCM)     │  │ (AES-256-GCM)      │             │
@@ -239,7 +286,7 @@ headers['Account-Id'] = accountId;
 **Soluzioni:**
 1. Verifica email e password
 2. Prova ad accedere dall'app ufficiale LibreLinkUp
-3. Controlla la regione (EU vs US)
+3. Controlla la regione (EU vs US, ecc.)
 
 ### Errore Keytar/Keychain
 
@@ -258,12 +305,12 @@ librelink-mcp-server-fixed/
 │   ├── glucose-analytics.ts  # Analisi e statistiche
 │   ├── config.ts             # Gestione configurazione
 │   ├── configure.ts          # Tool CLI configurazione
-│   ├── secure-storage.ts     # NEW: Storage sicuro con Keytar
+│   ├── secure-storage.ts     # Storage sicuro con Keytar
 │   └── types.ts              # Definizioni TypeScript
-├── dist/                     # File compilati
 ├── test-real-connection.js   # Test connessione
-├── test-secure-storage.js    # NEW: Test modulo sicurezza
+├── test-secure-storage.js    # Test modulo sicurezza
 ├── package.json
+├── tsconfig.json
 └── README.md
 ```
 

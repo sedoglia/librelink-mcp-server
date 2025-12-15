@@ -6,13 +6,18 @@
  * - Encryption keys stored in OS keychain via Keytar
  * - JWT tokens stored encrypted in user profile folder
  * - Automatic token refresh and persistence
+ *
+ * Storage locations:
+ * - Windows: %LOCALAPPDATA%\librelink-mcp\
+ * - macOS: ~/Library/Application Support/librelink-mcp/
+ * - Linux: ~/.config/librelink-mcp/
  */
 
 import keytar from 'keytar';
 import { randomBytes, createCipheriv, createDecipheriv, scryptSync } from 'crypto';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync, unlinkSync } from 'fs';
 import { join } from 'path';
-import { homedir } from 'os';
+import { homedir, platform } from 'os';
 
 // Service name for keytar
 const SERVICE_NAME = 'librelink-mcp-server';
@@ -25,6 +30,36 @@ const IV_LENGTH = 16;
 const AUTH_TAG_LENGTH = 16;
 const SALT_LENGTH = 32;
 const KEY_LENGTH = 32;
+
+/**
+ * Get the appropriate config directory based on the operating system
+ * - Windows: %LOCALAPPDATA%\librelink-mcp\
+ * - macOS: ~/Library/Application Support/librelink-mcp/
+ * - Linux: ~/.config/librelink-mcp/
+ */
+function getConfigDir(): string {
+  const os = platform();
+
+  if (os === 'win32') {
+    // Windows: use LOCALAPPDATA
+    const localAppData = process.env.LOCALAPPDATA || join(homedir(), 'AppData', 'Local');
+    return join(localAppData, 'librelink-mcp');
+  } else if (os === 'darwin') {
+    // macOS: use ~/Library/Application Support
+    return join(homedir(), 'Library', 'Application Support', 'librelink-mcp');
+  } else {
+    // Linux and others: use ~/.config
+    const configHome = process.env.XDG_CONFIG_HOME || join(homedir(), '.config');
+    return join(configHome, 'librelink-mcp');
+  }
+}
+
+/**
+ * Get the legacy config directory path for migration
+ */
+function getLegacyConfigDir(): string {
+  return join(homedir(), '.librelink-mcp');
+}
 
 export interface SecureCredentials {
   email: string;
@@ -51,12 +86,14 @@ export interface EncryptedData {
  */
 export class SecureStorage {
   private configDir: string;
+  private legacyConfigDir: string;
   private credentialsPath: string;
   private tokenPath: string;
   private encryptionKey: Buffer | null = null;
 
   constructor() {
-    this.configDir = join(homedir(), '.librelink-mcp');
+    this.configDir = getConfigDir();
+    this.legacyConfigDir = getLegacyConfigDir();
     this.credentialsPath = join(this.configDir, 'credentials.enc');
     this.tokenPath = join(this.configDir, 'token.enc');
   }
@@ -320,48 +357,70 @@ export class SecureStorage {
 
   /**
    * Migrate from old unencrypted config.json to new secure storage
+   * Checks both new location and legacy ~/.librelink-mcp/ location
    */
   async migrateFromLegacy(): Promise<boolean> {
-    const legacyPath = join(this.configDir, 'config.json');
+    // Try new location first, then legacy location
+    const pathsToCheck = [
+      join(this.configDir, 'config.json'),
+      join(this.legacyConfigDir, 'config.json')
+    ];
 
-    if (!existsSync(legacyPath)) {
-      return false;
-    }
-
-    try {
-      const legacyData = JSON.parse(readFileSync(legacyPath, 'utf-8'));
-
-      // Check for password in root or nested credentials object
-      const email = legacyData.email || legacyData.credentials?.email;
-      const password = legacyData.password || legacyData.credentials?.password;
-
-      if (email && password) {
-        // Save credentials to new secure storage
-        await this.saveCredentials({ email, password });
-
-        console.error('Migrated credentials from legacy config to secure storage');
-
-        // Remove all sensitive data from legacy file
-        delete legacyData.password;
-        delete legacyData.email;
-        delete legacyData.credentials;
-
-        // Keep only non-sensitive settings
-        const cleanConfig = {
-          region: legacyData.region || 'EU',
-          targetLow: legacyData.targetLow || legacyData.ranges?.target_low || 70,
-          targetHigh: legacyData.targetHigh || legacyData.ranges?.target_high || 180,
-          clientVersion: legacyData.clientVersion || '4.16.0'
-        };
-
-        writeFileSync(legacyPath, JSON.stringify(cleanConfig, null, 2));
-
-        return true;
+    for (const legacyPath of pathsToCheck) {
+      if (!existsSync(legacyPath)) {
+        continue;
       }
-    } catch (error) {
-      console.error('Error migrating legacy config:', error);
+
+      try {
+        const legacyData = JSON.parse(readFileSync(legacyPath, 'utf-8'));
+
+        // Check for password in root or nested credentials object
+        const email = legacyData.email || legacyData.credentials?.email;
+        const password = legacyData.password || legacyData.credentials?.password;
+
+        if (email && password) {
+          // Save credentials to new secure storage
+          await this.saveCredentials({ email, password });
+
+          console.error(`Migrated credentials from ${legacyPath} to secure storage`);
+
+          // Remove all sensitive data from legacy file
+          delete legacyData.password;
+          delete legacyData.email;
+          delete legacyData.credentials;
+
+          // Keep only non-sensitive settings
+          const cleanConfig = {
+            region: legacyData.region || 'EU',
+            targetLow: legacyData.targetLow || legacyData.ranges?.target_low || 70,
+            targetHigh: legacyData.targetHigh || legacyData.ranges?.target_high || 180,
+            clientVersion: legacyData.clientVersion || '4.16.0'
+          };
+
+          // Save cleaned config to new location
+          this.ensureConfigDir();
+          const newConfigPath = join(this.configDir, 'config.json');
+          writeFileSync(newConfigPath, JSON.stringify(cleanConfig, null, 2));
+
+          // If migrating from legacy location, update that file too
+          if (legacyPath !== newConfigPath) {
+            writeFileSync(legacyPath, JSON.stringify(cleanConfig, null, 2));
+          }
+
+          return true;
+        }
+      } catch (error) {
+        console.error(`Error migrating legacy config from ${legacyPath}:`, error);
+      }
     }
 
     return false;
+  }
+
+  /**
+   * Get the legacy config directory path
+   */
+  getLegacyConfigDir(): string {
+    return this.legacyConfigDir;
   }
 }

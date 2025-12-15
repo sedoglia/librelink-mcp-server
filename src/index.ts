@@ -23,7 +23,7 @@ import {
 import { LibreLinkClient } from './librelink-client.js';
 import { GlucoseAnalytics } from './glucose-analytics.js';
 import { ConfigManager } from './config.js';
-import { LibreLinkConfig } from './types.js';
+import { LibreLinkConfig, LibreLinkRegion, VALID_REGIONS } from './types.js';
 
 // Create MCP server
 const server = new Server(
@@ -155,8 +155,8 @@ const tools = [
         },
         region: {
           type: 'string',
-          enum: ['US', 'EU', 'DE', 'FR', 'AP', 'AU'],
-          description: 'Your LibreLinkUp account region. Default: EU'
+          enum: ['AE', 'AP', 'AU', 'CA', 'CN', 'DE', 'EU', 'EU2', 'FR', 'JP', 'LA', 'RU', 'US'],
+          description: 'Your LibreLinkUp account region. Available: AE, AP, AU, CA, CN, DE, EU, EU2, FR, JP, LA, RU, US. Default: EU'
         }
       },
       required: ['email', 'password']
@@ -338,7 +338,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const { email, password, region } = args as {
           email: string;
           password: string;
-          region?: 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU'
+          region?: LibreLinkRegion
         };
 
         await configManager.updateCredentials(email, password);

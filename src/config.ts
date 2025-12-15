@@ -4,17 +4,21 @@
  * Handles loading, saving, and managing configuration.
  * Credentials are now stored securely using SecureStorage with
  * AES-256-GCM encryption and OS keychain for key storage.
+ *
+ * Storage locations:
+ * - Windows: %LOCALAPPDATA%\librelink-mcp\
+ * - macOS: ~/Library/Application Support/librelink-mcp/
+ * - Linux: ~/.config/librelink-mcp/
  */
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync } from 'fs';
 import { join } from 'path';
-import { homedir } from 'os';
-import { LibreLinkConfig } from './types.js';
+import { LibreLinkConfig, LibreLinkRegion, VALID_REGIONS } from './types.js';
 import { SecureStorage, SecureCredentials, StoredTokenData } from './secure-storage.js';
 
 // Configuration stored on disk (non-sensitive data only)
 interface StoredConfig {
-  region: 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU';
+  region: LibreLinkRegion;
   targetLow: number;
   targetHigh: number;
   clientVersion: string;
@@ -36,10 +40,11 @@ export class ConfigManager {
   private cachedCredentials: SecureCredentials | null = null;
 
   constructor() {
-    // Store config in user's home directory
-    this.configDir = join(homedir(), '.librelink-mcp');
-    this.configPath = join(this.configDir, 'config.json');
+    // Use SecureStorage to get the correct OS-specific config directory
     this.secureStorage = new SecureStorage();
+    const paths = this.secureStorage.getStoragePaths();
+    this.configDir = paths.configDir;
+    this.configPath = join(this.configDir, 'config.json');
     this.config = this.loadConfig();
   }
 
@@ -184,7 +189,10 @@ export class ConfigManager {
   /**
    * Update region
    */
-  updateRegion(region: 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU'): void {
+  updateRegion(region: LibreLinkRegion): void {
+    if (!VALID_REGIONS.includes(region)) {
+      throw new Error(`Invalid region: ${region}. Valid regions are: ${VALID_REGIONS.join(', ')}`);
+    }
     this.config.region = region;
     this.saveConfig();
   }
@@ -283,7 +291,7 @@ export class ConfigManager {
   /**
    * Get region
    */
-  getRegion(): 'US' | 'EU' | 'DE' | 'FR' | 'AP' | 'AU' {
+  getRegion(): LibreLinkRegion {
     return this.config.region;
   }
 

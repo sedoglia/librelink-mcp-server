@@ -1,6 +1,6 @@
 {
   "name": "librelink-mcp-server-fixed",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "MCP server for FreeStyle LibreLink CGM data - Fixed for API v4.16.0 with secure credential storage",
   "type": "module",
   "main": "dist/index.js",
