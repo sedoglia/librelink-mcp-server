@@ -34,11 +34,6 @@ cd librelink-mcp-server-fixed
 npm install
 ```
 
-```bash
-# Installa Keytar
-npm install keytar
-```
-
 ### Keytar Requirements
 
 Keytar requires some system dependencies to work:
@@ -55,6 +50,11 @@ sudo apt-get install libsecret-1-dev gnome-keyring
 **Linux** (Fedora/RHEL):
 ```bash
 sudo dnf install libsecret-devel gnome-keyring
+```
+
+```bash
+# Installa Keytar
+npm install keytar
 ```
 
 ```bash
