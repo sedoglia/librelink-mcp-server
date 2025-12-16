@@ -332,6 +332,12 @@ MIT License
 - MCP Protocol: [Anthropic](https://modelcontextprotocol.io)
 - Secure Storage: [Keytar](https://github.com/atom/node-keytar)
 
+## ☕ Supporta il Progetto
+
+Se questo progetto ti è utile, considera di fare una donazione per supportarne lo sviluppo:
+
+[![PayPal](https://img.shields.io/badge/PayPal-Dona-blue?style=for-the-badge&logo=paypal)](https://paypal.me/sedoglia)
+
 ---
 
 **Disclaimer**: Questo è un progetto non ufficiale, non affiliato con Abbott o FreeStyle Libre. Usalo responsabilmente e consulta sempre i professionisti sanitari per decisioni mediche.
