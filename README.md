@@ -21,7 +21,78 @@
 - **Sensore**: FreeStyle Libre 2 o 3 attivo
 - **Claude Desktop**: Per l'integrazione MCP
 
-## 🚀 Installazione
+## 🚀 Installazione Rapida (Bundle Precompilato)
+
+### Passaggi:
+
+### 1. Installa Keytar (Raccomandato per sicurezza massima)
+
+Per utilizzare il vault nativo del sistema operativo (Windows Credential Manager, macOS Keychain, Linux Secret Service), installa `keytar`:
+
+```bash
+npm install keytar
+```
+
+> **Nota:** Se `keytar` non può essere installato, il sistema userà automaticamente un file criptato come fallback.
+
+### 2. Scarica il bundle
+
+Usa il browser oppure:
+
+```bash
+wget https://github.com/sedoglia/librelink-mcp-server-fixed/releases/download/v1.3.0/librelink-mcp-server-fixed.mcpb
+```
+
+### 3. Verifica l'integrità
+
+Verifica l'integrità (opzionale ma consigliato):
+
+```bash
+wget https://github.com/sedoglia/librelink-mcp-server-fixed/releases/download/v1.3.0/librelink-mcp-server-fixed.mcpb.sha256
+sha256sum -c librelink-mcp-server-fixed.mcpb
+```
+
+### 4. Installa l'estensione in Claude Desktop (Metodo Consigliato)
+
+**Installazione tramite Custom Desktop Extensions:**
+
+1. Apri **Claude Desktop**
+2. Vai su **Impostazioni** (Settings)
+3. Seleziona la scheda **Estensioni** (Extensions)
+4. Clicca su **Impostazioni Avanzate** (Advanced settings) e trova la sezione **Extension Developer**
+5. Clicca su **"Installa Estensione..."** (Install Extension…)
+6. Seleziona il file `.mcpb` (`librelink-mcp-server-fixed.mcpb` scaricato al passaggio 1)
+7. Segui le indicazioni a schermo per completare l'installazione
+
+> **Nota:** Questo è il metodo più semplice e consigliato. L'estensione sarà automaticamente integrata in Claude Desktop senza necessità di configurazione manuale.
+
+---
+
+### 5. Configura le Credenziali LibreLink (Metodo Sicuro - Raccomandato)
+
+Apri una **nuova chat su Claude Desktop** e scrivi il seguente prompt:
+
+```
+Configura le credenziali di accesso per LibreLink
+```
+
+Rispondi al messaggio fornendo:
+- **Utente:** la tua email LibreLink
+- **Password:** la tua password LibreLink
+
+L'estensione provvederà automaticamente a criptare e salvare le credenziali in modo sicuro nel vault nativo del sistema operativo (Windows Credential Manager, macOS Keychain, Linux Secret Service).
+
+> **Nota:** Le credenziali NON verranno salvate in file di testo. Saranno sempre crittografate e gestite dal vault nativo del SO.
+
+
+### 6. Riavvia Claude Desktop
+
+- Chiudi completamente l'applicazione
+- Riapri Claude Desktop
+- Verifica in Impostazioni → Sviluppatore lo stato della connessione ✅
+
+
+## 🚀 Installazione (clonando il repository con GIT)
 
 ### 1. Clona il Repository
 
