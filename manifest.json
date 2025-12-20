@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.2",
+  "manifest_version": "0.3",
   "name": "librelink-mcp-server-fixed",
   "version": "1.3.0",
   "description": "MCP server for FreeStyle LibreLink CGM data - Fixed for API v4.16.0 with secure credential storage",
@@ -10,6 +10,9 @@
   "homepage": "https://github.com/sedoglia/librelink-mcp-server-fixed",
   "documentation": "https://github.com/sedoglia/librelink-mcp-server-fixed",
   "support": "https://github.com/sedoglia/librelink-mcp-server-fixed/issues",
+  "privacy_policies": [
+    "https://github.com/sedoglia/librelink-mcp-server-fixed#-privacy-policy"
+  ],
   "server": {
     "type": "node",
     "entry_point": "dist/index.js",

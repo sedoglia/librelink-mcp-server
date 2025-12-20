@@ -29,7 +29,7 @@ import { LibreLinkConfig, LibreLinkRegion, VALID_REGIONS } from './types.js';
 const server = new Server(
   {
     name: 'librelink-mcp-server-fixed',
-    version: '1.2.0'
+    version: '1.3.0'
   },
   {
     capabilities: {
@@ -85,6 +85,9 @@ const tools = [
       type: 'object',
       properties: {},
       required: []
+    },
+    annotations: {
+      readOnlyHint: true
     }
   },
   {
@@ -99,6 +102,9 @@ const tools = [
         }
       },
       required: []
+    },
+    annotations: {
+      readOnlyHint: true
     }
   },
   {
@@ -113,6 +119,9 @@ const tools = [
         }
       },
       required: []
+    },
+    annotations: {
+      readOnlyHint: true
     }
   },
   {
@@ -128,6 +137,9 @@ const tools = [
         }
       },
       required: []
+    },
+    annotations: {
+      readOnlyHint: true
     }
   },
   {
@@ -137,6 +149,9 @@ const tools = [
       type: 'object',
       properties: {},
       required: []
+    },
+    annotations: {
+      readOnlyHint: true
     }
   },
   {
@@ -160,6 +175,9 @@ const tools = [
         }
       },
       required: ['email', 'password']
+    },
+    annotations: {
+      destructiveHint: true
     }
   },
   {
@@ -178,6 +196,9 @@ const tools = [
         }
       },
       required: ['target_low', 'target_high']
+    },
+    annotations: {
+      destructiveHint: true
     }
   },
   {
@@ -187,6 +208,9 @@ const tools = [
       type: 'object',
       properties: {},
       required: []
+    },
+    annotations: {
+      readOnlyHint: true
     }
   },
   {
@@ -196,6 +220,9 @@ const tools = [
       type: 'object',
       properties: {},
       required: []
+    },
+    annotations: {
+      readOnlyHint: true
     }
   },
   {
@@ -205,6 +232,9 @@ const tools = [
       type: 'object',
       properties: {},
       required: []
+    },
+    annotations: {
+      destructiveHint: true
     }
   }
 ];
@@ -468,7 +498,7 @@ export async function main(): Promise<void> {
   // Connect server to transport
   await server.connect(transport);
 
-  console.error('LibreLink MCP Server running on stdio (v1.2.0 - Secure credential storage)');
+  console.error('LibreLink MCP Server running on stdio (v1.3.0 - Secure credential storage)');
 }
 
 // Run if executed directly
