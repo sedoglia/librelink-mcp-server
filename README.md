@@ -394,34 +394,14 @@ librelink-mcp-server-fixed/
 
 ## 🔐 Privacy Policy
 
-Questo server MCP rispetta la tua privacy:
+Questo server MCP rispetta la tua privacy. Ecco un riepilogo:
 
-### Dati Raccolti
-- **Credenziali LibreLinkUp**: Email e password salvate localmente con crittografia AES-256-GCM
-- **Dati Glicemici**: Recuperati in tempo reale da LibreLinkUp, mai memorizzati permanentemente
-- **Token di Sessione**: JWT temporanei salvati localmente criptati
+- **Elaborazione locale**: Tutti i dati vengono elaborati esclusivamente sul tuo dispositivo
+- **Crittografia**: Credenziali protette con AES-256-GCM, chiavi nel keychain OS
+- **Nessun tracking**: Zero telemetria, analytics o condivisione con terze parti
+- **Comunicazione sicura**: Solo con API LibreLinkUp ufficiali di Abbott
 
-### Uso dei Dati
-- I dati vengono elaborati **esclusivamente in locale** sul tuo dispositivo
-- Nessun dato viene inviato a server esterni eccetto LibreLinkUp (API Abbott)
-- Nessuna telemetria, analytics o tracking
-
-### Storage dei Dati
-- Credenziali: File criptato locale + chiave nel keychain OS
-- Token: File criptato locale con scadenza automatica
-- Configurazione: File JSON locale non sensibile
-
-### Condivisione con Terze Parti
-- **Nessuna condivisione** di dati con terze parti
-- Comunicazione solo con API LibreLinkUp ufficiali di Abbott
-
-### Retention
-- Credenziali: Fino a cancellazione manuale (`clear_session`)
-- Token: Scadenza automatica dopo validità JWT
-- Dati glicemici: Non persistiti, solo in memoria durante sessione
-
-### Contatti
-Per domande sulla privacy: [GitHub Issues](https://github.com/sedoglia/librelink-mcp-server-fixed/issues)
+📄 **[Leggi la Privacy Policy completa](PRIVACY_POLICY.md)**
 
 ## 📜 Licenza
 

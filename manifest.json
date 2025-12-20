@@ -11,7 +11,7 @@
   "documentation": "https://github.com/sedoglia/librelink-mcp-server-fixed",
   "support": "https://github.com/sedoglia/librelink-mcp-server-fixed/issues",
   "privacy_policies": [
-    "https://github.com/sedoglia/librelink-mcp-server-fixed#-privacy-policy"
+    "https://github.com/sedoglia/librelink-mcp-server-fixed/blob/main/PRIVACY_POLICY.md"
   ],
   "server": {
     "type": "node",
