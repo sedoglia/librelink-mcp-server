@@ -1,6 +1,6 @@
 # Privacy Policy - LibreLink MCP Server
 
-*Last updated: December 2024*
+*Last updated: December 2025*
 
 ## Overview
 
@@ -162,4 +162,4 @@ This is an unofficial project, not affiliated with Abbott Laboratories or FreeSt
 
 ---
 
-*This privacy policy is effective as of December 2024.*
+*This privacy policy is effective as of December 2025.*
