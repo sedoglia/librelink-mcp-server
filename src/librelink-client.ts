@@ -428,12 +428,18 @@ export class LibreLinkClient {
   async getSensorInfo(): Promise<SensorInfo[]> {
     const data = await this.getGraphData();
 
-    return data.activeSensors.map(s => ({
-      sn: s.sensor.sn,
-      activatedOn: s.sensor.a,
-      expiresOn: s.sensor.a + (s.sensor.w * 24 * 60 * 60), // w is lifetime in days
-      status: 'active'
-    }));
+    return data.activeSensors.map(s => {
+      // a is Unix timestamp in seconds, w is lifetime in days
+      const activatedTimestamp = s.sensor.a * 1000; // Convert to milliseconds
+      const expiresTimestamp = activatedTimestamp + (s.sensor.w * 24 * 60 * 60 * 1000);
+
+      return {
+        sn: s.sensor.sn,
+        activatedOn: new Date(activatedTimestamp).toISOString(),
+        expiresOn: new Date(expiresTimestamp).toISOString(),
+        status: 'active'
+      };
+    });
   }
 
   /**

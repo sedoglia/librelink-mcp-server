@@ -51,8 +51,8 @@ export interface GlucoseTrends {
 
 export interface SensorInfo {
   sn: string;
-  activatedOn: number;
-  expiresOn: number;
+  activatedOn: string;
+  expiresOn: string;
   status: string;
 }
 
