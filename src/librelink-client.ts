@@ -429,9 +429,14 @@ export class LibreLinkClient {
     const data = await this.getGraphData();
 
     return data.activeSensors.map(s => {
-      // a is Unix timestamp in seconds, w is lifetime in days
+      // a is Unix timestamp in seconds (when sensor became active after warm-up)
       const activatedTimestamp = s.sensor.a * 1000; // Convert to milliseconds
-      const expiresTimestamp = activatedTimestamp + (s.sensor.w * 24 * 60 * 60 * 1000);
+
+      // Libre sensors last 14 days (Libre 2 and Libre 3)
+      // The 'w' field is NOT the lifetime - it's something else (possibly warm-up related)
+      // Libre 3 (pt=3) and Libre 2 (pt=2) both last 14 days
+      const SENSOR_LIFETIME_DAYS = 14;
+      const expiresTimestamp = activatedTimestamp + (SENSOR_LIFETIME_DAYS * 24 * 60 * 60 * 1000);
 
       return {
         sn: s.sensor.sn,
