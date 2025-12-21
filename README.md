@@ -11,6 +11,7 @@
 - ✅ Refresh automatico del token
 - ✅ Storage sicuro delle credenziali con crittografia AES-256-GCM
 - ✅ Chiavi di crittografia salvate nel keychain del sistema operativo (Keytar)
+- ✅ Fallback automatico a file `.encryption.key` se Keytar non disponibile
 - ✅ Persistenza sicura dei token JWT
 - ✅ **v1.3.0**: Supporto completo per tutte le 13 regioni LibreLinkUp
 
@@ -276,9 +277,16 @@ I file di configurazione sono salvati in posizioni specifiche per ogni sistema o
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    OS Keychain (Keytar)                     │
+│              Storage Chiave di Crittografia                 │
 │  ┌─────────────────────────────────────────────────────────┐│
-│  │  Chiave AES-256 (32 byte random)                        ││
+│  │  OPZIONE 1 (Preferita): OS Keychain via Keytar          ││
+│  │  - Windows: Credential Manager                          ││
+│  │  - macOS: Keychain                                      ││
+│  │  - Linux: Secret Service (libsecret)                    ││
+│  ├─────────────────────────────────────────────────────────┤│
+│  │  OPZIONE 2 (Fallback): File .encryption.key             ││
+│  │  - Permessi 0o600 (solo proprietario)                   ││
+│  │  - Usato se Keytar non disponibile                      ││
 │  └─────────────────────────────────────────────────────────┘│
 └─────────────────────────────────────────────────────────────┘
                               │
@@ -294,10 +302,10 @@ I file di configurazione sono salvati in posizioni specifiche per ogni sistema o
 │                         │ - accountId        │              │
 │  ┌───────────────────┐  └────────────────────┘              │
 │  │ config.json       │                                      │
-│  │ (non sensibile)   │                                      │
-│  │ - region          │                                      │
-│  │ - targetLow/High  │                                      │
-│  └───────────────────┘                                      │
+│  │ (non sensibile)   │  ┌────────────────────┐              │
+│  │ - region          │  │ .encryption.key    │              │
+│  │ - targetLow/High  │  │ (fallback, 0o600)  │              │
+│  └───────────────────┘  └────────────────────┘              │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -305,10 +313,11 @@ I file di configurazione sono salvati in posizioni specifiche per ogni sistema o
 
 - **Crittografia AES-256-GCM**: Le credenziali sono crittografate con algoritmo AES-256 in modalità GCM con authentication tag
 - **Salt e IV casuali**: Ogni operazione di crittografia usa salt e IV unici
-- **Chiavi nel Keychain**: La chiave master è salvata nel keychain del sistema operativo:
+- **Chiavi nel Keychain (preferito)**: La chiave master è salvata nel keychain del sistema operativo:
   - Windows: Credential Manager
   - macOS: Keychain
   - Linux: Secret Service (libsecret)
+- **Fallback file-based**: Se Keytar non è disponibile (es. LM Studio, ambienti senza moduli nativi), la chiave viene salvata in `.encryption.key` con permessi restrittivi (0o600)
 - **Token persistenti**: I JWT token sono salvati crittografati per evitare login ripetuti
 - **Migrazione automatica**: Le credenziali dalla vecchia versione vengono migrate automaticamente e le password in chiaro eliminate
 - **Permessi file**: Automaticamente impostati a 600 (solo utente)
@@ -371,7 +380,8 @@ headers['Account-Id'] = accountId;
 Se riscontri errori con il keychain:
 1. Assicurati che il servizio keychain del sistema sia attivo
 2. Su Linux, installa `libsecret-1-dev` e `gnome-keyring`
-3. Se il problema persiste, le credenziali saranno comunque crittografate con una chiave derivata
+3. Se Keytar non è disponibile, il sistema userà automaticamente il fallback file-based (`.encryption.key` nella directory dati)
+4. Il fallback è completamente trasparente e le credenziali rimangono crittografate con AES-256-GCM
 
 ## 📁 Struttura Progetto
 
