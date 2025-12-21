@@ -3,7 +3,8 @@
  *
  * Implements secure credential storage with:
  * - AES-256-GCM encryption for data at rest
- * - Encryption keys stored in OS keychain via Keytar
+ * - Encryption keys stored in OS keychain via Keytar (preferred)
+ * - Fallback to file-based key storage if Keytar is unavailable
  * - JWT tokens stored encrypted in user profile folder
  * - Automatic token refresh and persistence
  *
@@ -13,11 +14,34 @@
  * - Linux: ~/.config/librelink-mcp/
  */
 
-import keytar from 'keytar';
 import { randomBytes, createCipheriv, createDecipheriv, scryptSync } from 'crypto';
 import { readFileSync, writeFileSync, existsSync, mkdirSync, chmodSync, unlinkSync } from 'fs';
 import { join } from 'path';
 import { homedir, platform } from 'os';
+
+// Keytar module - loaded lazily to handle environments where it's not available
+let keytarModule: typeof import('keytar') | null = null;
+let keytarLoadAttempted = false;
+
+/**
+ * Lazily load keytar module
+ * Returns null if keytar is not available (e.g., in LM Studio or environments without native modules)
+ */
+async function getKeytarModule(): Promise<typeof import('keytar') | null> {
+  if (keytarLoadAttempted) {
+    return keytarModule;
+  }
+
+  keytarLoadAttempted = true;
+
+  try {
+    keytarModule = await import('keytar');
+    return keytarModule;
+  } catch {
+    // Keytar not available - will use file-based fallback
+    return null;
+  }
+}
 
 // Service name for keytar
 const SERVICE_NAME = 'librelink-mcp-server';
@@ -88,13 +112,16 @@ export class SecureStorage {
   private legacyConfigDir: string;
   private credentialsPath: string;
   private tokenPath: string;
+  private keyFilePath: string; // Fallback key storage when keytar is not available
   private encryptionKey: Buffer | null = null;
+  private usingKeytar: boolean = false; // Track which storage method is being used
 
   constructor() {
     this.configDir = getConfigDir();
     this.legacyConfigDir = getLegacyConfigDir();
     this.credentialsPath = join(this.configDir, 'credentials.enc');
     this.tokenPath = join(this.configDir, 'token.enc');
+    this.keyFilePath = join(this.configDir, '.encryption.key');
   }
 
   /**
@@ -112,36 +139,76 @@ export class SecureStorage {
   }
 
   /**
-   * Get or create the encryption key from the OS keychain
+   * Get or create the encryption key
+   * Tries OS keychain via Keytar first, falls back to file-based storage
    */
   private async getEncryptionKey(): Promise<Buffer> {
     if (this.encryptionKey) {
       return this.encryptionKey;
     }
 
-    try {
-      // Try to get existing key from keychain
-      const existingKey = await keytar.getPassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT);
+    // Try keytar first (OS keychain)
+    const keytar = await getKeytarModule();
+    if (keytar) {
+      try {
+        // Try to get existing key from keychain
+        const existingKey = await keytar.getPassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT);
 
-      if (existingKey) {
-        this.encryptionKey = Buffer.from(existingKey, 'hex');
+        if (existingKey) {
+          this.encryptionKey = Buffer.from(existingKey, 'hex');
+          this.usingKeytar = true;
+          return this.encryptionKey;
+        }
+
+        // Generate new encryption key and store in keychain
+        const newKey = randomBytes(KEY_LENGTH);
+        await keytar.setPassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT, newKey.toString('hex'));
+        this.encryptionKey = newKey;
+        this.usingKeytar = true;
         return this.encryptionKey;
+      } catch (error) {
+        // Keytar failed, fall through to file-based storage
+        console.error('Keytar failed, using file-based key storage:', error);
       }
-    } catch (error) {
-      console.error('Error accessing keychain:', error);
     }
 
-    // Generate new encryption key
+    // Fallback: use file-based key storage
+    return this.getEncryptionKeyFromFile();
+  }
+
+  /**
+   * Get or create encryption key from local file
+   * Used as fallback when keytar is not available
+   */
+  private getEncryptionKeyFromFile(): Buffer {
+    this.ensureConfigDir();
+
+    // Try to load existing key from file
+    if (existsSync(this.keyFilePath)) {
+      try {
+        const keyData = readFileSync(this.keyFilePath, 'utf-8').trim();
+        this.encryptionKey = Buffer.from(keyData, 'hex');
+        this.usingKeytar = false;
+        return this.encryptionKey;
+      } catch (error) {
+        console.error('Error reading key file:', error);
+      }
+    }
+
+    // Generate new encryption key and save to file
     const newKey = randomBytes(KEY_LENGTH);
 
+    writeFileSync(this.keyFilePath, newKey.toString('hex'), { mode: 0o600 });
+
+    // Try to set restrictive permissions (may fail on Windows)
     try {
-      await keytar.setPassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT, newKey.toString('hex'));
-    } catch (error) {
-      console.error('Error storing key in keychain:', error);
-      throw new Error('Failed to store encryption key in system keychain. Please ensure your system supports secure credential storage.');
+      chmodSync(this.keyFilePath, 0o600);
+    } catch {
+      // Ignore chmod errors on Windows
     }
 
     this.encryptionKey = newKey;
+    this.usingKeytar = false;
     return this.encryptionKey;
   }
 
@@ -310,23 +377,36 @@ export class SecureStorage {
   }
 
   /**
-   * Clear all stored data (credentials, tokens, and keychain entries)
+   * Clear all stored data (credentials, tokens, and key storage)
    */
   async clearAll(): Promise<void> {
-    // Clear files
+    // Clear encrypted files
     if (existsSync(this.credentialsPath)) {
       unlinkSync(this.credentialsPath);
     }
     await this.clearToken();
 
-    // Clear keychain entry
-    try {
-      await keytar.deletePassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT);
-    } catch {
-      // Ignore keychain errors
+    // Clear file-based key if exists
+    if (existsSync(this.keyFilePath)) {
+      try {
+        unlinkSync(this.keyFilePath);
+      } catch {
+        // Ignore errors
+      }
+    }
+
+    // Clear keychain entry if keytar is available
+    const keytar = await getKeytarModule();
+    if (keytar) {
+      try {
+        await keytar.deletePassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT);
+      } catch {
+        // Ignore keychain errors
+      }
     }
 
     this.encryptionKey = null;
+    this.usingKeytar = false;
   }
 
   /**
