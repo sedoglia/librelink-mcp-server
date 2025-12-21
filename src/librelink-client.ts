@@ -432,10 +432,12 @@ export class LibreLinkClient {
       // a is Unix timestamp in seconds (when sensor became active after warm-up)
       const activatedTimestamp = s.sensor.a * 1000; // Convert to milliseconds
 
-      // Libre sensors last 14 days (Libre 2 and Libre 3)
-      // The 'w' field is NOT the lifetime - it's something else (possibly warm-up related)
-      // Libre 3 (pt=3) and Libre 2 (pt=2) both last 14 days
-      const SENSOR_LIFETIME_DAYS = 14;
+      // Sensor lifetime depends on product type:
+      // - Libre 2 Plus: 15 days
+      // - Libre 3: 14 days
+      // - Libre 2: 14 days
+      // The 'w' field is NOT the lifetime - default to 15 days for Libre 2 Plus
+      const SENSOR_LIFETIME_DAYS = 15;
       const expiresTimestamp = activatedTimestamp + (SENSOR_LIFETIME_DAYS * 24 * 60 * 60 * 1000);
 
       return {
