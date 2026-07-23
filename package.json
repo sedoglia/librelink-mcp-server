@@ -29,13 +29,16 @@
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.26.0",
-    "axios": "^1.15.0",
+    "axios": "^1.18.1",
     "keytar": "^7.9.0"
   },
   "overrides": {
-    "hono": "^4.12.21",
+    "hono": "^4.12.25",
     "@hono/node-server": "^1.19.13",
-    "qs": "^6.15.2"
+    "qs": "^6.15.2",
+    "body-parser": "^2.3.0",
+    "form-data": "^4.0.6",
+    "fast-uri": "^3.1.4"
   },
   "devDependencies": {
     "@types/keytar": "^4.4.0",
