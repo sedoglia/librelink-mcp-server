@@ -26,11 +26,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Approve and enable auto-merge for patch updates
+      # No approval step on purpose. Branch protection on main requires status
+      # checks but no reviews, so an approval would add nothing — and it would
+      # need "Allow GitHub Actions to create and approve pull requests", which
+      # is off. With it off, gh pr review --approve returns 403, fails the job,
+      # and auto-merge is never queued at all.
+      - name: Enable auto-merge for patch updates
         if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
-        run: |
-          gh pr review --approve "$PR_URL"
-          gh pr merge --auto --squash "$PR_URL"
+        run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
