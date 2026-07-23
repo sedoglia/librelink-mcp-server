@@ -17,7 +17,7 @@
 
 ## 📋 Prerequisiti
 
-- **Node.js**: Versione 18.0.0 o superiore
+- **Node.js**: Versione 20.0.0 o superiore
 - **Account LibreLinkUp**: Account attivo con dati condivisi
 - **Sensore**: FreeStyle Libre 2 o 3 attivo
 - **Claude Desktop**: Per l'integrazione MCP
