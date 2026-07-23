@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  # The matrix makes this surface as two checks, "ci (20)" and "ci (22)".
+  # Both are required on main and gate auto-merge, so changing the job name or
+  # the matrix values means updating branch protection to match.
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # 20 is the floor declared in engines; 22 catches breakage on current LTS.
+        node-version: ['20', '22']
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      # keytar builds against libsecret; without it npm ci fails when no
+      # prebuilt binary matches the runner.
+      - name: Install libsecret
+        run: sudo apt-get update && sudo apt-get install -y libsecret-1-dev
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Smoke test
+        run: node scripts/smoke-test.mjs
+
+      # Fails the build on a known vulnerability at moderate or above, so a
+      # regression cannot be merged even by the auto-merge path.
+      - name: Audit
+        run: npm audit --audit-level=moderate

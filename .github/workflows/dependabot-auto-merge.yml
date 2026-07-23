@@ -1,0 +1,41 @@
+name: Dependabot auto-merge
+
+# Patch-level Dependabot PRs are approved and queued for auto-merge. GitHub
+# holds the merge until the required "ci" check on main goes green, so a bump
+# that breaks the build stays open instead of landing.
+#
+# Minor and major bumps are deliberately left for a human: the hono 4.x ->
+# @hono/node-server 2.x fix in v1.4.0 needed a manual override and a Node
+# engines bump, which no automated PR would have made.
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Approve and enable auto-merge for patch updates
+        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        run: |
+          gh pr review --approve "$PR_URL"
+          gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Leave non-patch updates for manual review
+        if: steps.metadata.outputs.update-type != 'version-update:semver-patch'
+        run: |
+          echo "::notice::${{ steps.metadata.outputs.update-type }} update - needs manual review, not auto-merging."

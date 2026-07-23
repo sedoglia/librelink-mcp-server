@@ -1,0 +1,33 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore(deps)
+      prefix-development: chore(deps-dev)
+    groups:
+      # One PR per weekly batch of patch bumps instead of one per package;
+      # the auto-merge workflow then handles it as a single unit.
+      patch-updates:
+        applies-to: version-updates
+        update-types:
+          - patch
+      # Security fixes stay grouped too, but auto-merge only takes the
+      # patch-level ones — see .github/workflows/dependabot-auto-merge.yml.
+      security-updates:
+        applies-to: security-updates
+        patterns:
+          - '*'
+
+  # Keeps the actions used by the two workflows above from going stale.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: chore(ci)
