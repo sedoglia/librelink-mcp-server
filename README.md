@@ -51,7 +51,7 @@ Verifica l'integrità (opzionale ma consigliato):
 
 ```bash
 wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.4.0/librelink-mcp-server.mcpb.sha256
-sha256sum -c librelink-mcp-server.mcpb
+sha256sum -c librelink-mcp-server.mcpb.sha256
 ```
 
 ### 4. Installa l'estensione in Claude Desktop (Metodo Consigliato)

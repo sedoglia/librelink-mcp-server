@@ -1,0 +1,7 @@
+# mcpb pack ignores .gitignore, so local-only files must be listed here too.
+# Without this, .claude/settings.local.json shipped inside the public v1.3.0 bundle.
+.claude/
+releases/
+.librelink-mcp/
+*.log
+.git/
