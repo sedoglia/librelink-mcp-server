@@ -32,10 +32,6 @@
     "axios": "^1.19.0",
     "keytar": "^7.9.0"
   },
-  "overridesComment": "@modelcontextprotocol/sdk pins @hono/node-server ^1.19.9, but the serve-static path traversal (GHSA-frvp-7c67-39w9) is only fixed in 2.0.5+. Safe across the major: the SDK's only import is getRequestListener, still exported in 2.x. Drop this override once the SDK allows 2.x.",
-  "overrides": {
-    "@hono/node-server": "^2.0.11"
-  },
   "devDependencies": {
     "@types/keytar": "^4.4.2",
     "@types/node": "^20.19.43",
