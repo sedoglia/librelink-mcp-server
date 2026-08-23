@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  # The matrix makes this surface as two checks, "ci (20)" and "ci (22)".
+  # The matrix makes this surface as two checks, "ci (22)" and "ci (24)".
   # Both are required on main and gate auto-merge, so changing the job name or
   # the matrix values means updating branch protection to match.
   ci:
@@ -20,8 +20,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # 20 is the floor declared in engines; 22 catches breakage on current LTS.
-        node-version: ['20', '22']
+        # 22 is the floor declared in engines; 24 catches breakage on current LTS.
+        node-version: ['22', '24']
 
     steps:
       - uses: actions/checkout@v7
