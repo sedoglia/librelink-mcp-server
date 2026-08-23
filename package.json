@@ -28,7 +28,7 @@
   "author": "Fork with v4.16.0 fix",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "axios": "^1.18.1",
     "keytar": "^7.9.0"
   },
