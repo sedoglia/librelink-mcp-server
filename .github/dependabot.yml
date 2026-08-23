@@ -10,6 +10,15 @@ updates:
     commit-message:
       prefix: chore(deps)
       prefix-development: chore(deps-dev)
+    ignore:
+      # @types/node ships the typings for one Node major. Anything above the
+      # engines floor types APIs the CI matrix cannot actually run, which is
+      # why #25 (20 -> 26) typechecked green against a runtime without them.
+      # Raise this together with engines and the matrix, never on its own.
+      - dependency-name: '@types/node'
+        update-types:
+          - version-update:semver-major
+
     groups:
       # One PR per weekly batch of patch bumps instead of one per package;
       # the auto-merge workflow then handles it as a single unit.
