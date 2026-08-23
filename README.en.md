@@ -15,6 +15,7 @@
 - ✅ Secure JWT token persistence
 - ✅ **v1.3.0**: Full support for all 13 LibreLinkUp regions
 - ✅ **v1.4.0**: Security dependency updates (13 vulnerabilities resolved), MCP SDK 1.29.0, requires Node.js 20+
+- ✅ **v1.5.0**: 8 vulnerabilities resolved, MCP SDK 1.30.0, requires Node.js 22+
 
 ## 📋 Prerequisites
 
@@ -42,7 +43,7 @@ npm install keytar
 Use your browser or:
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.4.0/librelink-mcp-server.mcpb
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.5.0/librelink-mcp-server.mcpb
 ```
 
 ### 3. Verify integrity
@@ -50,7 +51,7 @@ wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.4.0/l
 Verify the integrity (optional but recommended):
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.4.0/librelink-mcp-server.mcpb.sha256
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.5.0/librelink-mcp-server.mcpb.sha256
 sha256sum -c librelink-mcp-server.mcpb.sha256
 ```
 
