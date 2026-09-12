@@ -398,12 +398,56 @@ librelink-mcp-server/
 │   ├── configure.ts          # Tool CLI configurazione
 │   ├── secure-storage.ts     # Storage sicuro con Keytar
 │   └── types.ts              # Definizioni TypeScript
+├── scripts/
+│   ├── smoke-test.mjs        # Smoke test MCP senza credenziali (CI)
+│   └── pack.mjs              # Build del bundle .mcpb di release
+├── manifest.json             # Manifest del bundle .mcpb
 ├── test-real-connection.js   # Test connessione
 ├── test-secure-storage.js    # Test modulo sicurezza
 ├── package.json
 ├── tsconfig.json
 └── README.md
 ```
+
+## 📦 Pubblicare una release (per i maintainer)
+
+Il numero di versione è dichiarato in sei file, che devono cambiare insieme: `package.json`, `package-lock.json`, `manifest.json` (il bundle `.mcpb`), `src/index.ts` (costruttore `Server` e banner di avvio) e i due README (riga di changelog + URL di download del bundle).
+
+1. **Branch e bump**
+   ```bash
+   git checkout -b release/X.Y.Z
+   npm version X.Y.Z --no-git-tag-version   # package.json + package-lock.json
+   ```
+   Poi aggiorna a mano `manifest.json`, `src/index.ts`, `README.md` e `README.en.md`.
+
+2. **Verifica**
+   ```bash
+   npm run typecheck && npm run build
+   npm run pack
+   npm audit --audit-level=moderate
+   ```
+   `npm run pack` compila, reinstalla le sole dipendenze di produzione, esegue lo smoke test su quell'albero (che controlla anche che la versione riportata via MCP coincida con `package.json`), impacchetta `releases/librelink-mcp-server.mcpb` con il relativo `.sha256` e infine ripristina le devDependencies. Così il bundle non contiene mai `typescript` o `@types/*`.
+
+3. **Pull request** con il template dedicato (le PR ordinarie e quelle di Dependabot non lo usano):
+   ```bash
+   gh pr create --template release.md
+   ```
+   Il merge su `main` richiede la CI verde.
+
+4. **Tag e release** dopo il merge:
+   ```bash
+   git checkout main && git pull --ff-only
+   git tag -a vX.Y.Z -m "vX.Y.Z" && git push origin vX.Y.Z
+   npm run pack
+   gh release create vX.Y.Z releases/librelink-mcp-server.mcpb releases/librelink-mcp-server.mcpb.sha256 \
+     --title "LibreLink MCP Server vX.Y.Z" --latest --notes-file NOTE.md
+   ```
+
+5. **Controllo finale**: scarica gli asset pubblicati e verifica il checksum, esattamente come farà un utente.
+   ```bash
+   gh release download vX.Y.Z -p 'librelink-mcp-server.mcpb*'
+   sha256sum -c librelink-mcp-server.mcpb.sha256
+   ```
 
 ## 🔐 Privacy Policy
 
