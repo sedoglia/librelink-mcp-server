@@ -29,7 +29,7 @@ import { LibreLinkConfig, LibreLinkRegion, VALID_REGIONS } from './types.js';
 const server = new Server(
   {
     name: 'librelink-mcp-server',
-    version: '1.5.1'
+    version: '1.6.0'
   },
   {
     capabilities: {
@@ -516,7 +516,7 @@ export async function main(): Promise<void> {
   // Connect server to transport
   await server.connect(transport);
 
-  console.error('LibreLink MCP Server running on stdio (v1.5.1 - Secure credential storage)');
+  console.error('LibreLink MCP Server running on stdio (v1.6.0 - Secure credential storage)');
 }
 
 // Run if executed directly
