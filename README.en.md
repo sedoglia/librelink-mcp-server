@@ -248,6 +248,13 @@ Once integrated with Claude Desktop, you can ask:
 ```json
 {
   "analysis_period_days": 7,
+  "data_coverage": {
+    "from": "2026-09-12T10:46:28.000Z",
+    "to": "2026-09-12T22:01:32.000Z",
+    "hours_covered": 11.3,
+    "hours_requested": 168,
+    "note": "Only 11.3 of the requested 168 hours are available: LibreLinkUp returns roughly the last 12 hours of readings. Statistics below describe that window only."
+  },
   "average_glucose": 112.5,
   "glucose_management_indicator": 5.94,
   "time_in_range": {
@@ -261,6 +268,8 @@ Once integrated with Claude Desktop, you can ask:
   }
 }
 ```
+
+The `data_coverage` block reports the time window the readings actually span: LibreLinkUp only serves roughly the last 12 hours, so the statistics describe that window even when more days are requested.
 
 ## 🔒 Security & Privacy
 

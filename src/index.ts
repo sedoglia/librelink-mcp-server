@@ -109,7 +109,7 @@ const tools = [
   },
   {
     name: 'get_glucose_stats',
-    description: 'Calculate comprehensive glucose statistics including average glucose, GMI (estimated A1C), time-in-range percentages, and variability metrics. Essential for diabetes management insights and identifying areas for improvement.',
+    description: 'Calculate comprehensive glucose statistics including average glucose, GMI (estimated A1C), time-in-range percentages, and variability metrics. The response includes data_coverage with the time window the readings actually span, which is usually shorter than requested because LibreLinkUp only serves roughly the last 12 hours. Essential for diabetes management insights and identifying areas for improvement.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -300,11 +300,29 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const readings = await client.getGlucoseHistory(days * 24);
         const stats = analytics.calculateGlucoseStats(readings);
 
+        // LibreLinkUp's graph endpoint only returns the last ~12 hours, so the
+        // window actually covered is usually far shorter than the one asked
+        // for. Report it, or a "7-day" average silently becomes a 12-hour one.
+        // Readings come back sorted by timestamp ascending.
+        const first = readings[0] ? new Date(readings[0].timestamp) : null;
+        const last = readings.length ? new Date(readings[readings.length - 1].timestamp) : null;
+        const hoursCovered = first && last ? (last.getTime() - first.getTime()) / 3_600_000 : 0;
+        const requestedHours = days * 24;
+
         return {
           content: [{
             type: 'text',
             text: JSON.stringify({
               analysis_period_days: days,
+              data_coverage: {
+                from: first?.toISOString() ?? null,
+                to: last?.toISOString() ?? null,
+                hours_covered: Math.round(hoursCovered * 10) / 10,
+                hours_requested: requestedHours,
+                ...(hoursCovered < requestedHours * 0.9 && {
+                  note: `Only ${Math.round(hoursCovered * 10) / 10} of the requested ${requestedHours} hours are available: LibreLinkUp returns roughly the last 12 hours of readings. Statistics below describe that window only.`
+                })
+              },
               average_glucose: stats.average,
               glucose_management_indicator: stats.gmi,
               time_in_range: {
