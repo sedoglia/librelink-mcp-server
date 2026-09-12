@@ -4,8 +4,11 @@
  * speaks MCP. Only initialize and tools/list are exercised, so nothing touches
  * the keychain or the LibreLink API — this can run on CI with no secrets.
  *
- * Exits non-zero on any mismatch so a dependency bump that breaks the server
- * fails the build instead of reaching main.
+ * Also cross-checks manifest.json (the .mcpb metadata, maintained by hand)
+ * against what the server actually reports: version and tool list.
+ *
+ * Exits non-zero on any mismatch so a dependency bump that breaks the server,
+ * or a manifest left behind, fails the build instead of reaching main.
  */
 import { spawn } from 'node:child_process';
 import { readFileSync } from 'node:fs';
@@ -95,6 +98,14 @@ child.on('close', (code) => {
   }
   console.log(`✓ version matches package.json (${pkg.version})`);
 
+  // manifest.json is the version Claude Desktop shows for the installed .mcpb;
+  // it is bumped by hand, so catch it drifting from package.json here.
+  const manifest = JSON.parse(readFileSync(join(root, 'manifest.json'), 'utf8'));
+  if (manifest.version !== pkg.version) {
+    fail(`version mismatch: manifest.json says ${manifest.version}, package.json says ${pkg.version}`);
+  }
+  console.log(`✓ manifest.json version matches (${manifest.version})`);
+
   const tools = responses.get(2)?.result?.tools;
   if (!Array.isArray(tools)) {
     fail(`tools/list failed (exit ${code})\nstdout: ${stdout}\nstderr: ${stderr}`);
@@ -104,6 +115,24 @@ child.on('close', (code) => {
   const missing = EXPECTED_TOOLS.filter((t) => !names.includes(t));
   if (missing.length) fail(`missing tools: ${missing.join(', ')}`);
   console.log(`✓ tools/list -> all ${EXPECTED_TOOLS.length} tools present`);
+
+  // manifest.tools is a static copy of what the server exposes, maintained by
+  // hand. Compare both ways so a tool added, removed or renamed in src/index.ts
+  // without touching manifest.json fails here instead of shipping a bundle
+  // whose extension page lists the wrong tools.
+  const manifestNames = (manifest.tools ?? []).map((t) => t.name);
+  const notInManifest = names.filter((t) => !manifestNames.includes(t));
+  const notInServer = manifestNames.filter((t) => !names.includes(t));
+  if (notInManifest.length || notInServer.length) {
+    fail(
+      'manifest.json tools out of sync with the server' +
+        (notInManifest.length ? `
+  exposed by server, missing from manifest: ${notInManifest.join(', ')}` : '') +
+        (notInServer.length ? `
+  listed in manifest, not exposed by server: ${notInServer.join(', ')}` : '')
+    );
+  }
+  console.log(`✓ manifest.json tools match tools/list (${manifestNames.length})`);
 
   console.log('\nSmoke test passed.');
 });
