@@ -2,7 +2,7 @@
   "manifest_version": "0.2",
   "name": "librelink-mcp-server",
   "display_name": "LibreLink MCP Server",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "FreeStyle Libre CGM data in Claude via LibreLinkUp: current glucose, history, statistics and trends, with credentials encrypted in the OS keychain.",
   "long_description": "Connects Claude to your FreeStyle Libre continuous glucose monitor through the LibreLinkUp API (v4.16.0).\n\nExposes 10 tools: current reading with trend arrow, historical readings, statistics (average, GMI, time in range, variability), pattern analysis (dawn phenomenon, meal responses, overnight stability), sensor status, and credential/session management.\n\nCredentials are stored AES-256-GCM encrypted with the key kept in the OS keychain (Keytar) and a file fallback when Keytar is unavailable. All 13 LibreLinkUp regions are supported. Requires Node.js 22 or newer.",
   "author": {
