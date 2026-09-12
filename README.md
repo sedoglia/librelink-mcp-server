@@ -16,6 +16,7 @@
 - ✅ **v1.3.0**: Supporto completo per tutte le 13 regioni LibreLinkUp
 - ✅ **v1.4.0**: Aggiornamento dipendenze di sicurezza (13 vulnerabilità risolte), MCP SDK 1.29.0, richiede Node.js 20+
 - ✅ **v1.5.0**: 8 vulnerabilità risolte, MCP SDK 1.30.0, richiede Node.js 22+
+- ✅ **v1.5.1**: 5 vulnerabilità risolte (hono, qs), axios 1.20.0
 
 ## 📋 Prerequisiti
 
@@ -43,7 +44,7 @@ npm install keytar
 Usa il browser oppure:
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.5.0/librelink-mcp-server.mcpb
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.5.1/librelink-mcp-server.mcpb
 ```
 
 ### 3. Verifica l'integrità
@@ -51,7 +52,7 @@ wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.5.0/l
 Verifica l'integrità (opzionale ma consigliato):
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.5.0/librelink-mcp-server.mcpb.sha256
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.5.1/librelink-mcp-server.mcpb.sha256
 sha256sum -c librelink-mcp-server.mcpb.sha256
 ```
 
