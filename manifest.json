@@ -1,16 +1,19 @@
 {
   "manifest_version": "0.2",
   "name": "librelink-mcp-server",
+  "display_name": "LibreLink MCP Server",
   "version": "1.5.1",
-  "description": "MCP server for FreeStyle LibreLink CGM data - Fixed for API v4.16.0 with secure credential storage",
+  "description": "FreeStyle Libre CGM data in Claude via LibreLinkUp: current glucose, history, statistics and trends, with credentials encrypted in the OS keychain.",
+  "long_description": "Connects Claude to your FreeStyle Libre continuous glucose monitor through the LibreLinkUp API (v4.16.0).\n\nExposes 10 tools: current reading with trend arrow, historical readings, statistics (average, GMI, time in range, variability), pattern analysis (dawn phenomenon, meal responses, overnight stability), sensor status, and credential/session management.\n\nCredentials are stored AES-256-GCM encrypted with the key kept in the OS keychain (Keytar) and a file fallback when Keytar is unavailable. All 13 LibreLinkUp regions are supported. Requires Node.js 22 or newer.",
   "author": {
     "name": "sedoglia",
-    "email": "sedoglia@gmail.com"
+    "email": "sedoglia@gmail.com",
+    "url": "https://github.com/sedoglia"
   },
   "homepage": "https://github.com/sedoglia/librelink-mcp-server",
   "documentation": "https://github.com/sedoglia/librelink-mcp-server/blob/main/README.en.md",
   "support": "https://github.com/sedoglia/librelink-mcp-server/issues",
-  "icon": ".\\LibreLink.png",
+  "icon": "LibreLink.png",
   "server": {
     "type": "node",
     "entry_point": "dist/index.js",
@@ -22,9 +25,75 @@
       "env": {}
     }
   },
+  "tools": [
+    {
+      "name": "get_current_glucose",
+      "description": "Most recent glucose reading with trend direction and in-range flag."
+    },
+    {
+      "name": "get_glucose_history",
+      "description": "Timestamped glucose readings for a period (default 24 hours)."
+    },
+    {
+      "name": "get_glucose_stats",
+      "description": "Average, GMI (estimated A1C), time in range and variability metrics."
+    },
+    {
+      "name": "get_glucose_trends",
+      "description": "Recurring patterns: dawn phenomenon, meal responses, overnight stability."
+    },
+    {
+      "name": "get_sensor_info",
+      "description": "Active sensor serial number, activation date and status."
+    },
+    {
+      "name": "configure_credentials",
+      "description": "Store LibreLinkUp credentials, encrypted with the key in the OS keychain."
+    },
+    {
+      "name": "configure_ranges",
+      "description": "Set the personal target glucose range used for time-in-range calculations."
+    },
+    {
+      "name": "validate_connection",
+      "description": "Test the LibreLinkUp connection and the stored credentials."
+    },
+    {
+      "name": "get_session_status",
+      "description": "Authentication state, token validity and expiration."
+    },
+    {
+      "name": "clear_session",
+      "description": "Drop the current session and stored tokens to force re-authentication."
+    }
+  ],
+  "keywords": [
+    "mcp",
+    "librelink",
+    "freestyle-libre",
+    "cgm",
+    "glucose",
+    "diabetes",
+    "claude",
+    "anthropic"
+  ],
   "license": "MIT",
+  "privacy_policies": [
+    "https://github.com/sedoglia/librelink-mcp-server/blob/main/PRIVACY_POLICY.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/sedoglia/librelink-mcp-server"
+  },
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=22.0.0"
+    }
   }
 }
