@@ -7,6 +7,8 @@
   "scripts": {
     "build": "tsc",
     "pack": "node scripts/pack.mjs",
+    "sbom": "npx --yes @cyclonedx/cyclonedx-npm@6.0.1 --package-lock-only --omit dev --spec-version 1.6 --output-reproducible --validate --output-format JSON --output-file sbom.cdx.json",
+    "sbom:check": "node scripts/sbom-check.mjs",
     "start": "node dist/index.js",
     "dev": "tsc --watch",
     "configure": "node dist/configure.js",

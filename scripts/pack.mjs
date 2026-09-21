@@ -11,6 +11,12 @@
  * than on a user's machine. Dev dependencies are reinstalled at the end
  * (also on failure), leaving the working tree as it was.
  *
+ * The CycloneDX SBOM (sbom.cdx.json) is regenerated right before packing so
+ * it describes the same prod-only tree the smoke test just ran against, and
+ * ships inside the bundle. It is generated from package-lock.json alone and
+ * is reproducible, so a diff on it only ever reflects a dependency change
+ * (scripts/sbom-check.mjs enforces this in CI).
+ *
  * Wrapped in Node rather than a shell one-liner so it behaves the same on
  * Windows, where npm scripts run under cmd.exe and sha256sum does not exist.
  */
@@ -44,6 +50,7 @@ try {
 
   run('npm', ['ci', '--omit=dev']);
   run('node', ['scripts/smoke-test.mjs']);
+  run('npm', ['run', 'sbom']);
 
   mkdirSync(outDir, { recursive: true });
   rmSync(bundle, { force: true });

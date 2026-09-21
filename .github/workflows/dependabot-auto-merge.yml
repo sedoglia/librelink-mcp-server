@@ -7,6 +7,13 @@ name: Dependabot auto-merge
 # Minor and major bumps are deliberately left for a human: the hono 4.x ->
 # @hono/node-server 2.x fix in v1.4.0 needed a manual override and a Node
 # engines bump, which no automated PR would have made.
+#
+# Even a patch PR needs one manual push before it lands: Dependabot does not
+# regenerate sbom.cdx.json, so the "SBOM up to date" CI step fails until the
+# maintainer runs `npm run sbom` and commits on the PR branch. Doing that
+# from CI is not an option, because a push made with GITHUB_TOKEN does not
+# trigger workflows, and the required checks would never report on the new
+# head commit.
 
 on: pull_request
 
