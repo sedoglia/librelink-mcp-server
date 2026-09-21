@@ -335,6 +335,22 @@ Configuration files are stored in OS-specific locations:
 - **No tracking**: Zero telemetry
 - **Local processing**: No data sent to external servers
 
+## 🧾 SBOM (Software Bill of Materials)
+
+The project publishes an [SBOM](https://github.com/resources/articles/what-is-an-sbom-software-bill-of-materials) in [CycloneDX](https://cyclonedx.org/) 1.6 format: a complete, machine-readable inventory of every piece of third-party code that runs on your device when you use the server.
+
+- **File**: [`sbom.cdx.json`](sbom.cdx.json) in the repository root; it also ships inside the `.mcpb` bundle and is attached to every [GitHub release](https://github.com/sedoglia/librelink-mcp-server/releases).
+- **Contents**: production dependencies only (the ones that end up in the bundle), direct and transitive, with version, license, [Package URL](https://github.com/package-url/purl-spec), SHA-512 hash of the npm tarball and the dependency graph. devDependencies (`typescript`, `@types/*`) are excluded because they are not distributed.
+- **Generation**: produced by [`@cyclonedx/cyclonedx-npm`](https://github.com/CycloneDX/cyclonedx-node-npm) from `package-lock.json` alone, in reproducible mode (no timestamp or serial number): the same lockfile always yields the same inventory, so a diff on the SBOM only ever means a dependency change.
+- **Guaranteed alignment**: CI regenerates the SBOM on every push and PR (`npm run sbom:check`) and fails if it differs from the committed one, so the file on `main` always describes the current lockfile. Whoever bumps a dependency must therefore re-run `npm run sbom` and commit the result together with `package-lock.json`.
+
+To regenerate it, or to feed it to a vulnerability scanner (e.g. [Grype](https://github.com/anchore/grype), [OSV-Scanner](https://github.com/google/osv-scanner), [Dependency-Track](https://dependencytrack.org/)):
+
+```bash
+npm run sbom
+grype sbom:sbom.cdx.json
+```
+
 ## ⚠️ API v4.16.0 Fix (October 2025)
 
 ### The Problem
@@ -408,8 +424,10 @@ librelink-mcp-server/
 │   └── types.ts              # TypeScript definitions
 ├── scripts/
 │   ├── smoke-test.mjs        # Credential-free MCP smoke test (CI)
+│   ├── sbom-check.mjs        # Checks the SBOM matches the lockfile (CI)
 │   └── pack.mjs              # Builds the release .mcpb bundle
 ├── manifest.json             # .mcpb bundle manifest
+├── sbom.cdx.json             # CycloneDX SBOM of the production dependencies
 ├── test-real-connection.js   # Connection test
 ├── test-secure-storage.js    # Security module test
 ├── package.json
@@ -434,7 +452,7 @@ The version number is declared in six files, which must change together: `packag
    npm run pack
    npm audit --audit-level=moderate
    ```
-   `npm run pack` builds, reinstalls production dependencies only, runs the smoke test against that tree (which also checks that the version reported over MCP matches `package.json`), packs `releases/librelink-mcp-server.mcpb` with its `.sha256`, and finally restores the devDependencies. The bundle therefore never contains `typescript` or `@types/*`.
+   `npm run pack` builds, reinstalls production dependencies only, runs the smoke test against that tree (which also checks that the version reported over MCP matches `package.json`), regenerates `sbom.cdx.json`, packs `releases/librelink-mcp-server.mcpb` with its `.sha256`, and finally restores the devDependencies. The bundle therefore never contains `typescript` or `@types/*`, and the SBOM (which carries the new version and the updated dependencies) gets committed together with the bump.
 
 3. **Pull request** using the dedicated template (everyday and Dependabot PRs do not use it):
    ```bash
@@ -447,7 +465,7 @@ The version number is declared in six files, which must change together: `packag
    git checkout main && git pull --ff-only
    git tag -a vX.Y.Z -m "vX.Y.Z" && git push origin vX.Y.Z
    npm run pack
-   gh release create vX.Y.Z releases/librelink-mcp-server.mcpb releases/librelink-mcp-server.mcpb.sha256 \
+   gh release create vX.Y.Z releases/librelink-mcp-server.mcpb releases/librelink-mcp-server.mcpb.sha256 sbom.cdx.json \
      --title "LibreLink MCP Server vX.Y.Z" --latest --notes-file NOTES.md
    ```
 

@@ -48,6 +48,13 @@ jobs:
       - name: Smoke test
         run: node scripts/smoke-test.mjs
 
+      # The committed SBOM must describe the lockfile on this exact commit.
+      # Dependabot PRs trip this by design, since Dependabot only touches
+      # package.json and package-lock.json: the maintainer runs `npm run sbom`
+      # and pushes, which re-runs CI and lets the queued auto-merge proceed.
+      - name: SBOM up to date
+        run: npm run sbom:check
+
       # Fails the build on a known vulnerability at moderate or above, so a
       # regression cannot be merged even by the auto-merge path.
       - name: Audit
