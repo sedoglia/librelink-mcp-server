@@ -1837,8 +1837,8 @@
     {
       "type": "library",
       "name": "fast-uri",
-      "version": "3.1.6",
-      "bom-ref": "librelink-mcp-server@1.6.0|fast-uri@3.1.6",
+      "version": "3.1.8",
+      "bom-ref": "librelink-mcp-server@1.6.0|fast-uri@3.1.8",
       "licenses": [
         {
           "license": {
@@ -1847,15 +1847,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/fast-uri@3.1.6",
+      "purl": "pkg:npm/fast-uri@3.1.8",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/fast-uri/-/fast-uri-3.1.6.tgz",
+          "url": "https://registry.npmjs.org/fast-uri/-/fast-uri-3.1.8.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "ec871a975bc510caf4a276d5cc40c8ade336d88e24856f9fcf240fc2f005581a758b076c852651b0be238d1bcf1bd24fd6e8aa30746da3e614e91dbf0b30f3e5"
+              "content": "19932d6544cd4693952040a85f02cd652e7150613e99535b4c1f21ffb4708764c559c05088fcd3832662d39045f543192a42c9bfc5c14494e553bce0f3e65f32"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -2621,8 +2621,8 @@
     {
       "type": "library",
       "name": "ip-address",
-      "version": "10.5.0",
-      "bom-ref": "librelink-mcp-server@1.6.0|ip-address@10.5.0",
+      "version": "10.7.2",
+      "bom-ref": "librelink-mcp-server@1.6.0|ip-address@10.7.2",
       "licenses": [
         {
           "license": {
@@ -2631,15 +2631,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/ip-address@10.5.0",
+      "purl": "pkg:npm/ip-address@10.7.2",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/ip-address/-/ip-address-10.5.0.tgz",
+          "url": "https://registry.npmjs.org/ip-address/-/ip-address-10.7.2.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "4794a754b26681862f7f6176660c120677a5cf91b8ab9031202dbbec60df51a35bad928d00d7010bb447a9861e3e5b337f8901a2556425ab86d198c71c5879e6"
+              "content": "ec7ff68054888adc5cd211b79ce2358254bc40ba3f10704514b93cbc45235d8ff1bb401d2fc8d9f54d48cced8f526d1dd83fe87d070089f6f483a38192df14ef"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -5206,7 +5206,7 @@
       "ref": "librelink-mcp-server@1.6.0|ajv@8.18.0",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|fast-deep-equal@3.1.3",
-        "librelink-mcp-server@1.6.0|fast-uri@3.1.6",
+        "librelink-mcp-server@1.6.0|fast-uri@3.1.8",
         "librelink-mcp-server@1.6.0|json-schema-traverse@1.0.0",
         "librelink-mcp-server@1.6.0|require-from-string@2.0.2"
       ]
@@ -5398,7 +5398,7 @@
       "ref": "librelink-mcp-server@1.6.0|express-rate-limit@8.5.1",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|express@5.2.1",
-        "librelink-mcp-server@1.6.0|ip-address@10.5.0"
+        "librelink-mcp-server@1.6.0|ip-address@10.7.2"
       ]
     },
     {
@@ -5447,7 +5447,7 @@
       "ref": "librelink-mcp-server@1.6.0|fast-deep-equal@3.1.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|fast-uri@3.1.6"
+      "ref": "librelink-mcp-server@1.6.0|fast-uri@3.1.8"
     },
     {
       "ref": "librelink-mcp-server@1.6.0|finalhandler@2.1.1",
@@ -5570,7 +5570,7 @@
       "ref": "librelink-mcp-server@1.6.0|ini@1.3.8"
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|ip-address@10.5.0"
+      "ref": "librelink-mcp-server@1.6.0|ip-address@10.7.2"
     },
     {
       "ref": "librelink-mcp-server@1.6.0|ipaddr.js@1.9.1"
