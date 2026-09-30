@@ -26,8 +26,9 @@ updates:
         applies-to: version-updates
         update-types:
           - patch
-      # Security fixes stay grouped too, but auto-merge only takes the
-      # patch-level ones — see .github/workflows/dependabot-auto-merge.yml.
+      # Security fixes stay grouped too; auto-merge takes patch and minor
+      # ones, majors wait for a human — see
+      # .github/workflows/dependabot-auto-merge.yml.
       security-updates:
         applies-to: security-updates
         patterns:

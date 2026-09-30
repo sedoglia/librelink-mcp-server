@@ -1,19 +1,17 @@
 name: Dependabot auto-merge
 
-# Patch-level Dependabot PRs are approved and queued for auto-merge. GitHub
-# holds the merge until the required "ci" check on main goes green, so a bump
-# that breaks the build stays open instead of landing.
+# Patch- and minor-level Dependabot PRs are queued for auto-merge. GitHub
+# holds the merge until the required "ci" checks go green, so a bump that
+# breaks the typecheck, build, smoke test or audit stays open instead of
+# landing. For a grouped PR, update-type is the largest bump in the group.
 #
-# Minor and major bumps are deliberately left for a human: the hono 4.x ->
+# Major bumps are deliberately left for a human: the hono 4.x ->
 # @hono/node-server 2.x fix in v1.4.0 needed a manual override and a Node
 # engines bump, which no automated PR would have made.
 #
-# Even a patch PR needs one manual push before it lands: Dependabot does not
-# regenerate sbom.cdx.json, so the "SBOM up to date" CI step fails until the
-# maintainer runs `npm run sbom` and commits on the PR branch. Doing that
-# from CI is not an option, because a push made with GITHUB_TOKEN does not
-# trigger workflows, and the required checks would never report on the new
-# head commit.
+# The stale sbom.cdx.json that fails the first CI run on every npm bump is
+# fixed by dependabot-sbom.yml, which commits the regenerated file and
+# re-runs CI; the auto-merge queued here then goes through on its own.
 
 on: pull_request
 
@@ -38,14 +36,14 @@ jobs:
       # need "Allow GitHub Actions to create and approve pull requests", which
       # is off. With it off, gh pr review --approve returns 403, fails the job,
       # and auto-merge is never queued at all.
-      - name: Enable auto-merge for patch updates
-        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+      - name: Enable auto-merge for patch and minor updates
+        if: contains(fromJSON('["version-update:semver-patch","version-update:semver-minor"]'), steps.metadata.outputs.update-type)
         run: gh pr merge --auto --squash "$PR_URL"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Leave non-patch updates for manual review
-        if: steps.metadata.outputs.update-type != 'version-update:semver-patch'
+      - name: Leave major updates for manual review
+        if: ${{ !contains(fromJSON('["version-update:semver-patch","version-update:semver-minor"]'), steps.metadata.outputs.update-type) }}
         run: |
           echo "::notice::${{ steps.metadata.outputs.update-type }} update - needs manual review, not auto-merging."
