@@ -167,8 +167,8 @@
       "type": "library",
       "name": "sdk",
       "group": "@modelcontextprotocol",
-      "version": "1.30.0",
-      "bom-ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.30.0",
+      "version": "1.30.1",
+      "bom-ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.30.1",
       "licenses": [
         {
           "license": {
@@ -177,15 +177,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/%40modelcontextprotocol/sdk@1.30.0",
+      "purl": "pkg:npm/%40modelcontextprotocol/sdk@1.30.1",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.30.0.tgz",
+          "url": "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.30.1.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "c4a77c388ce5a8dcdca9c36e98601aea0f8f5b69230f9beba5c28e9df95d0143cfde3ee59ea30fc254d7426f2017e5301fbdb3d25a9a45b8ebf61a86cf47884c"
+              "content": "1f61f12ef0b71c33726de3c968b752ad4d618542b9890c3e5af5756f4d66c85c88eec75519ed6efc83d31390fd7c60a224356d80c57f9661644172e643220560"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -5141,7 +5141,7 @@
     {
       "ref": "librelink-mcp-server@1.6.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.30.0",
+        "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.30.1",
         "librelink-mcp-server@1.6.0|axios@1.20.0",
         "librelink-mcp-server@1.6.0|keytar@7.9.0"
       ]
@@ -5153,7 +5153,7 @@
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.30.0",
+      "ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.30.1",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|@hono/node-server@2.0.11",
         "librelink-mcp-server@1.6.0|ajv-formats@3.0.1",
