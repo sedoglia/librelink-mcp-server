@@ -5,9 +5,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  # Dispatched by dependabot-sbom.yml after it pushes a regenerated SBOM:
-  # that push uses GITHUB_TOKEN, which does not trigger pull_request, so the
-  # required checks on the new head commit come from this run instead.
+  # Dispatched by dependabot-sbom.yml after it pushes a regenerated SBOM. That
+  # GITHUB_TOKEN push also creates a pull_request run, but GitHub holds it for
+  # approval (actor github-actions[bot]) and dependabot-sbom.yml deletes it,
+  # so the required checks on the new head commit come from this run.
   workflow_dispatch:
 
 permissions:
@@ -55,8 +56,9 @@ jobs:
       # The committed SBOM must describe the lockfile on this exact commit.
       # On a Dependabot PR the first run fails here by design, since
       # Dependabot only touches package.json and package-lock.json;
-      # dependabot-sbom.yml then commits the regenerated file and dispatches
-      # this workflow again, which lets the queued auto-merge proceed.
+      # dependabot-sbom.yml then commits the regenerated file, dispatches
+      # this workflow again and deletes the runs GitHub holds for approval,
+      # which lets the queued auto-merge proceed.
       - name: SBOM up to date
         run: npm run sbom:check
 
