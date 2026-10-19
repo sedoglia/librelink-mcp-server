@@ -12,6 +12,9 @@ name: Dependabot auto-merge
 # The stale sbom.cdx.json that fails the first CI run on every npm bump is
 # fixed by dependabot-sbom.yml, which commits the regenerated file and
 # re-runs CI; the auto-merge queued here then goes through on its own.
+# That commit also creates a run of this workflow started by
+# github-actions[bot]; GitHub holds it for approval and dependabot-sbom.yml
+# deletes it. Approved, it would only skip, since the actor is not Dependabot.
 
 on: pull_request
 

@@ -4,13 +4,18 @@ name: Dependabot SBOM
 # bump would fail the "SBOM up to date" CI step until someone regenerated
 # sbom.cdx.json by hand. This job does it on the PR branch instead.
 #
-# Two details make the loop close without a human:
+# Three details make the loop close without a human:
 #
-# - A push made with GITHUB_TOKEN does not trigger workflows, so the required
-#   "ci (22)" / "ci (24)" checks would never report on the new head commit.
-#   workflow_dispatch is the documented exception: dispatching ci.yml on the
-#   PR branch runs it on that exact commit, and the check runs it produces
-#   are the ones branch protection and the queued auto-merge wait for.
+# - Dispatching ci.yml on the PR branch runs it on the new head commit, and
+#   the "ci (22)" / "ci (24)" check runs it produces are the ones branch
+#   protection and the queued auto-merge wait for.
+#
+# - The GITHUB_TOKEN push also creates pull_request runs started by
+#   github-actions[bot], which the repo's approval policy holds as
+#   action_required. The held CI run's check runs are newer than the
+#   dispatched ones and kept PRs #49 and #50 BLOCKED for a week each. The
+#   last step below deletes those held runs (only on the pushed commit and
+#   only ones started by github-actions[bot]) so the dispatched checks count.
 #
 # - Dependabot stops rebasing a PR once someone else has pushed to it, which
 #   would leave a second open bump stuck in conflict after the first merges.
@@ -59,6 +64,7 @@ jobs:
           fi
 
       - name: Commit and re-run CI
+        id: push
         if: steps.sbom.outputs.changed == 'true'
         run: |
           git config user.name 'github-actions[bot]'
@@ -66,7 +72,34 @@ jobs:
           git add sbom.cdx.json
           git commit -m 'chore(sbom): regenerate for dependency update [dependabot skip]'
           git push origin "HEAD:$HEAD_REF"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           gh workflow run ci.yml --ref "$HEAD_REF"
         env:
           HEAD_REF: ${{ github.head_ref }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # The held runs appear a few seconds after the push. Poll for up to two
+      # minutes, stopping once a pass after the first deletion finds nothing
+      # new; if GitHub creates no held runs at all, this just times out.
+      - name: Delete runs held for approval
+        if: steps.sbom.outputs.changed == 'true'
+        run: |
+          deleted=0
+          for _ in $(seq 1 12); do
+            sleep 10
+            ids=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs?head_sha=$SHA&status=action_required" \
+              --jq '.workflow_runs[] | select(.actor.login == "github-actions[bot]") | .id')
+            if [ -z "$ids" ]; then
+              if [ "$deleted" -gt 0 ]; then break; fi
+              continue
+            fi
+            for id in $ids; do
+              gh api -X DELETE "repos/$GITHUB_REPOSITORY/actions/runs/$id"
+              echo "Deleted held run $id"
+              deleted=$((deleted + 1))
+            done
+          done
+          echo "Deleted $deleted held run(s)."
+        env:
+          SHA: ${{ steps.push.outputs.sha }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
