@@ -9,7 +9,7 @@
         {
           "type": "application",
           "name": "npm",
-          "version": "11.19.0"
+          "version": "11.19.1"
         },
         {
           "type": "library",
@@ -2383,8 +2383,8 @@
     {
       "type": "library",
       "name": "hono",
-      "version": "4.13.7",
-      "bom-ref": "librelink-mcp-server@1.6.0|hono@4.13.7",
+      "version": "4.13.13",
+      "bom-ref": "librelink-mcp-server@1.6.0|hono@4.13.13",
       "licenses": [
         {
           "license": {
@@ -2393,15 +2393,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/hono@4.13.7",
+      "purl": "pkg:npm/hono@4.13.13",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/hono/-/hono-4.13.7.tgz",
+          "url": "https://registry.npmjs.org/hono/-/hono-4.13.13.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "73cfe017d69cf18efcfda804c55a1cc8b7af811f89969341e38e0fcb41525fca49a0f75851f53345c5ed604606c2dea5d7da8895564f37931fb30f6315286641"
+              "content": "090e3a53466400699b4ffe14c5dcf3189a5a70fd8878a818e1ae7fb4e23d00005ba4e31f2bbdfdc1f0d79afd6eb0293edd190a8f5850cb8fdf8e18b06b6c65ac"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -5149,7 +5149,7 @@
     {
       "ref": "librelink-mcp-server@1.6.0|@hono/node-server@2.0.11",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|hono@4.13.7"
+        "librelink-mcp-server@1.6.0|hono@4.13.13"
       ]
     },
     {
@@ -5165,7 +5165,7 @@
         "librelink-mcp-server@1.6.0|eventsource@3.0.7",
         "librelink-mcp-server@1.6.0|express-rate-limit@8.5.1",
         "librelink-mcp-server@1.6.0|express@5.2.1",
-        "librelink-mcp-server@1.6.0|hono@4.13.7",
+        "librelink-mcp-server@1.6.0|hono@4.13.13",
         "librelink-mcp-server@1.6.0|jose@6.1.3",
         "librelink-mcp-server@1.6.0|json-schema-typed@8.0.2",
         "librelink-mcp-server@1.6.0|pkce-challenge@5.0.1",
@@ -5535,7 +5535,7 @@
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|hono@4.13.7"
+      "ref": "librelink-mcp-server@1.6.0|hono@4.13.13"
     },
     {
       "ref": "librelink-mcp-server@1.6.0|http-errors@2.0.1",
