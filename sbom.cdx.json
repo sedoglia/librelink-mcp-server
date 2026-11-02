@@ -9,7 +9,7 @@
         {
           "type": "application",
           "name": "npm",
-          "version": "11.6.4"
+          "version": "11.19.1"
         },
         {
           "type": "library",
@@ -441,8 +441,8 @@
     {
       "type": "library",
       "name": "axios",
-      "version": "1.20.0",
-      "bom-ref": "librelink-mcp-server@1.6.0|axios@1.20.0",
+      "version": "1.21.0",
+      "bom-ref": "librelink-mcp-server@1.6.0|axios@1.21.0",
       "licenses": [
         {
           "license": {
@@ -451,15 +451,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/axios@1.20.0",
+      "purl": "pkg:npm/axios@1.21.0",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/axios/-/axios-1.20.0.tgz",
+          "url": "https://registry.npmjs.org/axios/-/axios-1.21.0.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "afc68e87c8fd7062a981002aa73ad41e748873a6b9f58dd77ff72ff2ccb50eb1c29191f340612ea2ad6d01193aa92c8376d4064838296fd90596bbb33efae0c2"
+              "content": "602cd7301e7743d3d906c87bc8def0b5aa62b7859ea707074b67cff10846b01c52cf962d818a1b57b186956940262f91c5f53bec6413422d8348b5266b8d8460"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -5142,7 +5142,7 @@
       "ref": "librelink-mcp-server@1.6.0",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.1",
-        "librelink-mcp-server@1.6.0|axios@1.20.0",
+        "librelink-mcp-server@1.6.0|axios@1.21.0",
         "librelink-mcp-server@1.6.0|keytar@7.9.0"
       ]
     },
@@ -5215,7 +5215,7 @@
       "ref": "librelink-mcp-server@1.6.0|asynckit@0.4.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|axios@1.20.0",
+      "ref": "librelink-mcp-server@1.6.0|axios@1.21.0",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|follow-redirects@1.16.1",
         "librelink-mcp-server@1.6.0|form-data@4.0.6",
