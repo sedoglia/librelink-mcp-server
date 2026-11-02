@@ -9,7 +9,7 @@
         {
           "type": "application",
           "name": "npm",
-          "version": "11.6.4"
+          "version": "11.19.1"
         },
         {
           "type": "library",
@@ -167,8 +167,8 @@
       "type": "library",
       "name": "sdk",
       "group": "@modelcontextprotocol",
-      "version": "1.32.1",
-      "bom-ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.1",
+      "version": "1.32.2",
+      "bom-ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.2",
       "licenses": [
         {
           "license": {
@@ -177,15 +177,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/%40modelcontextprotocol/sdk@1.32.1",
+      "purl": "pkg:npm/%40modelcontextprotocol/sdk@1.32.2",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.32.1.tgz",
+          "url": "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.32.2.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "d83744f92243b732c4116cd8d598d8ed0f9570f85c5752a2b03df3238bb45d9ca4b6c8c7ba6d66c1b308f896ae954062d8e664f8a2408b6b8f5f3c627213e477"
+              "content": "496b15b47ff4bd42d2412b6867ac711f62b4f4b8bc7d7613302eb865ea2009da59dd74a2d5e08f381c95d4ea6e271b88dce7261e1a2c0d66328a2d3bb693ec2f"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -5141,7 +5141,7 @@
     {
       "ref": "librelink-mcp-server@1.6.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.1",
+        "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.2",
         "librelink-mcp-server@1.6.0|axios@1.20.0",
         "librelink-mcp-server@1.6.0|keytar@7.9.0"
       ]
@@ -5153,7 +5153,7 @@
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.1",
+      "ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.2",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|@hono/node-server@2.0.11",
         "librelink-mcp-server@1.6.0|ajv-formats@3.0.1",
