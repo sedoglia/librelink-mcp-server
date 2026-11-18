@@ -18,6 +18,7 @@
 - ✅ **v1.5.0**: 8 vulnerabilities resolved, MCP SDK 1.30.0, requires Node.js 22+
 - ✅ **v1.5.1**: 5 vulnerabilities resolved (hono, qs), axios 1.20.0
 - ✅ **v1.6.0**: `get_glucose_stats` reports the time window actually covered (`data_coverage`), complete bundle manifest, bundle without devDependencies
+- ✅ **v1.6.1**: 19 vulnerabilities resolved (zod, body-parser, fast-uri, follow-redirects, hono, ip-address), MCP SDK 1.32.2, axios 1.21.1, CycloneDX SBOM published with every release
 
 ## 📋 Prerequisites
 
@@ -45,7 +46,7 @@ npm install keytar
 Use your browser or:
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.0/librelink-mcp-server.mcpb
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.1/librelink-mcp-server.mcpb
 ```
 
 ### 3. Verify integrity
@@ -53,7 +54,7 @@ wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.0/l
 Verify the integrity (optional but recommended):
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.0/librelink-mcp-server.mcpb.sha256
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.1/librelink-mcp-server.mcpb.sha256
 sha256sum -c librelink-mcp-server.mcpb.sha256
 ```
 
