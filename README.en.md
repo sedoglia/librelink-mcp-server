@@ -190,6 +190,12 @@ To check the MCP server without credentials (builds, then runs `initialize` + `t
 npm run test:mcp
 ```
 
+To check credential encryption (uses a temporary directory and its own keychain entry, never touches your real credentials):
+
+```bash
+npm run test:storage
+```
+
 ### 7. Configure Claude Desktop
 
 Add to your Claude Desktop configuration file:

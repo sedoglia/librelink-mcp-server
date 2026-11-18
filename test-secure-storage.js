@@ -3,16 +3,35 @@
  *
  * This tests the encryption, decryption, and keychain functionality
  * without requiring actual LibreLink credentials.
+ *
+ * Isolation: the test writes to a fresh temporary directory and uses its own
+ * keychain service name, so it never reads, overwrites or deletes the real
+ * credentials.enc / token.enc or the real "librelink-mcp-server" keychain key.
+ * Everything it creates is removed on exit, pass or fail.
  */
 
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join, resolve, sep } from 'node:path';
 import { SecureStorage } from './dist/secure-storage.js';
+
+const TEST_DIR = mkdtempSync(join(tmpdir(), 'librelink-mcp-test-'));
+const TEST_SERVICE = `librelink-mcp-server-test-${process.pid}`;
 
 async function testSecureStorage() {
   console.log('Testing Secure Storage Module');
   console.log('==============================\n');
 
-  const storage = new SecureStorage();
+  const storage = new SecureStorage({ configDir: TEST_DIR, keychainService: TEST_SERVICE });
   const paths = storage.getStoragePaths();
+
+  // Refuse to run unless every path is inside the throwaway directory: this
+  // test calls clearAll(), which would wipe a real setup.
+  for (const p of Object.values(paths)) {
+    if (!resolve(p).startsWith(resolve(TEST_DIR) + sep) && resolve(p) !== resolve(TEST_DIR)) {
+      throw new Error(`Refusing to run: ${p} is outside the test directory ${TEST_DIR}`);
+    }
+  }
 
   console.log('Storage paths:');
   console.log(`  Config dir: ${paths.configDir}`);
@@ -163,12 +182,23 @@ async function testSecureStorage() {
   return true;
 }
 
+// Remove the temp dir and the test keychain entry, whatever the outcome.
+async function cleanup() {
+  try {
+    await new SecureStorage({ configDir: TEST_DIR, keychainService: TEST_SERVICE }).clearAll();
+  } catch {
+    // Best effort: the directory removal below still runs.
+  }
+  rmSync(TEST_DIR, { recursive: true, force: true });
+}
+
 // Run tests
 testSecureStorage()
-  .then((success) => {
-    process.exit(success ? 0 : 1);
-  })
   .catch((error) => {
     console.error('Test error:', error);
-    process.exit(1);
+    return false;
+  })
+  .then(async (success) => {
+    await cleanup();
+    process.exit(success ? 0 : 1);
   });
