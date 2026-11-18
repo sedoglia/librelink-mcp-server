@@ -183,6 +183,12 @@ Credentials are stored securely:
 npm run test:connection
 ```
 
+To check the MCP server without credentials (builds, then runs `initialize` + `tools/list`):
+
+```bash
+npm run test:mcp
+```
+
 ### 7. Configure Claude Desktop
 
 Add to your Claude Desktop configuration file:

@@ -13,8 +13,7 @@
     "dev": "tsc --watch",
     "configure": "node dist/configure.js",
     "test": "npm run test:connection",
-    "test:mcp": "node test-mcp.js",
-    "test:analytics": "node test-analytics.js",
+    "test:mcp": "npm run build && node scripts/smoke-test.mjs",
     "test:connection": "node test-real-connection.js",
     "typecheck": "tsc --noEmit"
   },
