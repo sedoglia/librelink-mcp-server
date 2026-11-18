@@ -10,13 +10,17 @@
  * Everything it creates is removed on exit, pass or fail.
  */
 
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
+import { randomBytes } from 'node:crypto';
+import { createRequire } from 'node:module';
 import { SecureStorage } from './dist/secure-storage.js';
 
 const TEST_DIR = mkdtempSync(join(tmpdir(), 'librelink-mcp-test-'));
 const TEST_SERVICE = `librelink-mcp-server-test-${process.pid}`;
+const MIGRATION_DIR = join(TEST_DIR, 'migration');
+const MIGRATION_SERVICE = `${TEST_SERVICE}-migration`;
 
 async function testSecureStorage() {
   console.log('Testing Secure Storage Module');
@@ -175,6 +179,10 @@ async function testSecureStorage() {
     return false;
   }
 
+  if (!(await keyMigrationTests())) {
+    return false;
+  }
+
   console.log('\n==============================');
   console.log('All tests passed!');
   console.log('==============================');
@@ -182,12 +190,72 @@ async function testSecureStorage() {
   return true;
 }
 
-// Remove the temp dir and the test keychain entry, whatever the outcome.
-async function cleanup() {
+/**
+ * Tests 7-9: moving the master key from the fallback file to the keychain.
+ * Skipped when keytar cannot load (no native module / no keychain).
+ */
+async function keyMigrationTests() {
+  let keytar;
   try {
-    await new SecureStorage({ configDir: TEST_DIR, keychainService: TEST_SERVICE }).clearAll();
+    keytar = createRequire(import.meta.url)('keytar');
+    await keytar.getPassword(MIGRATION_SERVICE, 'probe');
   } catch {
-    // Best effort: the directory removal below still runs.
+    console.log('\nTests 7-9: keychain not available, skipped');
+    return true;
+  }
+
+  const account = 'encryption-key';
+  const keyFile = join(MIGRATION_DIR, '.encryption.key');
+  const creds = { email: 'migrate@example.com', password: 'migrate_pw_456!' };
+  const open = () => new SecureStorage({ configDir: MIGRATION_DIR, keychainService: MIGRATION_SERVICE });
+  const check = (ok, msg) => {
+    console.log(`  [${ok ? 'OK' : 'FAIL'}] ${msg}`);
+    return ok;
+  };
+
+  // Encrypt credentials with a key that lands in the keychain, then capture it.
+  await open().saveCredentials(creds);
+  const key = await keytar.getPassword(MIGRATION_SERVICE, account);
+  if (!check(Boolean(key), 'Fresh install stores its key in the keychain')) return false;
+
+  console.log('\nTest 7: Key only in the fallback file (installs up to 1.6.1)');
+  console.log('-------------------------------------------------------------');
+  writeFileSync(keyFile, key);
+  await keytar.deletePassword(MIGRATION_SERVICE, account);
+  let got = await open().getCredentials();
+  if (!check(got?.email === creds.email, 'Credentials still decrypt')) return false;
+  if (!check((await keytar.getPassword(MIGRATION_SERVICE, account)) === key, 'Key moved into the keychain')) return false;
+  if (!check(!existsSync(keyFile), 'Key file removed after the move')) return false;
+
+  console.log('\nTest 8: Stale keychain key, working key in the file');
+  console.log('---------------------------------------------------');
+  writeFileSync(keyFile, key);
+  await keytar.setPassword(MIGRATION_SERVICE, account, randomBytes(32).toString('hex'));
+  got = await open().getCredentials();
+  if (!check(got?.email === creds.email, 'Credentials decrypt with the file key')) return false;
+  if (!check((await keytar.getPassword(MIGRATION_SERVICE, account)) === key, 'Keychain now holds the working key')) return false;
+  if (!check(!existsSync(keyFile), 'Key file removed after the move')) return false;
+
+  console.log('\nTest 9: Unrelated key file next to a working keychain key');
+  console.log('---------------------------------------------------------');
+  const unrelated = randomBytes(32).toString('hex');
+  writeFileSync(keyFile, unrelated);
+  got = await open().getCredentials();
+  if (!check(got?.email === creds.email, 'Credentials decrypt with the keychain key')) return false;
+  if (!check((await keytar.getPassword(MIGRATION_SERVICE, account)) === key, 'Keychain key unchanged')) return false;
+  if (!check(existsSync(keyFile) && readFileSync(keyFile, 'utf8') === unrelated, 'Unrelated key file left untouched')) return false;
+
+  return true;
+}
+
+// Remove the temp dir and the test keychain entries, whatever the outcome.
+async function cleanup() {
+  for (const [configDir, keychainService] of [[TEST_DIR, TEST_SERVICE], [MIGRATION_DIR, MIGRATION_SERVICE]]) {
+    try {
+      await new SecureStorage({ configDir, keychainService }).clearAll();
+    } catch {
+      // Best effort: the directory removal below still runs.
+    }
   }
   rmSync(TEST_DIR, { recursive: true, force: true });
 }
