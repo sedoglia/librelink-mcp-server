@@ -192,6 +192,12 @@ Per verificare il server MCP senza credenziali (compila ed esegue `initialize` +
 npm run test:mcp
 ```
 
+Per verificare la cifratura delle credenziali (usa una cartella temporanea e una voce di keychain dedicata, non tocca le credenziali reali):
+
+```bash
+npm run test:storage
+```
+
 ### 7. Configura Claude Desktop
 
 Aggiungi al file di configurazione di Claude Desktop:

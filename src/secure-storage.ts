@@ -104,6 +104,17 @@ export interface EncryptedData {
   salt: string; // base64
 }
 
+export interface SecureStorageOptions {
+  /**
+   * Directory for encrypted files and the fallback key file.
+   * Defaults to the per-OS config dir. When set, the legacy-migration
+   * directory is placed inside it too, so nothing outside is touched.
+   */
+  configDir?: string;
+  /** Keychain service name for the encryption key. Defaults to the real one. */
+  keychainService?: string;
+}
+
 /**
  * SecureStorage class for managing encrypted credentials and tokens
  */
@@ -113,12 +124,18 @@ export class SecureStorage {
   private credentialsPath: string;
   private tokenPath: string;
   private keyFilePath: string; // Fallback key storage when keytar is not available
+  private keychainService: string;
   private encryptionKey: Buffer | null = null;
   private usingKeytar: boolean = false; // Track which storage method is being used
 
-  constructor() {
-    this.configDir = getConfigDir();
-    this.legacyConfigDir = getLegacyConfigDir();
+  /**
+   * Production code uses the defaults. Tests must pass both options so they
+   * never read, overwrite or delete the user's real credentials and key.
+   */
+  constructor(options: SecureStorageOptions = {}) {
+    this.configDir = options.configDir ?? getConfigDir();
+    this.legacyConfigDir = options.configDir ? join(options.configDir, 'legacy') : getLegacyConfigDir();
+    this.keychainService = options.keychainService ?? SERVICE_NAME;
     this.credentialsPath = join(this.configDir, 'credentials.enc');
     this.tokenPath = join(this.configDir, 'token.enc');
     this.keyFilePath = join(this.configDir, '.encryption.key');
@@ -152,7 +169,7 @@ export class SecureStorage {
     if (keytar) {
       try {
         // Try to get existing key from keychain
-        const existingKey = await keytar.getPassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT);
+        const existingKey = await keytar.getPassword(this.keychainService, ENCRYPTION_KEY_ACCOUNT);
 
         if (existingKey) {
           this.encryptionKey = Buffer.from(existingKey, 'hex');
@@ -162,7 +179,7 @@ export class SecureStorage {
 
         // Generate new encryption key and store in keychain
         const newKey = randomBytes(KEY_LENGTH);
-        await keytar.setPassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT, newKey.toString('hex'));
+        await keytar.setPassword(this.keychainService, ENCRYPTION_KEY_ACCOUNT, newKey.toString('hex'));
         this.encryptionKey = newKey;
         this.usingKeytar = true;
         return this.encryptionKey;
@@ -399,7 +416,7 @@ export class SecureStorage {
     const keytar = await getKeytarModule();
     if (keytar) {
       try {
-        await keytar.deletePassword(SERVICE_NAME, ENCRYPTION_KEY_ACCOUNT);
+        await keytar.deletePassword(this.keychainService, ENCRYPTION_KEY_ACCOUNT);
       } catch {
         // Ignore keychain errors
       }
