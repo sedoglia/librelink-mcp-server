@@ -35,7 +35,11 @@ async function getKeytarModule(): Promise<typeof import('keytar') | null> {
   keytarLoadAttempted = true;
 
   try {
-    keytarModule = await import('keytar');
+    // keytar is CommonJS. Node's ESM interop only detects the first function in
+    // its module.exports literal as a named export, so `mod.setPassword` and
+    // `mod.deletePassword` are undefined; the full object is on `default`.
+    const mod = (await import('keytar')) as unknown as { default?: typeof import('keytar') } & typeof import('keytar');
+    keytarModule = mod.default ?? mod;
     return keytarModule;
   } catch {
     // Keytar not available - will use file-based fallback
@@ -166,31 +170,92 @@ export class SecureStorage {
 
     // Try keytar first (OS keychain)
     const keytar = await getKeytarModule();
-    if (keytar) {
+    if (!keytar) {
+      return this.getEncryptionKeyFromFile();
+    }
+
+    let keychainKey: Buffer | null;
+    try {
+      const hex = await keytar.getPassword(this.keychainService, ENCRYPTION_KEY_ACCOUNT);
+      keychainKey = hex ? Buffer.from(hex, 'hex') : null;
+    } catch (error) {
+      console.error('Keytar failed, using file-based key storage:', error);
+      return this.getEncryptionKeyFromFile();
+    }
+
+    // Up to 1.6.1 the keychain could not be written (see getKeytarModule), so
+    // installs made since then keep their key in the fallback file. Use
+    // whichever key actually decrypts the stored data, so moving to the
+    // keychain never strands existing credentials behind a fresh key.
+    const fileKey = this.readKeyFile();
+    const chosen = this.pickKey([keychainKey, fileKey]) ?? randomBytes(KEY_LENGTH);
+
+    if (!keychainKey || !chosen.equals(keychainKey)) {
       try {
-        // Try to get existing key from keychain
-        const existingKey = await keytar.getPassword(this.keychainService, ENCRYPTION_KEY_ACCOUNT);
-
-        if (existingKey) {
-          this.encryptionKey = Buffer.from(existingKey, 'hex');
-          this.usingKeytar = true;
-          return this.encryptionKey;
+        await keytar.setPassword(this.keychainService, ENCRYPTION_KEY_ACCOUNT, chosen.toString('hex'));
+        const readBack = await keytar.getPassword(this.keychainService, ENCRYPTION_KEY_ACCOUNT);
+        if (readBack !== chosen.toString('hex')) {
+          throw new Error('keychain read-back did not match the stored key');
         }
-
-        // Generate new encryption key and store in keychain
-        const newKey = randomBytes(KEY_LENGTH);
-        await keytar.setPassword(this.keychainService, ENCRYPTION_KEY_ACCOUNT, newKey.toString('hex'));
-        this.encryptionKey = newKey;
-        this.usingKeytar = true;
-        return this.encryptionKey;
       } catch (error) {
-        // Keytar failed, fall through to file-based storage
         console.error('Keytar failed, using file-based key storage:', error);
+        return this.getEncryptionKeyFromFile();
       }
     }
 
-    // Fallback: use file-based key storage
-    return this.getEncryptionKeyFromFile();
+    // Only delete the file copy once the same key is confirmed in the keychain.
+    // A file holding some other key is left alone: it is not ours to discard.
+    if (fileKey && fileKey.equals(chosen)) {
+      try {
+        unlinkSync(this.keyFilePath);
+        console.error('Moved encryption key from file to the OS keychain');
+      } catch {
+        // Harmless: the keychain copy is authoritative from now on.
+      }
+    }
+
+    this.encryptionKey = chosen;
+    this.usingKeytar = true;
+    return this.encryptionKey;
+  }
+
+  /**
+   * Read the fallback key file, or null if it is missing or unreadable.
+   */
+  private readKeyFile(): Buffer | null {
+    if (!existsSync(this.keyFilePath)) {
+      return null;
+    }
+    try {
+      const keyData = readFileSync(this.keyFilePath, 'utf-8').trim();
+      return keyData ? Buffer.from(keyData, 'hex') : null;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Choose among candidate master keys (in order of preference).
+   * If encrypted data exists, return the first key that decrypts it; when none
+   * does, or nothing is stored yet, return the first candidate available.
+   */
+  private pickKey(candidates: Array<Buffer | null>): Buffer | null {
+    const keys = candidates.filter((k): k is Buffer => k !== null);
+    if (keys.length === 0) {
+      return null;
+    }
+    const probe = this.loadEncryptedFile(this.credentialsPath) ?? this.loadEncryptedFile(this.tokenPath);
+    if (probe) {
+      for (const key of keys) {
+        try {
+          this.decryptWithKey(probe, key);
+          return key;
+        } catch {
+          // Wrong key (GCM auth tag mismatch): try the next one.
+        }
+      }
+    }
+    return keys[0];
   }
 
   /**
@@ -264,7 +329,13 @@ export class SecureStorage {
    * Decrypt data using AES-256-GCM
    */
   private async decrypt(encryptedData: EncryptedData): Promise<string> {
-    const masterKey = await this.getEncryptionKey();
+    return this.decryptWithKey(encryptedData, await this.getEncryptionKey());
+  }
+
+  /**
+   * Decrypt with an explicit master key. Throws if the key is wrong.
+   */
+  private decryptWithKey(encryptedData: EncryptedData, masterKey: Buffer): string {
     const salt = Buffer.from(encryptedData.salt, 'base64');
     const derivedKey = this.deriveKey(masterKey, salt);
     const iv = Buffer.from(encryptedData.iv, 'base64');
