@@ -19,6 +19,7 @@
 - ✅ **v1.5.1**: 5 vulnerabilità risolte (hono, qs), axios 1.20.0
 - ✅ **v1.6.0**: `get_glucose_stats` riporta la finestra temporale effettivamente coperta (`data_coverage`), manifest del bundle completo, bundle senza devDependencies
 - ✅ **v1.6.1**: 19 vulnerabilità risolte (zod, body-parser, fast-uri, follow-redirects, hono, ip-address), MCP SDK 1.32.2, axios 1.21.1, SBOM CycloneDX pubblicato con ogni release
+- ✅ **v1.6.2**: la chiave di cifratura torna nel keychain del sistema operativo (le installazioni recenti la salvavano su file), con migrazione automatica e sicura; `npm run test:storage` non tocca più le credenziali reali
 
 ## 📋 Prerequisiti
 
@@ -46,7 +47,7 @@ npm install keytar
 Usa il browser oppure:
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.1/librelink-mcp-server.mcpb
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.2/librelink-mcp-server.mcpb
 ```
 
 ### 3. Verifica l'integrità
@@ -54,7 +55,7 @@ wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.1/l
 Verifica l'integrità (opzionale ma consigliato):
 
 ```bash
-wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.1/librelink-mcp-server.mcpb.sha256
+wget https://github.com/sedoglia/librelink-mcp-server/releases/download/v1.6.2/librelink-mcp-server.mcpb.sha256
 sha256sum -c librelink-mcp-server.mcpb.sha256
 ```
 
