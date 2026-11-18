@@ -132,8 +132,8 @@
       "type": "library",
       "name": "node-server",
       "group": "@hono",
-      "version": "2.0.11",
-      "bom-ref": "librelink-mcp-server@1.6.0|@hono/node-server@2.0.11",
+      "version": "2.1.9",
+      "bom-ref": "librelink-mcp-server@1.6.0|@hono/node-server@2.1.9",
       "licenses": [
         {
           "license": {
@@ -142,15 +142,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/%40hono/node-server@2.0.11",
+      "purl": "pkg:npm/%40hono/node-server@2.1.9",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/@hono/node-server/-/node-server-2.0.11.tgz",
+          "url": "https://registry.npmjs.org/@hono/node-server/-/node-server-2.1.9.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "6e30f6db528f2e8253594c2ca3527a7c62a24d711415e746fecd2f8ac6af638cda9053e4786511311365cbe161047b3b4fc0f3e2a1da648317f59a091d226d28"
+              "content": "4a4e0d41ddc6158d166560b39ddc0530fc0986d0f4cbdaa3b10fa98c80f4ff4de72bda71c81094a141c2868f106012c15618b4b2c2fc52434f1ea6e048e14f21"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -167,8 +167,8 @@
       "type": "library",
       "name": "sdk",
       "group": "@modelcontextprotocol",
-      "version": "1.32.1",
-      "bom-ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.1",
+      "version": "1.32.2",
+      "bom-ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.2",
       "licenses": [
         {
           "license": {
@@ -177,15 +177,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/%40modelcontextprotocol/sdk@1.32.1",
+      "purl": "pkg:npm/%40modelcontextprotocol/sdk@1.32.2",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.32.1.tgz",
+          "url": "https://registry.npmjs.org/@modelcontextprotocol/sdk/-/sdk-1.32.2.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "d83744f92243b732c4116cd8d598d8ed0f9570f85c5752a2b03df3238bb45d9ca4b6c8c7ba6d66c1b308f896ae954062d8e664f8a2408b6b8f5f3c627213e477"
+              "content": "496b15b47ff4bd42d2412b6867ac711f62b4f4b8bc7d7613302eb865ea2009da59dd74a2d5e08f381c95d4ea6e271b88dce7261e1a2c0d66328a2d3bb693ec2f"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -441,8 +441,8 @@
     {
       "type": "library",
       "name": "axios",
-      "version": "1.20.0",
-      "bom-ref": "librelink-mcp-server@1.6.0|axios@1.20.0",
+      "version": "1.21.1",
+      "bom-ref": "librelink-mcp-server@1.6.0|axios@1.21.1",
       "licenses": [
         {
           "license": {
@@ -451,15 +451,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/axios@1.20.0",
+      "purl": "pkg:npm/axios@1.21.1",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/axios/-/axios-1.20.0.tgz",
+          "url": "https://registry.npmjs.org/axios/-/axios-1.21.1.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "afc68e87c8fd7062a981002aa73ad41e748873a6b9f58dd77ff72ff2ccb50eb1c29191f340612ea2ad6d01193aa92c8376d4064838296fd90596bbb33efae0c2"
+              "content": "e9e23943f638bbf526f5d0e5b11a2ae69636af19d44eff8be0fa4b8ad9db93f8b88dbdccc4b6790ac379221dc8cac6de4582b8a51f8feea7ccb0e425f5fc3015"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -543,8 +543,8 @@
     {
       "type": "library",
       "name": "body-parser",
-      "version": "2.3.0",
-      "bom-ref": "librelink-mcp-server@1.6.0|body-parser@2.3.0",
+      "version": "2.4.0",
+      "bom-ref": "librelink-mcp-server@1.6.0|body-parser@2.4.0",
       "licenses": [
         {
           "license": {
@@ -553,15 +553,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/body-parser@2.3.0",
+      "purl": "pkg:npm/body-parser@2.4.0",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/body-parser/-/body-parser-2.3.0.tgz",
+          "url": "https://registry.npmjs.org/body-parser/-/body-parser-2.4.0.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "d9c1a626ea5a36083e414c152c0b9c0ee5aea0c67a117f621c346cc19e65b0d6049b03da4649cc3c22d9cf4ef24f356affcde9e28ff0cdb0d96c1ad3bc619323"
+              "content": "21f93529c2ebc5a1add6871c41a81034534d3aa46dd4b16e7a11271c7cc1f19e9c460231454d5305a888b14882740fa0cb93cbed8d485f7d4334a9119b1b578d"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -577,8 +577,8 @@
         {
           "type": "library",
           "name": "content-type",
-          "version": "2.0.0",
-          "bom-ref": "librelink-mcp-server@1.6.0|body-parser@2.3.0|content-type@2.0.0",
+          "version": "2.1.0",
+          "bom-ref": "librelink-mcp-server@1.6.0|body-parser@2.4.0|content-type@2.1.0",
           "licenses": [
             {
               "license": {
@@ -587,15 +587,15 @@
               }
             }
           ],
-          "purl": "pkg:npm/content-type@2.0.0",
+          "purl": "pkg:npm/content-type@2.1.0",
           "externalReferences": [
             {
-              "url": "https://registry.npmjs.org/content-type/-/content-type-2.0.0.tgz",
+              "url": "https://registry.npmjs.org/content-type/-/content-type-2.1.0.tgz",
               "type": "distribution",
               "hashes": [
                 {
                   "alg": "SHA-512",
-                  "content": "8ff3bf77b19c642c8d97bfe1c1901beb4eabcea932bda0dcb4b99c91bc4bcc7bc50734c91ee1847687404dc3f7c884680eb2c790801326ebf36c5969fe48b671"
+                  "content": "9a3ed43d71348daa9a3acba435945411f122d8070bec2fefc26c1c1d5d0ef7b78ed44d69c4166eca3959af1e6c79368d060d54ebea37e70a5adf941f71cfbb6a"
                 }
               ],
               "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -1837,8 +1837,8 @@
     {
       "type": "library",
       "name": "fast-uri",
-      "version": "3.1.8",
-      "bom-ref": "librelink-mcp-server@1.6.0|fast-uri@3.1.8",
+      "version": "3.1.9",
+      "bom-ref": "librelink-mcp-server@1.6.0|fast-uri@3.1.9",
       "licenses": [
         {
           "license": {
@@ -1847,15 +1847,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/fast-uri@3.1.8",
+      "purl": "pkg:npm/fast-uri@3.1.9",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/fast-uri/-/fast-uri-3.1.8.tgz",
+          "url": "https://registry.npmjs.org/fast-uri/-/fast-uri-3.1.9.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "19932d6544cd4693952040a85f02cd652e7150613e99535b4c1f21ffb4708764c559c05088fcd3832662d39045f543192a42c9bfc5c14494e553bce0f3e65f32"
+              "content": "852ff45addd86b4e37a0a5ecd2c231acca4a4084d784c2c8ad500a2978b8828cc60bdbfb6115959d7219ce334f4ced3633d05dc4b096a8ad7245780dce257225"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -1905,8 +1905,8 @@
     {
       "type": "library",
       "name": "follow-redirects",
-      "version": "1.16.1",
-      "bom-ref": "librelink-mcp-server@1.6.0|follow-redirects@1.16.1",
+      "version": "1.16.3",
+      "bom-ref": "librelink-mcp-server@1.6.0|follow-redirects@1.16.3",
       "licenses": [
         {
           "license": {
@@ -1915,15 +1915,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/follow-redirects@1.16.1",
+      "purl": "pkg:npm/follow-redirects@1.16.3",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.16.1.tgz",
+          "url": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.16.3.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "14dbc51b3a0c2d6984e988fdb296ffce377bca23421e2016f7f4e0f425eb43cc2ebb7d87b6524ec163b5d4e25a7e5e457d8dc3c53750d2f8f8db353592fbf98e"
+              "content": "b68392a2a37a779d568dfd5a38525872856fd5a343f6b8ff0b08cb534573e34a03b92a560dac8278a7b82692f934bd16745be838e088dc1468ebd1da8636d1d4"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -2383,8 +2383,8 @@
     {
       "type": "library",
       "name": "hono",
-      "version": "4.13.13",
-      "bom-ref": "librelink-mcp-server@1.6.0|hono@4.13.13",
+      "version": "4.13.19",
+      "bom-ref": "librelink-mcp-server@1.6.0|hono@4.13.19",
       "licenses": [
         {
           "license": {
@@ -2393,15 +2393,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/hono@4.13.13",
+      "purl": "pkg:npm/hono@4.13.19",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/hono/-/hono-4.13.13.tgz",
+          "url": "https://registry.npmjs.org/hono/-/hono-4.13.19.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "090e3a53466400699b4ffe14c5dcf3189a5a70fd8878a818e1ae7fb4e23d00005ba4e31f2bbdfdc1f0d79afd6eb0293edd190a8f5850cb8fdf8e18b06b6c65ac"
+              "content": "2a65ef4005f07001d5fa6bb36c8c28276de78840799cca0356bf56711914f26be35040a6ff5fbbbf8260a7b3fb6be1fa30b16b87ebd7ac6a271ab192f9141f90"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -2485,8 +2485,8 @@
     {
       "type": "library",
       "name": "iconv-lite",
-      "version": "0.7.2",
-      "bom-ref": "librelink-mcp-server@1.6.0|iconv-lite@0.7.2",
+      "version": "0.7.3",
+      "bom-ref": "librelink-mcp-server@1.6.0|iconv-lite@0.7.3",
       "licenses": [
         {
           "license": {
@@ -2495,15 +2495,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/iconv-lite@0.7.2",
+      "purl": "pkg:npm/iconv-lite@0.7.3",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.2.tgz",
+          "url": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.7.3.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "8a6f438c40d0e79b3d7cbe04633380bf4c8caa6301499a7a1b456f1724cc3ca5b1892047523f4d5bfaaa2e65d4c17aeb33b02fa9295309fbea45bd1c33cc98ab"
+              "content": "20a5e9bc8ce39c2f574c051b54170c7c64b410f6885ed5babfecebf91469fa1a942c4a68d28c196b1eb0c91c0f3896d66f38d8b29430bac4ec7d5af489f878b9"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -2621,8 +2621,8 @@
     {
       "type": "library",
       "name": "ip-address",
-      "version": "10.7.2",
-      "bom-ref": "librelink-mcp-server@1.6.0|ip-address@10.7.2",
+      "version": "10.7.6",
+      "bom-ref": "librelink-mcp-server@1.6.0|ip-address@10.7.6",
       "licenses": [
         {
           "license": {
@@ -2631,15 +2631,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/ip-address@10.7.2",
+      "purl": "pkg:npm/ip-address@10.7.6",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/ip-address/-/ip-address-10.7.2.tgz",
+          "url": "https://registry.npmjs.org/ip-address/-/ip-address-10.7.6.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "ec7ff68054888adc5cd211b79ce2358254bc40ba3f10704514b93cbc45235d8ff1bb401d2fc8d9f54d48cced8f526d1dd83fe87d070089f6f483a38192df14ef"
+              "content": "d342d890ce9bc882daf5e408c7aaa869708ce34c532dde7a019e2fc9a3d6dd84f26f8f556583e8e71b2202ae2db90e78187e11ee055d612709d41ec1efb3ee4e"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -3743,8 +3743,8 @@
     {
       "type": "library",
       "name": "qs",
-      "version": "6.16.0",
-      "bom-ref": "librelink-mcp-server@1.6.0|qs@6.16.0",
+      "version": "6.17.1",
+      "bom-ref": "librelink-mcp-server@1.6.0|qs@6.17.1",
       "licenses": [
         {
           "license": {
@@ -3753,15 +3753,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/qs@6.16.0",
+      "purl": "pkg:npm/qs@6.17.1",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/qs/-/qs-6.16.0.tgz",
+          "url": "https://registry.npmjs.org/qs/-/qs-6.17.1.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "87a7e1388691ac80f609b118d9faacfbbb7e517668f8c2c09d4e60448abce6e16d76250f09db00a4c947857a202953381ccd8355b22318d4d3607d8e7263f5bc"
+              "content": "8dddc23a468a5601945be647c841c21bd6c7ed1a1a6a25ae320cec2018d43158cb01a5865a9a14015c258d5bc11f146eff6a841e769d2c666b92eb585013d024"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -5105,8 +5105,8 @@
     {
       "type": "library",
       "name": "zod",
-      "version": "4.3.6",
-      "bom-ref": "librelink-mcp-server@1.6.0|zod@4.3.6",
+      "version": "4.6.7",
+      "bom-ref": "librelink-mcp-server@1.6.0|zod@4.6.7",
       "licenses": [
         {
           "license": {
@@ -5115,15 +5115,15 @@
           }
         }
       ],
-      "purl": "pkg:npm/zod@4.3.6",
+      "purl": "pkg:npm/zod@4.6.7",
       "externalReferences": [
         {
-          "url": "https://registry.npmjs.org/zod/-/zod-4.3.6.tgz",
+          "url": "https://registry.npmjs.org/zod/-/zod-4.6.7.tgz",
           "type": "distribution",
           "hashes": [
             {
               "alg": "SHA-512",
-              "content": "adfb65ae484764e7230f090696752d65992f68f1c2b03013a78a46a6e38e3036937430d717dd70b950c9a16a0fb0a5ffdd83d0e5f1ee1774938dc6322abf9086"
+              "content": "83c5b60f6914e9af2e9ed734e777d7d6e5412b333bcaa0315bfdf3c24f37fba472176f9228eb95f9cd30043854c335753da19aa66647fab99c5333dffb7086c2"
             }
           ],
           "comment": "as detected from npm-ls property \"resolved\" and property \"integrity\""
@@ -5141,21 +5141,21 @@
     {
       "ref": "librelink-mcp-server@1.6.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.1",
-        "librelink-mcp-server@1.6.0|axios@1.20.0",
+        "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.2",
+        "librelink-mcp-server@1.6.0|axios@1.21.1",
         "librelink-mcp-server@1.6.0|keytar@7.9.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|@hono/node-server@2.0.11",
+      "ref": "librelink-mcp-server@1.6.0|@hono/node-server@2.1.9",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|hono@4.13.13"
+        "librelink-mcp-server@1.6.0|hono@4.13.19"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.1",
+      "ref": "librelink-mcp-server@1.6.0|@modelcontextprotocol/sdk@1.32.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|@hono/node-server@2.0.11",
+        "librelink-mcp-server@1.6.0|@hono/node-server@2.1.9",
         "librelink-mcp-server@1.6.0|ajv-formats@3.0.1",
         "librelink-mcp-server@1.6.0|ajv@8.18.0",
         "librelink-mcp-server@1.6.0|content-type@1.0.5",
@@ -5165,13 +5165,13 @@
         "librelink-mcp-server@1.6.0|eventsource@3.0.7",
         "librelink-mcp-server@1.6.0|express-rate-limit@8.5.1",
         "librelink-mcp-server@1.6.0|express@5.2.1",
-        "librelink-mcp-server@1.6.0|hono@4.13.13",
+        "librelink-mcp-server@1.6.0|hono@4.13.19",
         "librelink-mcp-server@1.6.0|jose@6.1.3",
         "librelink-mcp-server@1.6.0|json-schema-typed@8.0.2",
         "librelink-mcp-server@1.6.0|pkce-challenge@5.0.1",
         "librelink-mcp-server@1.6.0|raw-body@3.0.2",
         "librelink-mcp-server@1.6.0|zod-to-json-schema@3.25.1",
-        "librelink-mcp-server@1.6.0|zod@4.3.6"
+        "librelink-mcp-server@1.6.0|zod@4.6.7"
       ]
     },
     {
@@ -5206,7 +5206,7 @@
       "ref": "librelink-mcp-server@1.6.0|ajv@8.18.0",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|fast-deep-equal@3.1.3",
-        "librelink-mcp-server@1.6.0|fast-uri@3.1.8",
+        "librelink-mcp-server@1.6.0|fast-uri@3.1.9",
         "librelink-mcp-server@1.6.0|json-schema-traverse@1.0.0",
         "librelink-mcp-server@1.6.0|require-from-string@2.0.2"
       ]
@@ -5215,9 +5215,9 @@
       "ref": "librelink-mcp-server@1.6.0|asynckit@0.4.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|axios@1.20.0",
+      "ref": "librelink-mcp-server@1.6.0|axios@1.21.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|follow-redirects@1.16.1",
+        "librelink-mcp-server@1.6.0|follow-redirects@1.16.3",
         "librelink-mcp-server@1.6.0|form-data@4.0.6",
         "librelink-mcp-server@1.6.0|https-proxy-agent@5.0.1",
         "librelink-mcp-server@1.6.0|proxy-from-env@2.1.0"
@@ -5235,21 +5235,21 @@
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|body-parser@2.3.0",
+      "ref": "librelink-mcp-server@1.6.0|body-parser@2.4.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|body-parser@2.3.0|content-type@2.0.0",
+        "librelink-mcp-server@1.6.0|body-parser@2.4.0|content-type@2.1.0",
         "librelink-mcp-server@1.6.0|bytes@3.1.2",
         "librelink-mcp-server@1.6.0|debug@4.4.3",
         "librelink-mcp-server@1.6.0|http-errors@2.0.1",
-        "librelink-mcp-server@1.6.0|iconv-lite@0.7.2",
+        "librelink-mcp-server@1.6.0|iconv-lite@0.7.3",
         "librelink-mcp-server@1.6.0|on-finished@2.4.1",
-        "librelink-mcp-server@1.6.0|qs@6.16.0",
+        "librelink-mcp-server@1.6.0|qs@6.17.1",
         "librelink-mcp-server@1.6.0|raw-body@3.0.2",
         "librelink-mcp-server@1.6.0|type-is@2.1.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|body-parser@2.3.0|content-type@2.0.0"
+      "ref": "librelink-mcp-server@1.6.0|body-parser@2.4.0|content-type@2.1.0"
     },
     {
       "ref": "librelink-mcp-server@1.6.0|buffer@5.7.1",
@@ -5398,14 +5398,14 @@
       "ref": "librelink-mcp-server@1.6.0|express-rate-limit@8.5.1",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|express@5.2.1",
-        "librelink-mcp-server@1.6.0|ip-address@10.7.2"
+        "librelink-mcp-server@1.6.0|ip-address@10.7.6"
       ]
     },
     {
       "ref": "librelink-mcp-server@1.6.0|express@5.2.1",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|accepts@2.0.0",
-        "librelink-mcp-server@1.6.0|body-parser@2.3.0",
+        "librelink-mcp-server@1.6.0|body-parser@2.4.0",
         "librelink-mcp-server@1.6.0|content-disposition@1.0.1",
         "librelink-mcp-server@1.6.0|content-type@1.0.5",
         "librelink-mcp-server@1.6.0|cookie-signature@1.2.2",
@@ -5424,7 +5424,7 @@
         "librelink-mcp-server@1.6.0|once@1.4.0",
         "librelink-mcp-server@1.6.0|parseurl@1.3.3",
         "librelink-mcp-server@1.6.0|proxy-addr@2.0.8",
-        "librelink-mcp-server@1.6.0|qs@6.16.0",
+        "librelink-mcp-server@1.6.0|qs@6.17.1",
         "librelink-mcp-server@1.6.0|range-parser@1.2.1",
         "librelink-mcp-server@1.6.0|router@2.2.0",
         "librelink-mcp-server@1.6.0|send@1.2.1",
@@ -5447,7 +5447,7 @@
       "ref": "librelink-mcp-server@1.6.0|fast-deep-equal@3.1.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|fast-uri@3.1.8"
+      "ref": "librelink-mcp-server@1.6.0|fast-uri@3.1.9"
     },
     {
       "ref": "librelink-mcp-server@1.6.0|finalhandler@2.1.1",
@@ -5461,7 +5461,7 @@
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|follow-redirects@1.16.1"
+      "ref": "librelink-mcp-server@1.6.0|follow-redirects@1.16.3"
     },
     {
       "ref": "librelink-mcp-server@1.6.0|form-data@4.0.6",
@@ -5535,7 +5535,7 @@
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|hono@4.13.13"
+      "ref": "librelink-mcp-server@1.6.0|hono@4.13.19"
     },
     {
       "ref": "librelink-mcp-server@1.6.0|http-errors@2.0.1",
@@ -5555,7 +5555,7 @@
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|iconv-lite@0.7.2",
+      "ref": "librelink-mcp-server@1.6.0|iconv-lite@0.7.3",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|safer-buffer@2.1.2"
       ]
@@ -5570,7 +5570,7 @@
       "ref": "librelink-mcp-server@1.6.0|ini@1.3.8"
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|ip-address@10.7.2"
+      "ref": "librelink-mcp-server@1.6.0|ip-address@10.7.6"
     },
     {
       "ref": "librelink-mcp-server@1.6.0|ipaddr.js@1.9.1"
@@ -5707,7 +5707,7 @@
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|qs@6.16.0",
+      "ref": "librelink-mcp-server@1.6.0|qs@6.17.1",
       "dependsOn": [
         "librelink-mcp-server@1.6.0|es-define-property@1.0.1",
         "librelink-mcp-server@1.6.0|side-channel@1.1.1"
@@ -5721,7 +5721,7 @@
       "dependsOn": [
         "librelink-mcp-server@1.6.0|bytes@3.1.2",
         "librelink-mcp-server@1.6.0|http-errors@2.0.1",
-        "librelink-mcp-server@1.6.0|iconv-lite@0.7.2",
+        "librelink-mcp-server@1.6.0|iconv-lite@0.7.3",
         "librelink-mcp-server@1.6.0|unpipe@1.0.0"
       ]
     },
@@ -5938,11 +5938,11 @@
     {
       "ref": "librelink-mcp-server@1.6.0|zod-to-json-schema@3.25.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.0|zod@4.3.6"
+        "librelink-mcp-server@1.6.0|zod@4.6.7"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.0|zod@4.3.6"
+      "ref": "librelink-mcp-server@1.6.0|zod@4.6.7"
     }
   ]
 }
