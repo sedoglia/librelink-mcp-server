@@ -96,8 +96,8 @@
     "component": {
       "type": "application",
       "name": "librelink-mcp-server",
-      "version": "1.6.1",
-      "bom-ref": "librelink-mcp-server@1.6.1",
+      "version": "1.6.2",
+      "bom-ref": "librelink-mcp-server@1.6.2",
       "author": "Fork with v4.16.0 fix",
       "description": "MCP server for FreeStyle LibreLink CGM data - Fixed for API v4.16.0 with secure credential storage",
       "licenses": [
@@ -108,7 +108,7 @@
           }
         }
       ],
-      "purl": "pkg:npm/librelink-mcp-server@1.6.1",
+      "purl": "pkg:npm/librelink-mcp-server@1.6.2",
       "properties": [
         {
           "name": "cdx:npm:package:constraint:engine:node",
@@ -133,7 +133,7 @@
       "name": "node-server",
       "group": "@hono",
       "version": "2.1.9",
-      "bom-ref": "librelink-mcp-server@1.6.1|@hono/node-server@2.1.9",
+      "bom-ref": "librelink-mcp-server@1.6.2|@hono/node-server@2.1.9",
       "licenses": [
         {
           "license": {
@@ -168,7 +168,7 @@
       "name": "sdk",
       "group": "@modelcontextprotocol",
       "version": "1.32.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|@modelcontextprotocol/sdk@1.32.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|@modelcontextprotocol/sdk@1.32.2",
       "licenses": [
         {
           "license": {
@@ -202,7 +202,7 @@
       "type": "library",
       "name": "accepts",
       "version": "2.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|accepts@2.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|accepts@2.0.0",
       "licenses": [
         {
           "license": {
@@ -236,7 +236,7 @@
           "type": "library",
           "name": "mime-db",
           "version": "1.54.0",
-          "bom-ref": "librelink-mcp-server@1.6.1|accepts@2.0.0|mime-db@1.54.0",
+          "bom-ref": "librelink-mcp-server@1.6.2|accepts@2.0.0|mime-db@1.54.0",
           "licenses": [
             {
               "license": {
@@ -270,7 +270,7 @@
           "type": "library",
           "name": "mime-types",
           "version": "3.0.2",
-          "bom-ref": "librelink-mcp-server@1.6.1|accepts@2.0.0|mime-types@3.0.2",
+          "bom-ref": "librelink-mcp-server@1.6.2|accepts@2.0.0|mime-types@3.0.2",
           "licenses": [
             {
               "license": {
@@ -306,7 +306,7 @@
       "type": "library",
       "name": "agent-base",
       "version": "6.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|agent-base@6.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|agent-base@6.0.2",
       "licenses": [
         {
           "license": {
@@ -340,7 +340,7 @@
       "type": "library",
       "name": "ajv-formats",
       "version": "3.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|ajv-formats@3.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|ajv-formats@3.0.1",
       "licenses": [
         {
           "license": {
@@ -374,7 +374,7 @@
       "type": "library",
       "name": "ajv",
       "version": "8.18.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|ajv@8.18.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|ajv@8.18.0",
       "licenses": [
         {
           "license": {
@@ -408,7 +408,7 @@
       "type": "library",
       "name": "asynckit",
       "version": "0.4.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|asynckit@0.4.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|asynckit@0.4.0",
       "licenses": [
         {
           "license": {
@@ -442,7 +442,7 @@
       "type": "library",
       "name": "axios",
       "version": "1.21.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|axios@1.21.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|axios@1.21.1",
       "licenses": [
         {
           "license": {
@@ -476,7 +476,7 @@
       "type": "library",
       "name": "base64-js",
       "version": "1.5.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|base64-js@1.5.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|base64-js@1.5.1",
       "licenses": [
         {
           "license": {
@@ -510,7 +510,7 @@
       "type": "library",
       "name": "bl",
       "version": "4.1.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|bl@4.1.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|bl@4.1.0",
       "licenses": [
         {
           "license": {
@@ -544,7 +544,7 @@
       "type": "library",
       "name": "body-parser",
       "version": "2.4.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|body-parser@2.4.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|body-parser@2.4.0",
       "licenses": [
         {
           "license": {
@@ -578,7 +578,7 @@
           "type": "library",
           "name": "content-type",
           "version": "2.1.0",
-          "bom-ref": "librelink-mcp-server@1.6.1|body-parser@2.4.0|content-type@2.1.0",
+          "bom-ref": "librelink-mcp-server@1.6.2|body-parser@2.4.0|content-type@2.1.0",
           "licenses": [
             {
               "license": {
@@ -614,7 +614,7 @@
       "type": "library",
       "name": "buffer",
       "version": "5.7.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|buffer@5.7.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|buffer@5.7.1",
       "licenses": [
         {
           "license": {
@@ -648,7 +648,7 @@
       "type": "library",
       "name": "bytes",
       "version": "3.1.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|bytes@3.1.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|bytes@3.1.2",
       "licenses": [
         {
           "license": {
@@ -682,7 +682,7 @@
       "type": "library",
       "name": "call-bind-apply-helpers",
       "version": "1.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|call-bind-apply-helpers@1.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|call-bind-apply-helpers@1.0.2",
       "licenses": [
         {
           "license": {
@@ -716,7 +716,7 @@
       "type": "library",
       "name": "call-bound",
       "version": "1.0.4",
-      "bom-ref": "librelink-mcp-server@1.6.1|call-bound@1.0.4",
+      "bom-ref": "librelink-mcp-server@1.6.2|call-bound@1.0.4",
       "licenses": [
         {
           "license": {
@@ -750,7 +750,7 @@
       "type": "library",
       "name": "chownr",
       "version": "1.1.4",
-      "bom-ref": "librelink-mcp-server@1.6.1|chownr@1.1.4",
+      "bom-ref": "librelink-mcp-server@1.6.2|chownr@1.1.4",
       "licenses": [
         {
           "license": {
@@ -784,7 +784,7 @@
       "type": "library",
       "name": "combined-stream",
       "version": "1.0.8",
-      "bom-ref": "librelink-mcp-server@1.6.1|combined-stream@1.0.8",
+      "bom-ref": "librelink-mcp-server@1.6.2|combined-stream@1.0.8",
       "licenses": [
         {
           "license": {
@@ -818,7 +818,7 @@
       "type": "library",
       "name": "content-disposition",
       "version": "1.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|content-disposition@1.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|content-disposition@1.0.1",
       "licenses": [
         {
           "license": {
@@ -852,7 +852,7 @@
       "type": "library",
       "name": "content-type",
       "version": "1.0.5",
-      "bom-ref": "librelink-mcp-server@1.6.1|content-type@1.0.5",
+      "bom-ref": "librelink-mcp-server@1.6.2|content-type@1.0.5",
       "licenses": [
         {
           "license": {
@@ -886,7 +886,7 @@
       "type": "library",
       "name": "cookie-signature",
       "version": "1.2.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|cookie-signature@1.2.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|cookie-signature@1.2.2",
       "licenses": [
         {
           "license": {
@@ -920,7 +920,7 @@
       "type": "library",
       "name": "cookie",
       "version": "0.7.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|cookie@0.7.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|cookie@0.7.2",
       "licenses": [
         {
           "license": {
@@ -954,7 +954,7 @@
       "type": "library",
       "name": "cors",
       "version": "2.8.5",
-      "bom-ref": "librelink-mcp-server@1.6.1|cors@2.8.5",
+      "bom-ref": "librelink-mcp-server@1.6.2|cors@2.8.5",
       "licenses": [
         {
           "license": {
@@ -988,7 +988,7 @@
       "type": "library",
       "name": "cross-spawn",
       "version": "7.0.6",
-      "bom-ref": "librelink-mcp-server@1.6.1|cross-spawn@7.0.6",
+      "bom-ref": "librelink-mcp-server@1.6.2|cross-spawn@7.0.6",
       "licenses": [
         {
           "license": {
@@ -1022,7 +1022,7 @@
       "type": "library",
       "name": "debug",
       "version": "4.4.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|debug@4.4.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|debug@4.4.3",
       "licenses": [
         {
           "license": {
@@ -1056,7 +1056,7 @@
       "type": "library",
       "name": "decompress-response",
       "version": "6.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|decompress-response@6.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|decompress-response@6.0.0",
       "licenses": [
         {
           "license": {
@@ -1090,7 +1090,7 @@
       "type": "library",
       "name": "deep-extend",
       "version": "0.6.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|deep-extend@0.6.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|deep-extend@0.6.0",
       "licenses": [
         {
           "license": {
@@ -1124,7 +1124,7 @@
       "type": "library",
       "name": "delayed-stream",
       "version": "1.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|delayed-stream@1.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|delayed-stream@1.0.0",
       "licenses": [
         {
           "license": {
@@ -1158,7 +1158,7 @@
       "type": "library",
       "name": "depd",
       "version": "2.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|depd@2.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|depd@2.0.0",
       "licenses": [
         {
           "license": {
@@ -1192,7 +1192,7 @@
       "type": "library",
       "name": "detect-libc",
       "version": "2.1.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|detect-libc@2.1.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|detect-libc@2.1.2",
       "licenses": [
         {
           "license": {
@@ -1226,7 +1226,7 @@
       "type": "library",
       "name": "dunder-proto",
       "version": "1.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|dunder-proto@1.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|dunder-proto@1.0.1",
       "licenses": [
         {
           "license": {
@@ -1260,7 +1260,7 @@
       "type": "library",
       "name": "ee-first",
       "version": "1.1.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|ee-first@1.1.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|ee-first@1.1.1",
       "licenses": [
         {
           "license": {
@@ -1294,7 +1294,7 @@
       "type": "library",
       "name": "encodeurl",
       "version": "2.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|encodeurl@2.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|encodeurl@2.0.0",
       "licenses": [
         {
           "license": {
@@ -1328,7 +1328,7 @@
       "type": "library",
       "name": "end-of-stream",
       "version": "1.4.5",
-      "bom-ref": "librelink-mcp-server@1.6.1|end-of-stream@1.4.5",
+      "bom-ref": "librelink-mcp-server@1.6.2|end-of-stream@1.4.5",
       "licenses": [
         {
           "license": {
@@ -1362,7 +1362,7 @@
       "type": "library",
       "name": "es-define-property",
       "version": "1.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|es-define-property@1.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|es-define-property@1.0.1",
       "licenses": [
         {
           "license": {
@@ -1396,7 +1396,7 @@
       "type": "library",
       "name": "es-errors",
       "version": "1.3.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|es-errors@1.3.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|es-errors@1.3.0",
       "licenses": [
         {
           "license": {
@@ -1430,7 +1430,7 @@
       "type": "library",
       "name": "es-object-atoms",
       "version": "1.1.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|es-object-atoms@1.1.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|es-object-atoms@1.1.1",
       "licenses": [
         {
           "license": {
@@ -1464,7 +1464,7 @@
       "type": "library",
       "name": "es-set-tostringtag",
       "version": "2.1.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|es-set-tostringtag@2.1.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|es-set-tostringtag@2.1.0",
       "licenses": [
         {
           "license": {
@@ -1498,7 +1498,7 @@
       "type": "library",
       "name": "escape-html",
       "version": "1.0.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|escape-html@1.0.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|escape-html@1.0.3",
       "licenses": [
         {
           "license": {
@@ -1532,7 +1532,7 @@
       "type": "library",
       "name": "etag",
       "version": "1.8.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|etag@1.8.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|etag@1.8.1",
       "licenses": [
         {
           "license": {
@@ -1566,7 +1566,7 @@
       "type": "library",
       "name": "eventsource-parser",
       "version": "3.0.6",
-      "bom-ref": "librelink-mcp-server@1.6.1|eventsource-parser@3.0.6",
+      "bom-ref": "librelink-mcp-server@1.6.2|eventsource-parser@3.0.6",
       "licenses": [
         {
           "license": {
@@ -1600,7 +1600,7 @@
       "type": "library",
       "name": "eventsource",
       "version": "3.0.7",
-      "bom-ref": "librelink-mcp-server@1.6.1|eventsource@3.0.7",
+      "bom-ref": "librelink-mcp-server@1.6.2|eventsource@3.0.7",
       "licenses": [
         {
           "license": {
@@ -1634,7 +1634,7 @@
       "type": "library",
       "name": "expand-template",
       "version": "2.0.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|expand-template@2.0.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|expand-template@2.0.3",
       "licenses": [
         {
           "expression": "(MIT OR WTFPL)",
@@ -1666,7 +1666,7 @@
       "type": "library",
       "name": "express-rate-limit",
       "version": "8.5.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|express-rate-limit@8.5.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|express-rate-limit@8.5.1",
       "licenses": [
         {
           "license": {
@@ -1700,7 +1700,7 @@
       "type": "library",
       "name": "express",
       "version": "5.2.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|express@5.2.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|express@5.2.1",
       "licenses": [
         {
           "license": {
@@ -1734,7 +1734,7 @@
           "type": "library",
           "name": "mime-db",
           "version": "1.54.0",
-          "bom-ref": "librelink-mcp-server@1.6.1|express@5.2.1|mime-db@1.54.0",
+          "bom-ref": "librelink-mcp-server@1.6.2|express@5.2.1|mime-db@1.54.0",
           "licenses": [
             {
               "license": {
@@ -1768,7 +1768,7 @@
           "type": "library",
           "name": "mime-types",
           "version": "3.0.2",
-          "bom-ref": "librelink-mcp-server@1.6.1|express@5.2.1|mime-types@3.0.2",
+          "bom-ref": "librelink-mcp-server@1.6.2|express@5.2.1|mime-types@3.0.2",
           "licenses": [
             {
               "license": {
@@ -1804,7 +1804,7 @@
       "type": "library",
       "name": "fast-deep-equal",
       "version": "3.1.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|fast-deep-equal@3.1.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|fast-deep-equal@3.1.3",
       "licenses": [
         {
           "license": {
@@ -1838,7 +1838,7 @@
       "type": "library",
       "name": "fast-uri",
       "version": "3.1.9",
-      "bom-ref": "librelink-mcp-server@1.6.1|fast-uri@3.1.9",
+      "bom-ref": "librelink-mcp-server@1.6.2|fast-uri@3.1.9",
       "licenses": [
         {
           "license": {
@@ -1872,7 +1872,7 @@
       "type": "library",
       "name": "finalhandler",
       "version": "2.1.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|finalhandler@2.1.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|finalhandler@2.1.1",
       "licenses": [
         {
           "license": {
@@ -1906,7 +1906,7 @@
       "type": "library",
       "name": "follow-redirects",
       "version": "1.16.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|follow-redirects@1.16.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|follow-redirects@1.16.3",
       "licenses": [
         {
           "license": {
@@ -1940,7 +1940,7 @@
       "type": "library",
       "name": "form-data",
       "version": "4.0.6",
-      "bom-ref": "librelink-mcp-server@1.6.1|form-data@4.0.6",
+      "bom-ref": "librelink-mcp-server@1.6.2|form-data@4.0.6",
       "licenses": [
         {
           "license": {
@@ -1974,7 +1974,7 @@
           "type": "library",
           "name": "hasown",
           "version": "2.0.4",
-          "bom-ref": "librelink-mcp-server@1.6.1|form-data@4.0.6|hasown@2.0.4",
+          "bom-ref": "librelink-mcp-server@1.6.2|form-data@4.0.6|hasown@2.0.4",
           "licenses": [
             {
               "license": {
@@ -2010,7 +2010,7 @@
       "type": "library",
       "name": "forwarded",
       "version": "0.2.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|forwarded@0.2.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|forwarded@0.2.0",
       "licenses": [
         {
           "license": {
@@ -2044,7 +2044,7 @@
       "type": "library",
       "name": "fresh",
       "version": "2.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|fresh@2.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|fresh@2.0.0",
       "licenses": [
         {
           "license": {
@@ -2078,7 +2078,7 @@
       "type": "library",
       "name": "fs-constants",
       "version": "1.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|fs-constants@1.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|fs-constants@1.0.0",
       "licenses": [
         {
           "license": {
@@ -2112,7 +2112,7 @@
       "type": "library",
       "name": "function-bind",
       "version": "1.1.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|function-bind@1.1.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|function-bind@1.1.2",
       "licenses": [
         {
           "license": {
@@ -2146,7 +2146,7 @@
       "type": "library",
       "name": "get-intrinsic",
       "version": "1.3.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|get-intrinsic@1.3.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|get-intrinsic@1.3.0",
       "licenses": [
         {
           "license": {
@@ -2180,7 +2180,7 @@
       "type": "library",
       "name": "get-proto",
       "version": "1.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|get-proto@1.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|get-proto@1.0.1",
       "licenses": [
         {
           "license": {
@@ -2214,7 +2214,7 @@
       "type": "library",
       "name": "github-from-package",
       "version": "0.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|github-from-package@0.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|github-from-package@0.0.0",
       "licenses": [
         {
           "license": {
@@ -2248,7 +2248,7 @@
       "type": "library",
       "name": "gopd",
       "version": "1.2.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|gopd@1.2.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|gopd@1.2.0",
       "licenses": [
         {
           "license": {
@@ -2282,7 +2282,7 @@
       "type": "library",
       "name": "has-symbols",
       "version": "1.1.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|has-symbols@1.1.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|has-symbols@1.1.0",
       "licenses": [
         {
           "license": {
@@ -2316,7 +2316,7 @@
       "type": "library",
       "name": "has-tostringtag",
       "version": "1.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|has-tostringtag@1.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|has-tostringtag@1.0.2",
       "licenses": [
         {
           "license": {
@@ -2350,7 +2350,7 @@
       "type": "library",
       "name": "hasown",
       "version": "2.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|hasown@2.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|hasown@2.0.2",
       "licenses": [
         {
           "license": {
@@ -2384,7 +2384,7 @@
       "type": "library",
       "name": "hono",
       "version": "4.13.19",
-      "bom-ref": "librelink-mcp-server@1.6.1|hono@4.13.19",
+      "bom-ref": "librelink-mcp-server@1.6.2|hono@4.13.19",
       "licenses": [
         {
           "license": {
@@ -2418,7 +2418,7 @@
       "type": "library",
       "name": "http-errors",
       "version": "2.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|http-errors@2.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|http-errors@2.0.1",
       "licenses": [
         {
           "license": {
@@ -2452,7 +2452,7 @@
       "type": "library",
       "name": "https-proxy-agent",
       "version": "5.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|https-proxy-agent@5.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|https-proxy-agent@5.0.1",
       "licenses": [
         {
           "license": {
@@ -2486,7 +2486,7 @@
       "type": "library",
       "name": "iconv-lite",
       "version": "0.7.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|iconv-lite@0.7.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|iconv-lite@0.7.3",
       "licenses": [
         {
           "license": {
@@ -2520,7 +2520,7 @@
       "type": "library",
       "name": "ieee754",
       "version": "1.2.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|ieee754@1.2.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|ieee754@1.2.1",
       "licenses": [
         {
           "license": {
@@ -2554,7 +2554,7 @@
       "type": "library",
       "name": "inherits",
       "version": "2.0.4",
-      "bom-ref": "librelink-mcp-server@1.6.1|inherits@2.0.4",
+      "bom-ref": "librelink-mcp-server@1.6.2|inherits@2.0.4",
       "licenses": [
         {
           "license": {
@@ -2588,7 +2588,7 @@
       "type": "library",
       "name": "ini",
       "version": "1.3.8",
-      "bom-ref": "librelink-mcp-server@1.6.1|ini@1.3.8",
+      "bom-ref": "librelink-mcp-server@1.6.2|ini@1.3.8",
       "licenses": [
         {
           "license": {
@@ -2622,7 +2622,7 @@
       "type": "library",
       "name": "ip-address",
       "version": "10.7.6",
-      "bom-ref": "librelink-mcp-server@1.6.1|ip-address@10.7.6",
+      "bom-ref": "librelink-mcp-server@1.6.2|ip-address@10.7.6",
       "licenses": [
         {
           "license": {
@@ -2656,7 +2656,7 @@
       "type": "library",
       "name": "ipaddr.js",
       "version": "1.9.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|ipaddr.js@1.9.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|ipaddr.js@1.9.1",
       "licenses": [
         {
           "license": {
@@ -2690,7 +2690,7 @@
       "type": "library",
       "name": "is-promise",
       "version": "4.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|is-promise@4.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|is-promise@4.0.0",
       "licenses": [
         {
           "license": {
@@ -2724,7 +2724,7 @@
       "type": "library",
       "name": "isexe",
       "version": "2.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|isexe@2.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|isexe@2.0.0",
       "licenses": [
         {
           "license": {
@@ -2758,7 +2758,7 @@
       "type": "library",
       "name": "jose",
       "version": "6.1.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|jose@6.1.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|jose@6.1.3",
       "licenses": [
         {
           "license": {
@@ -2792,7 +2792,7 @@
       "type": "library",
       "name": "json-schema-traverse",
       "version": "1.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|json-schema-traverse@1.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|json-schema-traverse@1.0.0",
       "licenses": [
         {
           "license": {
@@ -2826,7 +2826,7 @@
       "type": "library",
       "name": "json-schema-typed",
       "version": "8.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|json-schema-typed@8.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|json-schema-typed@8.0.2",
       "licenses": [
         {
           "license": {
@@ -2860,7 +2860,7 @@
       "type": "library",
       "name": "keytar",
       "version": "7.9.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|keytar@7.9.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|keytar@7.9.0",
       "licenses": [
         {
           "license": {
@@ -2894,7 +2894,7 @@
       "type": "library",
       "name": "math-intrinsics",
       "version": "1.1.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|math-intrinsics@1.1.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|math-intrinsics@1.1.0",
       "licenses": [
         {
           "license": {
@@ -2928,7 +2928,7 @@
       "type": "library",
       "name": "media-typer",
       "version": "1.1.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|media-typer@1.1.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|media-typer@1.1.0",
       "licenses": [
         {
           "license": {
@@ -2962,7 +2962,7 @@
       "type": "library",
       "name": "merge-descriptors",
       "version": "2.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|merge-descriptors@2.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|merge-descriptors@2.0.0",
       "licenses": [
         {
           "license": {
@@ -2996,7 +2996,7 @@
       "type": "library",
       "name": "mime-db",
       "version": "1.52.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|mime-db@1.52.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|mime-db@1.52.0",
       "licenses": [
         {
           "license": {
@@ -3030,7 +3030,7 @@
       "type": "library",
       "name": "mime-types",
       "version": "2.1.35",
-      "bom-ref": "librelink-mcp-server@1.6.1|mime-types@2.1.35",
+      "bom-ref": "librelink-mcp-server@1.6.2|mime-types@2.1.35",
       "licenses": [
         {
           "license": {
@@ -3064,7 +3064,7 @@
       "type": "library",
       "name": "mimic-response",
       "version": "3.1.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|mimic-response@3.1.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|mimic-response@3.1.0",
       "licenses": [
         {
           "license": {
@@ -3098,7 +3098,7 @@
       "type": "library",
       "name": "minimist",
       "version": "1.2.8",
-      "bom-ref": "librelink-mcp-server@1.6.1|minimist@1.2.8",
+      "bom-ref": "librelink-mcp-server@1.6.2|minimist@1.2.8",
       "licenses": [
         {
           "license": {
@@ -3132,7 +3132,7 @@
       "type": "library",
       "name": "mkdirp-classic",
       "version": "0.5.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|mkdirp-classic@0.5.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|mkdirp-classic@0.5.3",
       "licenses": [
         {
           "license": {
@@ -3166,7 +3166,7 @@
       "type": "library",
       "name": "ms",
       "version": "2.1.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|ms@2.1.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|ms@2.1.3",
       "licenses": [
         {
           "license": {
@@ -3200,7 +3200,7 @@
       "type": "library",
       "name": "napi-build-utils",
       "version": "2.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|napi-build-utils@2.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|napi-build-utils@2.0.0",
       "licenses": [
         {
           "license": {
@@ -3234,7 +3234,7 @@
       "type": "library",
       "name": "negotiator",
       "version": "1.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|negotiator@1.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|negotiator@1.0.0",
       "licenses": [
         {
           "license": {
@@ -3268,7 +3268,7 @@
       "type": "library",
       "name": "node-abi",
       "version": "3.85.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|node-abi@3.85.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|node-abi@3.85.0",
       "licenses": [
         {
           "license": {
@@ -3302,7 +3302,7 @@
       "type": "library",
       "name": "node-addon-api",
       "version": "4.3.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|node-addon-api@4.3.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|node-addon-api@4.3.0",
       "licenses": [
         {
           "license": {
@@ -3336,7 +3336,7 @@
       "type": "library",
       "name": "object-assign",
       "version": "4.1.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|object-assign@4.1.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|object-assign@4.1.1",
       "licenses": [
         {
           "license": {
@@ -3370,7 +3370,7 @@
       "type": "library",
       "name": "object-inspect",
       "version": "1.13.4",
-      "bom-ref": "librelink-mcp-server@1.6.1|object-inspect@1.13.4",
+      "bom-ref": "librelink-mcp-server@1.6.2|object-inspect@1.13.4",
       "licenses": [
         {
           "license": {
@@ -3404,7 +3404,7 @@
       "type": "library",
       "name": "on-finished",
       "version": "2.4.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|on-finished@2.4.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|on-finished@2.4.1",
       "licenses": [
         {
           "license": {
@@ -3438,7 +3438,7 @@
       "type": "library",
       "name": "once",
       "version": "1.4.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|once@1.4.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|once@1.4.0",
       "licenses": [
         {
           "license": {
@@ -3472,7 +3472,7 @@
       "type": "library",
       "name": "parseurl",
       "version": "1.3.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|parseurl@1.3.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|parseurl@1.3.3",
       "licenses": [
         {
           "license": {
@@ -3506,7 +3506,7 @@
       "type": "library",
       "name": "path-key",
       "version": "3.1.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|path-key@3.1.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|path-key@3.1.1",
       "licenses": [
         {
           "license": {
@@ -3540,7 +3540,7 @@
       "type": "library",
       "name": "path-to-regexp",
       "version": "8.4.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|path-to-regexp@8.4.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|path-to-regexp@8.4.0",
       "licenses": [
         {
           "license": {
@@ -3574,7 +3574,7 @@
       "type": "library",
       "name": "pkce-challenge",
       "version": "5.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|pkce-challenge@5.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|pkce-challenge@5.0.1",
       "licenses": [
         {
           "license": {
@@ -3608,7 +3608,7 @@
       "type": "library",
       "name": "prebuild-install",
       "version": "7.1.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|prebuild-install@7.1.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|prebuild-install@7.1.3",
       "licenses": [
         {
           "license": {
@@ -3642,7 +3642,7 @@
       "type": "library",
       "name": "proxy-addr",
       "version": "2.0.8",
-      "bom-ref": "librelink-mcp-server@1.6.1|proxy-addr@2.0.8",
+      "bom-ref": "librelink-mcp-server@1.6.2|proxy-addr@2.0.8",
       "licenses": [
         {
           "license": {
@@ -3676,7 +3676,7 @@
       "type": "library",
       "name": "proxy-from-env",
       "version": "2.1.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|proxy-from-env@2.1.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|proxy-from-env@2.1.0",
       "licenses": [
         {
           "license": {
@@ -3710,7 +3710,7 @@
       "type": "library",
       "name": "pump",
       "version": "3.0.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|pump@3.0.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|pump@3.0.3",
       "licenses": [
         {
           "license": {
@@ -3744,7 +3744,7 @@
       "type": "library",
       "name": "qs",
       "version": "6.17.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|qs@6.17.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|qs@6.17.1",
       "licenses": [
         {
           "license": {
@@ -3778,7 +3778,7 @@
       "type": "library",
       "name": "range-parser",
       "version": "1.2.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|range-parser@1.2.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|range-parser@1.2.1",
       "licenses": [
         {
           "license": {
@@ -3812,7 +3812,7 @@
       "type": "library",
       "name": "raw-body",
       "version": "3.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|raw-body@3.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|raw-body@3.0.2",
       "licenses": [
         {
           "license": {
@@ -3846,7 +3846,7 @@
       "type": "library",
       "name": "rc",
       "version": "1.2.8",
-      "bom-ref": "librelink-mcp-server@1.6.1|rc@1.2.8",
+      "bom-ref": "librelink-mcp-server@1.6.2|rc@1.2.8",
       "licenses": [
         {
           "expression": "(BSD-2-Clause OR MIT OR Apache-2.0)",
@@ -3878,7 +3878,7 @@
       "type": "library",
       "name": "readable-stream",
       "version": "3.6.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|readable-stream@3.6.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|readable-stream@3.6.2",
       "licenses": [
         {
           "license": {
@@ -3912,7 +3912,7 @@
       "type": "library",
       "name": "require-from-string",
       "version": "2.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|require-from-string@2.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|require-from-string@2.0.2",
       "licenses": [
         {
           "license": {
@@ -3946,7 +3946,7 @@
       "type": "library",
       "name": "router",
       "version": "2.2.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|router@2.2.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|router@2.2.0",
       "licenses": [
         {
           "license": {
@@ -3980,7 +3980,7 @@
       "type": "library",
       "name": "safe-buffer",
       "version": "5.2.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|safe-buffer@5.2.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|safe-buffer@5.2.1",
       "licenses": [
         {
           "license": {
@@ -4014,7 +4014,7 @@
       "type": "library",
       "name": "safer-buffer",
       "version": "2.1.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|safer-buffer@2.1.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|safer-buffer@2.1.2",
       "licenses": [
         {
           "license": {
@@ -4048,7 +4048,7 @@
       "type": "library",
       "name": "semver",
       "version": "7.7.3",
-      "bom-ref": "librelink-mcp-server@1.6.1|semver@7.7.3",
+      "bom-ref": "librelink-mcp-server@1.6.2|semver@7.7.3",
       "licenses": [
         {
           "license": {
@@ -4082,7 +4082,7 @@
       "type": "library",
       "name": "send",
       "version": "1.2.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|send@1.2.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|send@1.2.1",
       "licenses": [
         {
           "license": {
@@ -4116,7 +4116,7 @@
           "type": "library",
           "name": "mime-db",
           "version": "1.54.0",
-          "bom-ref": "librelink-mcp-server@1.6.1|send@1.2.1|mime-db@1.54.0",
+          "bom-ref": "librelink-mcp-server@1.6.2|send@1.2.1|mime-db@1.54.0",
           "licenses": [
             {
               "license": {
@@ -4150,7 +4150,7 @@
           "type": "library",
           "name": "mime-types",
           "version": "3.0.2",
-          "bom-ref": "librelink-mcp-server@1.6.1|send@1.2.1|mime-types@3.0.2",
+          "bom-ref": "librelink-mcp-server@1.6.2|send@1.2.1|mime-types@3.0.2",
           "licenses": [
             {
               "license": {
@@ -4186,7 +4186,7 @@
       "type": "library",
       "name": "serve-static",
       "version": "2.2.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|serve-static@2.2.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|serve-static@2.2.1",
       "licenses": [
         {
           "license": {
@@ -4220,7 +4220,7 @@
       "type": "library",
       "name": "setprototypeof",
       "version": "1.2.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|setprototypeof@1.2.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|setprototypeof@1.2.0",
       "licenses": [
         {
           "license": {
@@ -4254,7 +4254,7 @@
       "type": "library",
       "name": "shebang-command",
       "version": "2.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|shebang-command@2.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|shebang-command@2.0.0",
       "licenses": [
         {
           "license": {
@@ -4288,7 +4288,7 @@
       "type": "library",
       "name": "shebang-regex",
       "version": "3.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|shebang-regex@3.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|shebang-regex@3.0.0",
       "licenses": [
         {
           "license": {
@@ -4322,7 +4322,7 @@
       "type": "library",
       "name": "side-channel-list",
       "version": "1.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|side-channel-list@1.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|side-channel-list@1.0.1",
       "licenses": [
         {
           "license": {
@@ -4356,7 +4356,7 @@
       "type": "library",
       "name": "side-channel-map",
       "version": "1.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|side-channel-map@1.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|side-channel-map@1.0.1",
       "licenses": [
         {
           "license": {
@@ -4390,7 +4390,7 @@
       "type": "library",
       "name": "side-channel-weakmap",
       "version": "1.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|side-channel-weakmap@1.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|side-channel-weakmap@1.0.2",
       "licenses": [
         {
           "license": {
@@ -4424,7 +4424,7 @@
       "type": "library",
       "name": "side-channel",
       "version": "1.1.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|side-channel@1.1.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|side-channel@1.1.1",
       "licenses": [
         {
           "license": {
@@ -4458,7 +4458,7 @@
       "type": "library",
       "name": "simple-concat",
       "version": "1.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|simple-concat@1.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|simple-concat@1.0.1",
       "licenses": [
         {
           "license": {
@@ -4492,7 +4492,7 @@
       "type": "library",
       "name": "simple-get",
       "version": "4.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|simple-get@4.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|simple-get@4.0.1",
       "licenses": [
         {
           "license": {
@@ -4526,7 +4526,7 @@
       "type": "library",
       "name": "statuses",
       "version": "2.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|statuses@2.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|statuses@2.0.2",
       "licenses": [
         {
           "license": {
@@ -4560,7 +4560,7 @@
       "type": "library",
       "name": "string_decoder",
       "version": "1.3.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|string_decoder@1.3.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|string_decoder@1.3.0",
       "licenses": [
         {
           "license": {
@@ -4594,7 +4594,7 @@
       "type": "library",
       "name": "strip-json-comments",
       "version": "2.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|strip-json-comments@2.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|strip-json-comments@2.0.1",
       "licenses": [
         {
           "license": {
@@ -4628,7 +4628,7 @@
       "type": "library",
       "name": "tar-fs",
       "version": "2.1.4",
-      "bom-ref": "librelink-mcp-server@1.6.1|tar-fs@2.1.4",
+      "bom-ref": "librelink-mcp-server@1.6.2|tar-fs@2.1.4",
       "licenses": [
         {
           "license": {
@@ -4662,7 +4662,7 @@
       "type": "library",
       "name": "tar-stream",
       "version": "2.2.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|tar-stream@2.2.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|tar-stream@2.2.0",
       "licenses": [
         {
           "license": {
@@ -4696,7 +4696,7 @@
       "type": "library",
       "name": "toidentifier",
       "version": "1.0.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|toidentifier@1.0.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|toidentifier@1.0.1",
       "licenses": [
         {
           "license": {
@@ -4730,7 +4730,7 @@
       "type": "library",
       "name": "tunnel-agent",
       "version": "0.6.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|tunnel-agent@0.6.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|tunnel-agent@0.6.0",
       "licenses": [
         {
           "license": {
@@ -4764,7 +4764,7 @@
       "type": "library",
       "name": "type-is",
       "version": "2.1.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|type-is@2.1.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|type-is@2.1.0",
       "licenses": [
         {
           "license": {
@@ -4798,7 +4798,7 @@
           "type": "library",
           "name": "content-type",
           "version": "2.0.0",
-          "bom-ref": "librelink-mcp-server@1.6.1|type-is@2.1.0|content-type@2.0.0",
+          "bom-ref": "librelink-mcp-server@1.6.2|type-is@2.1.0|content-type@2.0.0",
           "licenses": [
             {
               "license": {
@@ -4832,7 +4832,7 @@
           "type": "library",
           "name": "mime-db",
           "version": "1.54.0",
-          "bom-ref": "librelink-mcp-server@1.6.1|type-is@2.1.0|mime-db@1.54.0",
+          "bom-ref": "librelink-mcp-server@1.6.2|type-is@2.1.0|mime-db@1.54.0",
           "licenses": [
             {
               "license": {
@@ -4866,7 +4866,7 @@
           "type": "library",
           "name": "mime-types",
           "version": "3.0.2",
-          "bom-ref": "librelink-mcp-server@1.6.1|type-is@2.1.0|mime-types@3.0.2",
+          "bom-ref": "librelink-mcp-server@1.6.2|type-is@2.1.0|mime-types@3.0.2",
           "licenses": [
             {
               "license": {
@@ -4902,7 +4902,7 @@
       "type": "library",
       "name": "unpipe",
       "version": "1.0.0",
-      "bom-ref": "librelink-mcp-server@1.6.1|unpipe@1.0.0",
+      "bom-ref": "librelink-mcp-server@1.6.2|unpipe@1.0.0",
       "licenses": [
         {
           "license": {
@@ -4936,7 +4936,7 @@
       "type": "library",
       "name": "util-deprecate",
       "version": "1.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|util-deprecate@1.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|util-deprecate@1.0.2",
       "licenses": [
         {
           "license": {
@@ -4970,7 +4970,7 @@
       "type": "library",
       "name": "vary",
       "version": "1.1.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|vary@1.1.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|vary@1.1.2",
       "licenses": [
         {
           "license": {
@@ -5004,7 +5004,7 @@
       "type": "library",
       "name": "which",
       "version": "2.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|which@2.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|which@2.0.2",
       "licenses": [
         {
           "license": {
@@ -5038,7 +5038,7 @@
       "type": "library",
       "name": "wrappy",
       "version": "1.0.2",
-      "bom-ref": "librelink-mcp-server@1.6.1|wrappy@1.0.2",
+      "bom-ref": "librelink-mcp-server@1.6.2|wrappy@1.0.2",
       "licenses": [
         {
           "license": {
@@ -5072,7 +5072,7 @@
       "type": "library",
       "name": "zod-to-json-schema",
       "version": "3.25.1",
-      "bom-ref": "librelink-mcp-server@1.6.1|zod-to-json-schema@3.25.1",
+      "bom-ref": "librelink-mcp-server@1.6.2|zod-to-json-schema@3.25.1",
       "licenses": [
         {
           "license": {
@@ -5106,7 +5106,7 @@
       "type": "library",
       "name": "zod",
       "version": "4.6.7",
-      "bom-ref": "librelink-mcp-server@1.6.1|zod@4.6.7",
+      "bom-ref": "librelink-mcp-server@1.6.2|zod@4.6.7",
       "licenses": [
         {
           "license": {
@@ -5139,810 +5139,810 @@
   ],
   "dependencies": [
     {
-      "ref": "librelink-mcp-server@1.6.1",
+      "ref": "librelink-mcp-server@1.6.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|@modelcontextprotocol/sdk@1.32.2",
-        "librelink-mcp-server@1.6.1|axios@1.21.1",
-        "librelink-mcp-server@1.6.1|keytar@7.9.0"
+        "librelink-mcp-server@1.6.2|@modelcontextprotocol/sdk@1.32.2",
+        "librelink-mcp-server@1.6.2|axios@1.21.1",
+        "librelink-mcp-server@1.6.2|keytar@7.9.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|@hono/node-server@2.1.9",
+      "ref": "librelink-mcp-server@1.6.2|@hono/node-server@2.1.9",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|hono@4.13.19"
+        "librelink-mcp-server@1.6.2|hono@4.13.19"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|@modelcontextprotocol/sdk@1.32.2",
+      "ref": "librelink-mcp-server@1.6.2|@modelcontextprotocol/sdk@1.32.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|@hono/node-server@2.1.9",
-        "librelink-mcp-server@1.6.1|ajv-formats@3.0.1",
-        "librelink-mcp-server@1.6.1|ajv@8.18.0",
-        "librelink-mcp-server@1.6.1|content-type@1.0.5",
-        "librelink-mcp-server@1.6.1|cors@2.8.5",
-        "librelink-mcp-server@1.6.1|cross-spawn@7.0.6",
-        "librelink-mcp-server@1.6.1|eventsource-parser@3.0.6",
-        "librelink-mcp-server@1.6.1|eventsource@3.0.7",
-        "librelink-mcp-server@1.6.1|express-rate-limit@8.5.1",
-        "librelink-mcp-server@1.6.1|express@5.2.1",
-        "librelink-mcp-server@1.6.1|hono@4.13.19",
-        "librelink-mcp-server@1.6.1|jose@6.1.3",
-        "librelink-mcp-server@1.6.1|json-schema-typed@8.0.2",
-        "librelink-mcp-server@1.6.1|pkce-challenge@5.0.1",
-        "librelink-mcp-server@1.6.1|raw-body@3.0.2",
-        "librelink-mcp-server@1.6.1|zod-to-json-schema@3.25.1",
-        "librelink-mcp-server@1.6.1|zod@4.6.7"
+        "librelink-mcp-server@1.6.2|@hono/node-server@2.1.9",
+        "librelink-mcp-server@1.6.2|ajv-formats@3.0.1",
+        "librelink-mcp-server@1.6.2|ajv@8.18.0",
+        "librelink-mcp-server@1.6.2|content-type@1.0.5",
+        "librelink-mcp-server@1.6.2|cors@2.8.5",
+        "librelink-mcp-server@1.6.2|cross-spawn@7.0.6",
+        "librelink-mcp-server@1.6.2|eventsource-parser@3.0.6",
+        "librelink-mcp-server@1.6.2|eventsource@3.0.7",
+        "librelink-mcp-server@1.6.2|express-rate-limit@8.5.1",
+        "librelink-mcp-server@1.6.2|express@5.2.1",
+        "librelink-mcp-server@1.6.2|hono@4.13.19",
+        "librelink-mcp-server@1.6.2|jose@6.1.3",
+        "librelink-mcp-server@1.6.2|json-schema-typed@8.0.2",
+        "librelink-mcp-server@1.6.2|pkce-challenge@5.0.1",
+        "librelink-mcp-server@1.6.2|raw-body@3.0.2",
+        "librelink-mcp-server@1.6.2|zod-to-json-schema@3.25.1",
+        "librelink-mcp-server@1.6.2|zod@4.6.7"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|accepts@2.0.0",
+      "ref": "librelink-mcp-server@1.6.2|accepts@2.0.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|accepts@2.0.0|mime-types@3.0.2",
-        "librelink-mcp-server@1.6.1|negotiator@1.0.0"
+        "librelink-mcp-server@1.6.2|accepts@2.0.0|mime-types@3.0.2",
+        "librelink-mcp-server@1.6.2|negotiator@1.0.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|accepts@2.0.0|mime-db@1.54.0"
+      "ref": "librelink-mcp-server@1.6.2|accepts@2.0.0|mime-db@1.54.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|accepts@2.0.0|mime-types@3.0.2",
+      "ref": "librelink-mcp-server@1.6.2|accepts@2.0.0|mime-types@3.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|accepts@2.0.0|mime-db@1.54.0"
+        "librelink-mcp-server@1.6.2|accepts@2.0.0|mime-db@1.54.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|agent-base@6.0.2",
+      "ref": "librelink-mcp-server@1.6.2|agent-base@6.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|debug@4.4.3"
+        "librelink-mcp-server@1.6.2|debug@4.4.3"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|ajv-formats@3.0.1",
+      "ref": "librelink-mcp-server@1.6.2|ajv-formats@3.0.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|ajv@8.18.0"
+        "librelink-mcp-server@1.6.2|ajv@8.18.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|ajv@8.18.0",
+      "ref": "librelink-mcp-server@1.6.2|ajv@8.18.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|fast-deep-equal@3.1.3",
-        "librelink-mcp-server@1.6.1|fast-uri@3.1.9",
-        "librelink-mcp-server@1.6.1|json-schema-traverse@1.0.0",
-        "librelink-mcp-server@1.6.1|require-from-string@2.0.2"
+        "librelink-mcp-server@1.6.2|fast-deep-equal@3.1.3",
+        "librelink-mcp-server@1.6.2|fast-uri@3.1.9",
+        "librelink-mcp-server@1.6.2|json-schema-traverse@1.0.0",
+        "librelink-mcp-server@1.6.2|require-from-string@2.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|asynckit@0.4.0"
+      "ref": "librelink-mcp-server@1.6.2|asynckit@0.4.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|axios@1.21.1",
+      "ref": "librelink-mcp-server@1.6.2|axios@1.21.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|follow-redirects@1.16.3",
-        "librelink-mcp-server@1.6.1|form-data@4.0.6",
-        "librelink-mcp-server@1.6.1|https-proxy-agent@5.0.1",
-        "librelink-mcp-server@1.6.1|proxy-from-env@2.1.0"
+        "librelink-mcp-server@1.6.2|follow-redirects@1.16.3",
+        "librelink-mcp-server@1.6.2|form-data@4.0.6",
+        "librelink-mcp-server@1.6.2|https-proxy-agent@5.0.1",
+        "librelink-mcp-server@1.6.2|proxy-from-env@2.1.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|base64-js@1.5.1"
+      "ref": "librelink-mcp-server@1.6.2|base64-js@1.5.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|bl@4.1.0",
+      "ref": "librelink-mcp-server@1.6.2|bl@4.1.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|buffer@5.7.1",
-        "librelink-mcp-server@1.6.1|inherits@2.0.4",
-        "librelink-mcp-server@1.6.1|readable-stream@3.6.2"
+        "librelink-mcp-server@1.6.2|buffer@5.7.1",
+        "librelink-mcp-server@1.6.2|inherits@2.0.4",
+        "librelink-mcp-server@1.6.2|readable-stream@3.6.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|body-parser@2.4.0",
+      "ref": "librelink-mcp-server@1.6.2|body-parser@2.4.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|body-parser@2.4.0|content-type@2.1.0",
-        "librelink-mcp-server@1.6.1|bytes@3.1.2",
-        "librelink-mcp-server@1.6.1|debug@4.4.3",
-        "librelink-mcp-server@1.6.1|http-errors@2.0.1",
-        "librelink-mcp-server@1.6.1|iconv-lite@0.7.3",
-        "librelink-mcp-server@1.6.1|on-finished@2.4.1",
-        "librelink-mcp-server@1.6.1|qs@6.17.1",
-        "librelink-mcp-server@1.6.1|raw-body@3.0.2",
-        "librelink-mcp-server@1.6.1|type-is@2.1.0"
+        "librelink-mcp-server@1.6.2|body-parser@2.4.0|content-type@2.1.0",
+        "librelink-mcp-server@1.6.2|bytes@3.1.2",
+        "librelink-mcp-server@1.6.2|debug@4.4.3",
+        "librelink-mcp-server@1.6.2|http-errors@2.0.1",
+        "librelink-mcp-server@1.6.2|iconv-lite@0.7.3",
+        "librelink-mcp-server@1.6.2|on-finished@2.4.1",
+        "librelink-mcp-server@1.6.2|qs@6.17.1",
+        "librelink-mcp-server@1.6.2|raw-body@3.0.2",
+        "librelink-mcp-server@1.6.2|type-is@2.1.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|body-parser@2.4.0|content-type@2.1.0"
+      "ref": "librelink-mcp-server@1.6.2|body-parser@2.4.0|content-type@2.1.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|buffer@5.7.1",
+      "ref": "librelink-mcp-server@1.6.2|buffer@5.7.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|base64-js@1.5.1",
-        "librelink-mcp-server@1.6.1|ieee754@1.2.1"
+        "librelink-mcp-server@1.6.2|base64-js@1.5.1",
+        "librelink-mcp-server@1.6.2|ieee754@1.2.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|bytes@3.1.2"
+      "ref": "librelink-mcp-server@1.6.2|bytes@3.1.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|call-bind-apply-helpers@1.0.2",
+      "ref": "librelink-mcp-server@1.6.2|call-bind-apply-helpers@1.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0",
-        "librelink-mcp-server@1.6.1|function-bind@1.1.2"
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0",
+        "librelink-mcp-server@1.6.2|function-bind@1.1.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|call-bound@1.0.4",
+      "ref": "librelink-mcp-server@1.6.2|call-bound@1.0.4",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|call-bind-apply-helpers@1.0.2",
-        "librelink-mcp-server@1.6.1|get-intrinsic@1.3.0"
+        "librelink-mcp-server@1.6.2|call-bind-apply-helpers@1.0.2",
+        "librelink-mcp-server@1.6.2|get-intrinsic@1.3.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|chownr@1.1.4"
+      "ref": "librelink-mcp-server@1.6.2|chownr@1.1.4"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|combined-stream@1.0.8",
+      "ref": "librelink-mcp-server@1.6.2|combined-stream@1.0.8",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|delayed-stream@1.0.0"
+        "librelink-mcp-server@1.6.2|delayed-stream@1.0.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|content-disposition@1.0.1"
+      "ref": "librelink-mcp-server@1.6.2|content-disposition@1.0.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|content-type@1.0.5"
+      "ref": "librelink-mcp-server@1.6.2|content-type@1.0.5"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|cookie-signature@1.2.2"
+      "ref": "librelink-mcp-server@1.6.2|cookie-signature@1.2.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|cookie@0.7.2"
+      "ref": "librelink-mcp-server@1.6.2|cookie@0.7.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|cors@2.8.5",
+      "ref": "librelink-mcp-server@1.6.2|cors@2.8.5",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|object-assign@4.1.1",
-        "librelink-mcp-server@1.6.1|vary@1.1.2"
+        "librelink-mcp-server@1.6.2|object-assign@4.1.1",
+        "librelink-mcp-server@1.6.2|vary@1.1.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|cross-spawn@7.0.6",
+      "ref": "librelink-mcp-server@1.6.2|cross-spawn@7.0.6",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|path-key@3.1.1",
-        "librelink-mcp-server@1.6.1|shebang-command@2.0.0",
-        "librelink-mcp-server@1.6.1|which@2.0.2"
+        "librelink-mcp-server@1.6.2|path-key@3.1.1",
+        "librelink-mcp-server@1.6.2|shebang-command@2.0.0",
+        "librelink-mcp-server@1.6.2|which@2.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|debug@4.4.3",
+      "ref": "librelink-mcp-server@1.6.2|debug@4.4.3",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|ms@2.1.3"
+        "librelink-mcp-server@1.6.2|ms@2.1.3"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|decompress-response@6.0.0",
+      "ref": "librelink-mcp-server@1.6.2|decompress-response@6.0.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|mimic-response@3.1.0"
+        "librelink-mcp-server@1.6.2|mimic-response@3.1.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|deep-extend@0.6.0"
+      "ref": "librelink-mcp-server@1.6.2|deep-extend@0.6.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|delayed-stream@1.0.0"
+      "ref": "librelink-mcp-server@1.6.2|delayed-stream@1.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|depd@2.0.0"
+      "ref": "librelink-mcp-server@1.6.2|depd@2.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|detect-libc@2.1.2"
+      "ref": "librelink-mcp-server@1.6.2|detect-libc@2.1.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|dunder-proto@1.0.1",
+      "ref": "librelink-mcp-server@1.6.2|dunder-proto@1.0.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|call-bind-apply-helpers@1.0.2",
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0",
-        "librelink-mcp-server@1.6.1|gopd@1.2.0"
+        "librelink-mcp-server@1.6.2|call-bind-apply-helpers@1.0.2",
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0",
+        "librelink-mcp-server@1.6.2|gopd@1.2.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|ee-first@1.1.1"
+      "ref": "librelink-mcp-server@1.6.2|ee-first@1.1.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|encodeurl@2.0.0"
+      "ref": "librelink-mcp-server@1.6.2|encodeurl@2.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|end-of-stream@1.4.5",
+      "ref": "librelink-mcp-server@1.6.2|end-of-stream@1.4.5",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|once@1.4.0"
+        "librelink-mcp-server@1.6.2|once@1.4.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|es-define-property@1.0.1"
+      "ref": "librelink-mcp-server@1.6.2|es-define-property@1.0.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|es-errors@1.3.0"
+      "ref": "librelink-mcp-server@1.6.2|es-errors@1.3.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|es-object-atoms@1.1.1",
+      "ref": "librelink-mcp-server@1.6.2|es-object-atoms@1.1.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0"
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|es-set-tostringtag@2.1.0",
+      "ref": "librelink-mcp-server@1.6.2|es-set-tostringtag@2.1.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0",
-        "librelink-mcp-server@1.6.1|get-intrinsic@1.3.0",
-        "librelink-mcp-server@1.6.1|has-tostringtag@1.0.2",
-        "librelink-mcp-server@1.6.1|hasown@2.0.2"
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0",
+        "librelink-mcp-server@1.6.2|get-intrinsic@1.3.0",
+        "librelink-mcp-server@1.6.2|has-tostringtag@1.0.2",
+        "librelink-mcp-server@1.6.2|hasown@2.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|escape-html@1.0.3"
+      "ref": "librelink-mcp-server@1.6.2|escape-html@1.0.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|etag@1.8.1"
+      "ref": "librelink-mcp-server@1.6.2|etag@1.8.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|eventsource-parser@3.0.6"
+      "ref": "librelink-mcp-server@1.6.2|eventsource-parser@3.0.6"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|eventsource@3.0.7",
+      "ref": "librelink-mcp-server@1.6.2|eventsource@3.0.7",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|eventsource-parser@3.0.6"
+        "librelink-mcp-server@1.6.2|eventsource-parser@3.0.6"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|expand-template@2.0.3"
+      "ref": "librelink-mcp-server@1.6.2|expand-template@2.0.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|express-rate-limit@8.5.1",
+      "ref": "librelink-mcp-server@1.6.2|express-rate-limit@8.5.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|express@5.2.1",
-        "librelink-mcp-server@1.6.1|ip-address@10.7.6"
+        "librelink-mcp-server@1.6.2|express@5.2.1",
+        "librelink-mcp-server@1.6.2|ip-address@10.7.6"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|express@5.2.1",
+      "ref": "librelink-mcp-server@1.6.2|express@5.2.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|accepts@2.0.0",
-        "librelink-mcp-server@1.6.1|body-parser@2.4.0",
-        "librelink-mcp-server@1.6.1|content-disposition@1.0.1",
-        "librelink-mcp-server@1.6.1|content-type@1.0.5",
-        "librelink-mcp-server@1.6.1|cookie-signature@1.2.2",
-        "librelink-mcp-server@1.6.1|cookie@0.7.2",
-        "librelink-mcp-server@1.6.1|debug@4.4.3",
-        "librelink-mcp-server@1.6.1|depd@2.0.0",
-        "librelink-mcp-server@1.6.1|encodeurl@2.0.0",
-        "librelink-mcp-server@1.6.1|escape-html@1.0.3",
-        "librelink-mcp-server@1.6.1|etag@1.8.1",
-        "librelink-mcp-server@1.6.1|express@5.2.1|mime-types@3.0.2",
-        "librelink-mcp-server@1.6.1|finalhandler@2.1.1",
-        "librelink-mcp-server@1.6.1|fresh@2.0.0",
-        "librelink-mcp-server@1.6.1|http-errors@2.0.1",
-        "librelink-mcp-server@1.6.1|merge-descriptors@2.0.0",
-        "librelink-mcp-server@1.6.1|on-finished@2.4.1",
-        "librelink-mcp-server@1.6.1|once@1.4.0",
-        "librelink-mcp-server@1.6.1|parseurl@1.3.3",
-        "librelink-mcp-server@1.6.1|proxy-addr@2.0.8",
-        "librelink-mcp-server@1.6.1|qs@6.17.1",
-        "librelink-mcp-server@1.6.1|range-parser@1.2.1",
-        "librelink-mcp-server@1.6.1|router@2.2.0",
-        "librelink-mcp-server@1.6.1|send@1.2.1",
-        "librelink-mcp-server@1.6.1|serve-static@2.2.1",
-        "librelink-mcp-server@1.6.1|statuses@2.0.2",
-        "librelink-mcp-server@1.6.1|type-is@2.1.0",
-        "librelink-mcp-server@1.6.1|vary@1.1.2"
+        "librelink-mcp-server@1.6.2|accepts@2.0.0",
+        "librelink-mcp-server@1.6.2|body-parser@2.4.0",
+        "librelink-mcp-server@1.6.2|content-disposition@1.0.1",
+        "librelink-mcp-server@1.6.2|content-type@1.0.5",
+        "librelink-mcp-server@1.6.2|cookie-signature@1.2.2",
+        "librelink-mcp-server@1.6.2|cookie@0.7.2",
+        "librelink-mcp-server@1.6.2|debug@4.4.3",
+        "librelink-mcp-server@1.6.2|depd@2.0.0",
+        "librelink-mcp-server@1.6.2|encodeurl@2.0.0",
+        "librelink-mcp-server@1.6.2|escape-html@1.0.3",
+        "librelink-mcp-server@1.6.2|etag@1.8.1",
+        "librelink-mcp-server@1.6.2|express@5.2.1|mime-types@3.0.2",
+        "librelink-mcp-server@1.6.2|finalhandler@2.1.1",
+        "librelink-mcp-server@1.6.2|fresh@2.0.0",
+        "librelink-mcp-server@1.6.2|http-errors@2.0.1",
+        "librelink-mcp-server@1.6.2|merge-descriptors@2.0.0",
+        "librelink-mcp-server@1.6.2|on-finished@2.4.1",
+        "librelink-mcp-server@1.6.2|once@1.4.0",
+        "librelink-mcp-server@1.6.2|parseurl@1.3.3",
+        "librelink-mcp-server@1.6.2|proxy-addr@2.0.8",
+        "librelink-mcp-server@1.6.2|qs@6.17.1",
+        "librelink-mcp-server@1.6.2|range-parser@1.2.1",
+        "librelink-mcp-server@1.6.2|router@2.2.0",
+        "librelink-mcp-server@1.6.2|send@1.2.1",
+        "librelink-mcp-server@1.6.2|serve-static@2.2.1",
+        "librelink-mcp-server@1.6.2|statuses@2.0.2",
+        "librelink-mcp-server@1.6.2|type-is@2.1.0",
+        "librelink-mcp-server@1.6.2|vary@1.1.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|express@5.2.1|mime-db@1.54.0"
+      "ref": "librelink-mcp-server@1.6.2|express@5.2.1|mime-db@1.54.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|express@5.2.1|mime-types@3.0.2",
+      "ref": "librelink-mcp-server@1.6.2|express@5.2.1|mime-types@3.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|express@5.2.1|mime-db@1.54.0"
+        "librelink-mcp-server@1.6.2|express@5.2.1|mime-db@1.54.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|fast-deep-equal@3.1.3"
+      "ref": "librelink-mcp-server@1.6.2|fast-deep-equal@3.1.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|fast-uri@3.1.9"
+      "ref": "librelink-mcp-server@1.6.2|fast-uri@3.1.9"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|finalhandler@2.1.1",
+      "ref": "librelink-mcp-server@1.6.2|finalhandler@2.1.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|debug@4.4.3",
-        "librelink-mcp-server@1.6.1|encodeurl@2.0.0",
-        "librelink-mcp-server@1.6.1|escape-html@1.0.3",
-        "librelink-mcp-server@1.6.1|on-finished@2.4.1",
-        "librelink-mcp-server@1.6.1|parseurl@1.3.3",
-        "librelink-mcp-server@1.6.1|statuses@2.0.2"
+        "librelink-mcp-server@1.6.2|debug@4.4.3",
+        "librelink-mcp-server@1.6.2|encodeurl@2.0.0",
+        "librelink-mcp-server@1.6.2|escape-html@1.0.3",
+        "librelink-mcp-server@1.6.2|on-finished@2.4.1",
+        "librelink-mcp-server@1.6.2|parseurl@1.3.3",
+        "librelink-mcp-server@1.6.2|statuses@2.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|follow-redirects@1.16.3"
+      "ref": "librelink-mcp-server@1.6.2|follow-redirects@1.16.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|form-data@4.0.6",
+      "ref": "librelink-mcp-server@1.6.2|form-data@4.0.6",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|asynckit@0.4.0",
-        "librelink-mcp-server@1.6.1|combined-stream@1.0.8",
-        "librelink-mcp-server@1.6.1|es-set-tostringtag@2.1.0",
-        "librelink-mcp-server@1.6.1|form-data@4.0.6|hasown@2.0.4",
-        "librelink-mcp-server@1.6.1|mime-types@2.1.35"
+        "librelink-mcp-server@1.6.2|asynckit@0.4.0",
+        "librelink-mcp-server@1.6.2|combined-stream@1.0.8",
+        "librelink-mcp-server@1.6.2|es-set-tostringtag@2.1.0",
+        "librelink-mcp-server@1.6.2|form-data@4.0.6|hasown@2.0.4",
+        "librelink-mcp-server@1.6.2|mime-types@2.1.35"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|form-data@4.0.6|hasown@2.0.4",
+      "ref": "librelink-mcp-server@1.6.2|form-data@4.0.6|hasown@2.0.4",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|function-bind@1.1.2"
+        "librelink-mcp-server@1.6.2|function-bind@1.1.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|forwarded@0.2.0"
+      "ref": "librelink-mcp-server@1.6.2|forwarded@0.2.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|fresh@2.0.0"
+      "ref": "librelink-mcp-server@1.6.2|fresh@2.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|fs-constants@1.0.0"
+      "ref": "librelink-mcp-server@1.6.2|fs-constants@1.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|function-bind@1.1.2"
+      "ref": "librelink-mcp-server@1.6.2|function-bind@1.1.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|get-intrinsic@1.3.0",
+      "ref": "librelink-mcp-server@1.6.2|get-intrinsic@1.3.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|call-bind-apply-helpers@1.0.2",
-        "librelink-mcp-server@1.6.1|es-define-property@1.0.1",
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0",
-        "librelink-mcp-server@1.6.1|es-object-atoms@1.1.1",
-        "librelink-mcp-server@1.6.1|function-bind@1.1.2",
-        "librelink-mcp-server@1.6.1|get-proto@1.0.1",
-        "librelink-mcp-server@1.6.1|gopd@1.2.0",
-        "librelink-mcp-server@1.6.1|has-symbols@1.1.0",
-        "librelink-mcp-server@1.6.1|hasown@2.0.2",
-        "librelink-mcp-server@1.6.1|math-intrinsics@1.1.0"
+        "librelink-mcp-server@1.6.2|call-bind-apply-helpers@1.0.2",
+        "librelink-mcp-server@1.6.2|es-define-property@1.0.1",
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0",
+        "librelink-mcp-server@1.6.2|es-object-atoms@1.1.1",
+        "librelink-mcp-server@1.6.2|function-bind@1.1.2",
+        "librelink-mcp-server@1.6.2|get-proto@1.0.1",
+        "librelink-mcp-server@1.6.2|gopd@1.2.0",
+        "librelink-mcp-server@1.6.2|has-symbols@1.1.0",
+        "librelink-mcp-server@1.6.2|hasown@2.0.2",
+        "librelink-mcp-server@1.6.2|math-intrinsics@1.1.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|get-proto@1.0.1",
+      "ref": "librelink-mcp-server@1.6.2|get-proto@1.0.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|dunder-proto@1.0.1",
-        "librelink-mcp-server@1.6.1|es-object-atoms@1.1.1"
+        "librelink-mcp-server@1.6.2|dunder-proto@1.0.1",
+        "librelink-mcp-server@1.6.2|es-object-atoms@1.1.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|github-from-package@0.0.0"
+      "ref": "librelink-mcp-server@1.6.2|github-from-package@0.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|gopd@1.2.0"
+      "ref": "librelink-mcp-server@1.6.2|gopd@1.2.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|has-symbols@1.1.0"
+      "ref": "librelink-mcp-server@1.6.2|has-symbols@1.1.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|has-tostringtag@1.0.2",
+      "ref": "librelink-mcp-server@1.6.2|has-tostringtag@1.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|has-symbols@1.1.0"
+        "librelink-mcp-server@1.6.2|has-symbols@1.1.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|hasown@2.0.2",
+      "ref": "librelink-mcp-server@1.6.2|hasown@2.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|function-bind@1.1.2"
+        "librelink-mcp-server@1.6.2|function-bind@1.1.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|hono@4.13.19"
+      "ref": "librelink-mcp-server@1.6.2|hono@4.13.19"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|http-errors@2.0.1",
+      "ref": "librelink-mcp-server@1.6.2|http-errors@2.0.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|depd@2.0.0",
-        "librelink-mcp-server@1.6.1|inherits@2.0.4",
-        "librelink-mcp-server@1.6.1|setprototypeof@1.2.0",
-        "librelink-mcp-server@1.6.1|statuses@2.0.2",
-        "librelink-mcp-server@1.6.1|toidentifier@1.0.1"
+        "librelink-mcp-server@1.6.2|depd@2.0.0",
+        "librelink-mcp-server@1.6.2|inherits@2.0.4",
+        "librelink-mcp-server@1.6.2|setprototypeof@1.2.0",
+        "librelink-mcp-server@1.6.2|statuses@2.0.2",
+        "librelink-mcp-server@1.6.2|toidentifier@1.0.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|https-proxy-agent@5.0.1",
+      "ref": "librelink-mcp-server@1.6.2|https-proxy-agent@5.0.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|agent-base@6.0.2",
-        "librelink-mcp-server@1.6.1|debug@4.4.3"
+        "librelink-mcp-server@1.6.2|agent-base@6.0.2",
+        "librelink-mcp-server@1.6.2|debug@4.4.3"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|iconv-lite@0.7.3",
+      "ref": "librelink-mcp-server@1.6.2|iconv-lite@0.7.3",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|safer-buffer@2.1.2"
+        "librelink-mcp-server@1.6.2|safer-buffer@2.1.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|ieee754@1.2.1"
+      "ref": "librelink-mcp-server@1.6.2|ieee754@1.2.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|inherits@2.0.4"
+      "ref": "librelink-mcp-server@1.6.2|inherits@2.0.4"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|ini@1.3.8"
+      "ref": "librelink-mcp-server@1.6.2|ini@1.3.8"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|ip-address@10.7.6"
+      "ref": "librelink-mcp-server@1.6.2|ip-address@10.7.6"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|ipaddr.js@1.9.1"
+      "ref": "librelink-mcp-server@1.6.2|ipaddr.js@1.9.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|is-promise@4.0.0"
+      "ref": "librelink-mcp-server@1.6.2|is-promise@4.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|isexe@2.0.0"
+      "ref": "librelink-mcp-server@1.6.2|isexe@2.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|jose@6.1.3"
+      "ref": "librelink-mcp-server@1.6.2|jose@6.1.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|json-schema-traverse@1.0.0"
+      "ref": "librelink-mcp-server@1.6.2|json-schema-traverse@1.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|json-schema-typed@8.0.2"
+      "ref": "librelink-mcp-server@1.6.2|json-schema-typed@8.0.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|keytar@7.9.0",
+      "ref": "librelink-mcp-server@1.6.2|keytar@7.9.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|node-addon-api@4.3.0",
-        "librelink-mcp-server@1.6.1|prebuild-install@7.1.3"
+        "librelink-mcp-server@1.6.2|node-addon-api@4.3.0",
+        "librelink-mcp-server@1.6.2|prebuild-install@7.1.3"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|math-intrinsics@1.1.0"
+      "ref": "librelink-mcp-server@1.6.2|math-intrinsics@1.1.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|media-typer@1.1.0"
+      "ref": "librelink-mcp-server@1.6.2|media-typer@1.1.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|merge-descriptors@2.0.0"
+      "ref": "librelink-mcp-server@1.6.2|merge-descriptors@2.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|mime-db@1.52.0"
+      "ref": "librelink-mcp-server@1.6.2|mime-db@1.52.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|mime-types@2.1.35",
+      "ref": "librelink-mcp-server@1.6.2|mime-types@2.1.35",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|mime-db@1.52.0"
+        "librelink-mcp-server@1.6.2|mime-db@1.52.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|mimic-response@3.1.0"
+      "ref": "librelink-mcp-server@1.6.2|mimic-response@3.1.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|minimist@1.2.8"
+      "ref": "librelink-mcp-server@1.6.2|minimist@1.2.8"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|mkdirp-classic@0.5.3"
+      "ref": "librelink-mcp-server@1.6.2|mkdirp-classic@0.5.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|ms@2.1.3"
+      "ref": "librelink-mcp-server@1.6.2|ms@2.1.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|napi-build-utils@2.0.0"
+      "ref": "librelink-mcp-server@1.6.2|napi-build-utils@2.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|negotiator@1.0.0"
+      "ref": "librelink-mcp-server@1.6.2|negotiator@1.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|node-abi@3.85.0",
+      "ref": "librelink-mcp-server@1.6.2|node-abi@3.85.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|semver@7.7.3"
+        "librelink-mcp-server@1.6.2|semver@7.7.3"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|node-addon-api@4.3.0"
+      "ref": "librelink-mcp-server@1.6.2|node-addon-api@4.3.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|object-assign@4.1.1"
+      "ref": "librelink-mcp-server@1.6.2|object-assign@4.1.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|object-inspect@1.13.4"
+      "ref": "librelink-mcp-server@1.6.2|object-inspect@1.13.4"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|on-finished@2.4.1",
+      "ref": "librelink-mcp-server@1.6.2|on-finished@2.4.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|ee-first@1.1.1"
+        "librelink-mcp-server@1.6.2|ee-first@1.1.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|once@1.4.0",
+      "ref": "librelink-mcp-server@1.6.2|once@1.4.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|wrappy@1.0.2"
+        "librelink-mcp-server@1.6.2|wrappy@1.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|parseurl@1.3.3"
+      "ref": "librelink-mcp-server@1.6.2|parseurl@1.3.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|path-key@3.1.1"
+      "ref": "librelink-mcp-server@1.6.2|path-key@3.1.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|path-to-regexp@8.4.0"
+      "ref": "librelink-mcp-server@1.6.2|path-to-regexp@8.4.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|pkce-challenge@5.0.1"
+      "ref": "librelink-mcp-server@1.6.2|pkce-challenge@5.0.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|prebuild-install@7.1.3",
+      "ref": "librelink-mcp-server@1.6.2|prebuild-install@7.1.3",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|detect-libc@2.1.2",
-        "librelink-mcp-server@1.6.1|expand-template@2.0.3",
-        "librelink-mcp-server@1.6.1|github-from-package@0.0.0",
-        "librelink-mcp-server@1.6.1|minimist@1.2.8",
-        "librelink-mcp-server@1.6.1|mkdirp-classic@0.5.3",
-        "librelink-mcp-server@1.6.1|napi-build-utils@2.0.0",
-        "librelink-mcp-server@1.6.1|node-abi@3.85.0",
-        "librelink-mcp-server@1.6.1|pump@3.0.3",
-        "librelink-mcp-server@1.6.1|rc@1.2.8",
-        "librelink-mcp-server@1.6.1|simple-get@4.0.1",
-        "librelink-mcp-server@1.6.1|tar-fs@2.1.4",
-        "librelink-mcp-server@1.6.1|tunnel-agent@0.6.0"
+        "librelink-mcp-server@1.6.2|detect-libc@2.1.2",
+        "librelink-mcp-server@1.6.2|expand-template@2.0.3",
+        "librelink-mcp-server@1.6.2|github-from-package@0.0.0",
+        "librelink-mcp-server@1.6.2|minimist@1.2.8",
+        "librelink-mcp-server@1.6.2|mkdirp-classic@0.5.3",
+        "librelink-mcp-server@1.6.2|napi-build-utils@2.0.0",
+        "librelink-mcp-server@1.6.2|node-abi@3.85.0",
+        "librelink-mcp-server@1.6.2|pump@3.0.3",
+        "librelink-mcp-server@1.6.2|rc@1.2.8",
+        "librelink-mcp-server@1.6.2|simple-get@4.0.1",
+        "librelink-mcp-server@1.6.2|tar-fs@2.1.4",
+        "librelink-mcp-server@1.6.2|tunnel-agent@0.6.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|proxy-addr@2.0.8",
+      "ref": "librelink-mcp-server@1.6.2|proxy-addr@2.0.8",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|forwarded@0.2.0",
-        "librelink-mcp-server@1.6.1|ipaddr.js@1.9.1"
+        "librelink-mcp-server@1.6.2|forwarded@0.2.0",
+        "librelink-mcp-server@1.6.2|ipaddr.js@1.9.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|proxy-from-env@2.1.0"
+      "ref": "librelink-mcp-server@1.6.2|proxy-from-env@2.1.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|pump@3.0.3",
+      "ref": "librelink-mcp-server@1.6.2|pump@3.0.3",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|end-of-stream@1.4.5",
-        "librelink-mcp-server@1.6.1|once@1.4.0"
+        "librelink-mcp-server@1.6.2|end-of-stream@1.4.5",
+        "librelink-mcp-server@1.6.2|once@1.4.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|qs@6.17.1",
+      "ref": "librelink-mcp-server@1.6.2|qs@6.17.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|es-define-property@1.0.1",
-        "librelink-mcp-server@1.6.1|side-channel@1.1.1"
+        "librelink-mcp-server@1.6.2|es-define-property@1.0.1",
+        "librelink-mcp-server@1.6.2|side-channel@1.1.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|range-parser@1.2.1"
+      "ref": "librelink-mcp-server@1.6.2|range-parser@1.2.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|raw-body@3.0.2",
+      "ref": "librelink-mcp-server@1.6.2|raw-body@3.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|bytes@3.1.2",
-        "librelink-mcp-server@1.6.1|http-errors@2.0.1",
-        "librelink-mcp-server@1.6.1|iconv-lite@0.7.3",
-        "librelink-mcp-server@1.6.1|unpipe@1.0.0"
+        "librelink-mcp-server@1.6.2|bytes@3.1.2",
+        "librelink-mcp-server@1.6.2|http-errors@2.0.1",
+        "librelink-mcp-server@1.6.2|iconv-lite@0.7.3",
+        "librelink-mcp-server@1.6.2|unpipe@1.0.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|rc@1.2.8",
+      "ref": "librelink-mcp-server@1.6.2|rc@1.2.8",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|deep-extend@0.6.0",
-        "librelink-mcp-server@1.6.1|ini@1.3.8",
-        "librelink-mcp-server@1.6.1|minimist@1.2.8",
-        "librelink-mcp-server@1.6.1|strip-json-comments@2.0.1"
+        "librelink-mcp-server@1.6.2|deep-extend@0.6.0",
+        "librelink-mcp-server@1.6.2|ini@1.3.8",
+        "librelink-mcp-server@1.6.2|minimist@1.2.8",
+        "librelink-mcp-server@1.6.2|strip-json-comments@2.0.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|readable-stream@3.6.2",
+      "ref": "librelink-mcp-server@1.6.2|readable-stream@3.6.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|inherits@2.0.4",
-        "librelink-mcp-server@1.6.1|string_decoder@1.3.0",
-        "librelink-mcp-server@1.6.1|util-deprecate@1.0.2"
+        "librelink-mcp-server@1.6.2|inherits@2.0.4",
+        "librelink-mcp-server@1.6.2|string_decoder@1.3.0",
+        "librelink-mcp-server@1.6.2|util-deprecate@1.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|require-from-string@2.0.2"
+      "ref": "librelink-mcp-server@1.6.2|require-from-string@2.0.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|router@2.2.0",
+      "ref": "librelink-mcp-server@1.6.2|router@2.2.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|debug@4.4.3",
-        "librelink-mcp-server@1.6.1|depd@2.0.0",
-        "librelink-mcp-server@1.6.1|is-promise@4.0.0",
-        "librelink-mcp-server@1.6.1|parseurl@1.3.3",
-        "librelink-mcp-server@1.6.1|path-to-regexp@8.4.0"
+        "librelink-mcp-server@1.6.2|debug@4.4.3",
+        "librelink-mcp-server@1.6.2|depd@2.0.0",
+        "librelink-mcp-server@1.6.2|is-promise@4.0.0",
+        "librelink-mcp-server@1.6.2|parseurl@1.3.3",
+        "librelink-mcp-server@1.6.2|path-to-regexp@8.4.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|safe-buffer@5.2.1"
+      "ref": "librelink-mcp-server@1.6.2|safe-buffer@5.2.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|safer-buffer@2.1.2"
+      "ref": "librelink-mcp-server@1.6.2|safer-buffer@2.1.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|semver@7.7.3"
+      "ref": "librelink-mcp-server@1.6.2|semver@7.7.3"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|send@1.2.1",
+      "ref": "librelink-mcp-server@1.6.2|send@1.2.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|debug@4.4.3",
-        "librelink-mcp-server@1.6.1|encodeurl@2.0.0",
-        "librelink-mcp-server@1.6.1|escape-html@1.0.3",
-        "librelink-mcp-server@1.6.1|etag@1.8.1",
-        "librelink-mcp-server@1.6.1|fresh@2.0.0",
-        "librelink-mcp-server@1.6.1|http-errors@2.0.1",
-        "librelink-mcp-server@1.6.1|ms@2.1.3",
-        "librelink-mcp-server@1.6.1|on-finished@2.4.1",
-        "librelink-mcp-server@1.6.1|range-parser@1.2.1",
-        "librelink-mcp-server@1.6.1|send@1.2.1|mime-types@3.0.2",
-        "librelink-mcp-server@1.6.1|statuses@2.0.2"
+        "librelink-mcp-server@1.6.2|debug@4.4.3",
+        "librelink-mcp-server@1.6.2|encodeurl@2.0.0",
+        "librelink-mcp-server@1.6.2|escape-html@1.0.3",
+        "librelink-mcp-server@1.6.2|etag@1.8.1",
+        "librelink-mcp-server@1.6.2|fresh@2.0.0",
+        "librelink-mcp-server@1.6.2|http-errors@2.0.1",
+        "librelink-mcp-server@1.6.2|ms@2.1.3",
+        "librelink-mcp-server@1.6.2|on-finished@2.4.1",
+        "librelink-mcp-server@1.6.2|range-parser@1.2.1",
+        "librelink-mcp-server@1.6.2|send@1.2.1|mime-types@3.0.2",
+        "librelink-mcp-server@1.6.2|statuses@2.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|send@1.2.1|mime-db@1.54.0"
+      "ref": "librelink-mcp-server@1.6.2|send@1.2.1|mime-db@1.54.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|send@1.2.1|mime-types@3.0.2",
+      "ref": "librelink-mcp-server@1.6.2|send@1.2.1|mime-types@3.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|send@1.2.1|mime-db@1.54.0"
+        "librelink-mcp-server@1.6.2|send@1.2.1|mime-db@1.54.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|serve-static@2.2.1",
+      "ref": "librelink-mcp-server@1.6.2|serve-static@2.2.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|encodeurl@2.0.0",
-        "librelink-mcp-server@1.6.1|escape-html@1.0.3",
-        "librelink-mcp-server@1.6.1|parseurl@1.3.3",
-        "librelink-mcp-server@1.6.1|send@1.2.1"
+        "librelink-mcp-server@1.6.2|encodeurl@2.0.0",
+        "librelink-mcp-server@1.6.2|escape-html@1.0.3",
+        "librelink-mcp-server@1.6.2|parseurl@1.3.3",
+        "librelink-mcp-server@1.6.2|send@1.2.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|setprototypeof@1.2.0"
+      "ref": "librelink-mcp-server@1.6.2|setprototypeof@1.2.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|shebang-command@2.0.0",
+      "ref": "librelink-mcp-server@1.6.2|shebang-command@2.0.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|shebang-regex@3.0.0"
+        "librelink-mcp-server@1.6.2|shebang-regex@3.0.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|shebang-regex@3.0.0"
+      "ref": "librelink-mcp-server@1.6.2|shebang-regex@3.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|side-channel-list@1.0.1",
+      "ref": "librelink-mcp-server@1.6.2|side-channel-list@1.0.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0",
-        "librelink-mcp-server@1.6.1|object-inspect@1.13.4"
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0",
+        "librelink-mcp-server@1.6.2|object-inspect@1.13.4"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|side-channel-map@1.0.1",
+      "ref": "librelink-mcp-server@1.6.2|side-channel-map@1.0.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|call-bound@1.0.4",
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0",
-        "librelink-mcp-server@1.6.1|get-intrinsic@1.3.0",
-        "librelink-mcp-server@1.6.1|object-inspect@1.13.4"
+        "librelink-mcp-server@1.6.2|call-bound@1.0.4",
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0",
+        "librelink-mcp-server@1.6.2|get-intrinsic@1.3.0",
+        "librelink-mcp-server@1.6.2|object-inspect@1.13.4"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|side-channel-weakmap@1.0.2",
+      "ref": "librelink-mcp-server@1.6.2|side-channel-weakmap@1.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|call-bound@1.0.4",
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0",
-        "librelink-mcp-server@1.6.1|get-intrinsic@1.3.0",
-        "librelink-mcp-server@1.6.1|object-inspect@1.13.4",
-        "librelink-mcp-server@1.6.1|side-channel-map@1.0.1"
+        "librelink-mcp-server@1.6.2|call-bound@1.0.4",
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0",
+        "librelink-mcp-server@1.6.2|get-intrinsic@1.3.0",
+        "librelink-mcp-server@1.6.2|object-inspect@1.13.4",
+        "librelink-mcp-server@1.6.2|side-channel-map@1.0.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|side-channel@1.1.1",
+      "ref": "librelink-mcp-server@1.6.2|side-channel@1.1.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|es-errors@1.3.0",
-        "librelink-mcp-server@1.6.1|object-inspect@1.13.4",
-        "librelink-mcp-server@1.6.1|side-channel-list@1.0.1",
-        "librelink-mcp-server@1.6.1|side-channel-map@1.0.1",
-        "librelink-mcp-server@1.6.1|side-channel-weakmap@1.0.2"
+        "librelink-mcp-server@1.6.2|es-errors@1.3.0",
+        "librelink-mcp-server@1.6.2|object-inspect@1.13.4",
+        "librelink-mcp-server@1.6.2|side-channel-list@1.0.1",
+        "librelink-mcp-server@1.6.2|side-channel-map@1.0.1",
+        "librelink-mcp-server@1.6.2|side-channel-weakmap@1.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|simple-concat@1.0.1"
+      "ref": "librelink-mcp-server@1.6.2|simple-concat@1.0.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|simple-get@4.0.1",
+      "ref": "librelink-mcp-server@1.6.2|simple-get@4.0.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|decompress-response@6.0.0",
-        "librelink-mcp-server@1.6.1|once@1.4.0",
-        "librelink-mcp-server@1.6.1|simple-concat@1.0.1"
+        "librelink-mcp-server@1.6.2|decompress-response@6.0.0",
+        "librelink-mcp-server@1.6.2|once@1.4.0",
+        "librelink-mcp-server@1.6.2|simple-concat@1.0.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|statuses@2.0.2"
+      "ref": "librelink-mcp-server@1.6.2|statuses@2.0.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|string_decoder@1.3.0",
+      "ref": "librelink-mcp-server@1.6.2|string_decoder@1.3.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|safe-buffer@5.2.1"
+        "librelink-mcp-server@1.6.2|safe-buffer@5.2.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|strip-json-comments@2.0.1"
+      "ref": "librelink-mcp-server@1.6.2|strip-json-comments@2.0.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|tar-fs@2.1.4",
+      "ref": "librelink-mcp-server@1.6.2|tar-fs@2.1.4",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|chownr@1.1.4",
-        "librelink-mcp-server@1.6.1|mkdirp-classic@0.5.3",
-        "librelink-mcp-server@1.6.1|pump@3.0.3",
-        "librelink-mcp-server@1.6.1|tar-stream@2.2.0"
+        "librelink-mcp-server@1.6.2|chownr@1.1.4",
+        "librelink-mcp-server@1.6.2|mkdirp-classic@0.5.3",
+        "librelink-mcp-server@1.6.2|pump@3.0.3",
+        "librelink-mcp-server@1.6.2|tar-stream@2.2.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|tar-stream@2.2.0",
+      "ref": "librelink-mcp-server@1.6.2|tar-stream@2.2.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|bl@4.1.0",
-        "librelink-mcp-server@1.6.1|end-of-stream@1.4.5",
-        "librelink-mcp-server@1.6.1|fs-constants@1.0.0",
-        "librelink-mcp-server@1.6.1|inherits@2.0.4",
-        "librelink-mcp-server@1.6.1|readable-stream@3.6.2"
+        "librelink-mcp-server@1.6.2|bl@4.1.0",
+        "librelink-mcp-server@1.6.2|end-of-stream@1.4.5",
+        "librelink-mcp-server@1.6.2|fs-constants@1.0.0",
+        "librelink-mcp-server@1.6.2|inherits@2.0.4",
+        "librelink-mcp-server@1.6.2|readable-stream@3.6.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|toidentifier@1.0.1"
+      "ref": "librelink-mcp-server@1.6.2|toidentifier@1.0.1"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|tunnel-agent@0.6.0",
+      "ref": "librelink-mcp-server@1.6.2|tunnel-agent@0.6.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|safe-buffer@5.2.1"
+        "librelink-mcp-server@1.6.2|safe-buffer@5.2.1"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|type-is@2.1.0",
+      "ref": "librelink-mcp-server@1.6.2|type-is@2.1.0",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|media-typer@1.1.0",
-        "librelink-mcp-server@1.6.1|type-is@2.1.0|content-type@2.0.0",
-        "librelink-mcp-server@1.6.1|type-is@2.1.0|mime-types@3.0.2"
+        "librelink-mcp-server@1.6.2|media-typer@1.1.0",
+        "librelink-mcp-server@1.6.2|type-is@2.1.0|content-type@2.0.0",
+        "librelink-mcp-server@1.6.2|type-is@2.1.0|mime-types@3.0.2"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|type-is@2.1.0|content-type@2.0.0"
+      "ref": "librelink-mcp-server@1.6.2|type-is@2.1.0|content-type@2.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|type-is@2.1.0|mime-db@1.54.0"
+      "ref": "librelink-mcp-server@1.6.2|type-is@2.1.0|mime-db@1.54.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|type-is@2.1.0|mime-types@3.0.2",
+      "ref": "librelink-mcp-server@1.6.2|type-is@2.1.0|mime-types@3.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|type-is@2.1.0|mime-db@1.54.0"
+        "librelink-mcp-server@1.6.2|type-is@2.1.0|mime-db@1.54.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|unpipe@1.0.0"
+      "ref": "librelink-mcp-server@1.6.2|unpipe@1.0.0"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|util-deprecate@1.0.2"
+      "ref": "librelink-mcp-server@1.6.2|util-deprecate@1.0.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|vary@1.1.2"
+      "ref": "librelink-mcp-server@1.6.2|vary@1.1.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|which@2.0.2",
+      "ref": "librelink-mcp-server@1.6.2|which@2.0.2",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|isexe@2.0.0"
+        "librelink-mcp-server@1.6.2|isexe@2.0.0"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|wrappy@1.0.2"
+      "ref": "librelink-mcp-server@1.6.2|wrappy@1.0.2"
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|zod-to-json-schema@3.25.1",
+      "ref": "librelink-mcp-server@1.6.2|zod-to-json-schema@3.25.1",
       "dependsOn": [
-        "librelink-mcp-server@1.6.1|zod@4.6.7"
+        "librelink-mcp-server@1.6.2|zod@4.6.7"
       ]
     },
     {
-      "ref": "librelink-mcp-server@1.6.1|zod@4.6.7"
+      "ref": "librelink-mcp-server@1.6.2|zod@4.6.7"
     }
   ]
 }
